@@ -1,0 +1,103 @@
+[
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "ring-number_one",
+            "veil-type_partial",
+            "stalk-surface-above-ring_smooth",
+            "stalk-surface-below-ring_smooth",
+            "gill-spacing_close",
+            "cap-shape_convex",
+            "ring-type_pendant",
+            "gill-size_broad",
+            "stalk-root_bulbous",
+            "stalk-color-below-ring_pink"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "ring-number_one",
+            "veil-type_partial",
+            "stalk-surface-above-ring_smooth",
+            "stalk-surface-below-ring_smooth",
+            "gill-spacing_close",
+            "ring-type_pendant",
+            "gill-size_broad",
+            "stalk-root_bulbous",
+            "stalk-color-below-ring_white",
+            "cap-color_gray"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "ring-number_one",
+            "veil-type_partial",
+            "stalk-surface-below-ring_smooth",
+            "gill-spacing_close",
+            "stalk-color-above-ring_white",
+            "ring-type_evanescent",
+            "cap-surface_smooth",
+            "stalk-color-below-ring_pink",
+            "bruises_no"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "veil-type_partial",
+            "gill-spacing_close",
+            "gill-size_broad",
+            "stalk-shape_enlarging",
+            "bruises_no"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "ring-number_one",
+            "veil-type_partial",
+            "stalk-surface-above-ring_smooth",
+            "stalk-surface-below-ring_smooth",
+            "gill-spacing_close",
+            "ring-type_pendant",
+            "gill-size_broad",
+            "stalk-root_bulbous",
+            "spore-print-color_black",
+            "stalk-color-below-ring_pink"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "gill-attachment_free",
+            "veil-color_white",
+            "veil-type_partial",
+            "ring-type_pendant",
+            "gill-size_broad",
+            "stalk-color-above-ring_white",
+            "stalk-shape_enlarging",
+            "habitat_grasses",
+            "stalk-color-below-ring_white",
+            "cap-surface_smooth",
+            "bruises_no"
+        ],
+        "id": "new"
+    }
+]
