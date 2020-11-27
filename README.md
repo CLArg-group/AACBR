@@ -5,21 +5,27 @@ This provides a basic implementation of (a slightly extended variant of) the AA-
 ## Project structure
 
 > aacbr.py 
+
 main file to run AA-CBR
 
 > argumentation.py
+
 for constructing abstract argumentation frameworks and computing grounded labellings
 
 > cases.py
+
 for constructing cases
 
 > graphs.py
+
 for drawing directed graphs
 
 > predictions.py 
+
 for generating AA-CBR predictions
 
 > variables.py
+
 contains global variables for constructing cases and making predictions
 
 There are a few '.json' files for testing functionality
