@@ -1,56 +1,47 @@
-
 import json
 
 from .variables import *
 
-
 class Case:
   '''Defines a case to comprise id, factors, outcome, 
-    lists of attackees and attackers and a label'''
-
-    def __init__(self, id, factors, outcome=None, attackees=None, attackers=None, label=None, weight=None):
-        self.id = id
-        self.factors = factors
-        self.outcome = outcome
-        self.attackees = attackees if attackees else []
-        self.attackers = attackers if attackers else []
-        self.label = label
-        if weight:
-            self.weight = weight
-    def __str__(self):
-        return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome}, "attackees": {[attacker.id for attacker in self.attackees]})'
-    def __repr__(self):
-        return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome}, "attackees": {[attacker.id for attacker in self.attackees]})'
-    def __eq__(self, other):
-        if not isinstance(other, Case):
-            return NotImplemented
-        return all([self.id == other.id, set(self.factors) == set(other.factors), self.outcome == other.outcome])
-    def __hash__(self):
-        return hash((self.id, frozenset(self.factors), self.outcome))
+    lists of attackees and attackers.'''
+  
+  def __init__(self, id, factors, outcome=None, attackees=None, attackers=None, weight=None):
+    self.id = id
+    self.factors = set(factors)
+    self.outcome = outcome
+    self.attackees = attackees if attackees else []
+    self.attackers = attackers if attackers else []
+    if weight: # currently unused
+      self.weight = weight
+  def __str__(self):
+    return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome})'
+  def __repr__(self):
+    return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome}'
+  def __eq__(self, other):
+    if not isinstance(other, Case):
+      return NotImplemented
+    return all([self.id == other.id, set(self.factors) == set(other.factors), self.outcome == other.outcome])
+  def __hash__(self):
+    return hash((self.id, frozenset(self.factors), self.outcome))
     
 def differentOutcomes(A, B):
   return A.outcome != B.outcome
 
-
 def moreSpecific(A, B):
   return B.factors.issubset(A.factors) and B.factors != A.factors
-
 
 def mostConcise(cases, A, B):
   return not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
 
-
 def attacks(cases, A, B):
   return differentOutcomes(A, B) and moreSpecific(A, B) and mostConcise(cases, A, B)
 
-
 def newcaseattacks(newcase, targetcase):
   return not newcase.factors.issuperset(targetcase.factors)
-  
-  
+    
 def inconsistentattacks(A, B):
   return differentOutcomes(A, B) and B.factors == A.factors
-
 
 def load_cases(file: str) -> list:
   '''Loads cases form a file'''
