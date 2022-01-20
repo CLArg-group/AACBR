@@ -38,6 +38,20 @@ def test_inconsistent():
   assert attacks(cases, case1, case2)
   assert attacks(cases, case2, case1)
   assert inconsistentattacks(case1, case2)
+
+def test_uniform_attack_notation():
+  # Perhaps this test should not exist and the notion of attack should be left to the model, not to case/data.
+  default = Case('default', [], outcome=0)
+  case1 = Case('1', ['a'], outcome=1)
+  case2 = Case('2', ['a','b'], outcome=0)
+  case3 = Case('3', ['a'], outcome=1)
+  case4 = Case('4', ['a','b'], outcome=0)
+  case5 = Case('5', ['a'], outcome=1)
+  newcase = Case('new', ['a'])
+  cases = (default, case1, case2, newcase)
+  assert attacks(cases, case1, default)
+  assert attacks(cases, case2, case1)
+  assert attacks(cases, newcase, case2)
   
 def test_load_cases():
   # TODO: implement
