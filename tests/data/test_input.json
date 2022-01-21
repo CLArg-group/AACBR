@@ -1,0 +1,12 @@
+[
+    {"id": "default"},
+    {"id": "a",
+     "factors": ["a"],
+     "outcome": 1},
+    {"id": "c",
+     "factors": ["c"],
+     "outcome": 1},
+    {"id": "ac",
+     "factors": ["a", "c"],
+     "outcome": 0}
+]

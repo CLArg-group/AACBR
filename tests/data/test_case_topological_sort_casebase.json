@@ -1,0 +1,17 @@
+[
+    {"id": "default",
+     "outcome": 0,
+     "_about": "In the cautious monotonic version, cases 2a and 3 should not be included. However this does not affect predictions."},
+    {"id": "1",
+     "factors": ["b"],
+     "outcome": 1},
+    {"id": "2a",
+     "factors": ["b", "c"],
+     "outcome": 1},
+    {"id": "2b",
+     "factors": ["a", "b"],
+     "outcome": 0},
+    {"id": "3",
+     "factors": ["a", "b", "c"],
+     "outcome": 0}
+]

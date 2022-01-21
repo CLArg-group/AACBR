@@ -1,0 +1,20 @@
+{
+    "outcomes": {
+        "default": 0,
+        "nondefault": 1,
+        "undecided": -1
+    },
+    "casebase": "test_incoherence_and_order_casebase.json",
+    "casebase_expected": {
+        "non_cautious": [ "default", "a", "c", "ab", "cd", "incoherent-1", "incoherent-0" ],
+        "cautious": [ "default", "a", "c", "ab", "cd", "incoherent-0" ]
+    },
+    "newcases":
+    [
+        {"id": "newcase",
+         "factors": ["a", "b", "c", "d"],
+         "outcome_expected": {
+             "non_cautious": 1,
+             "cautious": 0 }}
+    ]
+}

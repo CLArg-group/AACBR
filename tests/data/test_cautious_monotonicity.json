@@ -1,0 +1,52 @@
+[
+    {
+        "outcomes": {
+            "default": 0,
+            "nondefault": 1,
+            "undecided": -1
+        },
+        "casebase": "test_cautmono_casebase1.json",
+        "casebase_expected": {
+            "non_cautious": [ "default", "a", "c", "ab", "cd" ],
+            "cautious": [ "default", "a", "c", "ab", "cd" ]
+        },
+        "newcases":
+        [
+            {"id": "newcase1",
+             "factors": ["a", "b", "c"],
+             "outcome_expected": {
+                 "non_cautious": 1,
+                 "cautious": 1 }},
+            {"id": "newcase2",
+             "factors": ["a", "b", "c", "d"],
+             "outcome_expected": {
+                 "non_cautious": 0,
+                 "cautious": 0 }}
+        ]
+    },
+    {
+        "outcomes": {
+            "default": 0,
+            "nondefault": 1,
+            "undecided": -1
+        },
+        "casebase": "test_cautmono_casebase2.json",
+        "casebase_expected": {
+            "non_cautious": [ "default", "a", "c", "ab", "cd", "abc"],
+            "cautious": [ "default", "a", "c", "ab", "cd" ]
+        },
+        "newcases":
+        [
+            {"id": "newcase1",
+             "factors": ["a", "b", "c"],
+             "outcome_expected": {
+                 "non_cautious": 1,
+                 "cautious": 1 }},
+            {"id": "newcase2",
+             "factors": ["a", "b", "c", "d"],
+             "outcome_expected": {
+                 "non_cautious": 1,
+                 "cautious": 0 }}
+        ]
+    }
+]

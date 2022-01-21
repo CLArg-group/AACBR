@@ -1,0 +1,18 @@
+[
+    {"id": "default"},
+    {"id": "a",
+     "factors": ["a"],
+     "outcome": 1},
+    {"id": "c",
+     "factors": ["c"],
+     "outcome": 1},
+    {"id": "ab",
+     "factors": ["a", "b"],
+     "outcome": 0},
+    {"id": "cd",
+     "factors": ["c", "d"],
+     "outcome": 0},
+    {"id": "abc",
+     "factors": ["a","c", "d"],
+     "outcome": 1}
+]

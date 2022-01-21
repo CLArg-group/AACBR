@@ -1,0 +1,34 @@
+[{
+    "outcomes": {
+        "default": 0,
+        "nondefault": 1,
+        "undecided": -1
+    },
+    "casebase": "test_case_topological_sort_casebase.json",
+    "casebase_expected": {
+        "non_cautious": [ "default", "1", "2a", "2b", "3" ],
+        "cautious": [ "default", "1", "2b" ]
+    },
+    "newcases": []
+},
+ {
+     "outcomes": {
+         "default": 0,
+         "nondefault": 1,
+         "undecided": -1
+     },
+     "casebase": "test_case_topological_sort_casebase2.json",
+     "casebase_expected": {
+         "non_cautious": [ "default", "a", "ab", "c", "cd", "newcase1", "extra1", "extra2" ],
+         "cautious": [ "default", "a", "ab", "c", "cd", "extra1", "extra2" ]
+     },
+     "newcases": [
+         {"id": "newcase2",
+          "factors": ["a", "b", "c", "d"],
+          "outcome_expected": {
+              "cautious": 0,
+              "non_cautious": 1
+          }}
+     ]
+ }
+]

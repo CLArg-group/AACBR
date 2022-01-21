@@ -1,0 +1,23 @@
+[
+    {"id": "default",
+     "outcome": 0,
+     "_about": "Incoherent-0 should enter the casebase but incoherent-1 should not."},
+    {"id": "a",
+     "factors": ["a"],
+     "outcome": 1},
+    {"id": "ab",
+     "factors": ["a", "b"],
+     "outcome": 0},
+    {"id": "c",
+     "factors": ["c"],
+     "outcome": 1},
+    {"id": "cd",
+     "factors": ["c", "d"],
+     "outcome": 0},
+    {"id": "incoherent-1",
+     "factors": ["a", "b", "c"],
+     "outcome": 1},
+    {"id": "incoherent-0",
+     "factors": ["a", "b", "c"],
+     "outcome": 0}
+]
