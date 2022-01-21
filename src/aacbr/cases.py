@@ -32,10 +32,10 @@ def moreSpecific(A, B):
   return B.factors.issubset(A.factors) and B.factors != A.factors
 
 def mostConcise(cases, A, B):
-  return not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
+  return moreSpecific(A,B) and not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
 
 def attacks(cases, A, B):
-  return differentOutcomes(A, B) and moreSpecific(A, B) and mostConcise(cases, A, B)
+  return differentOutcomes(A, B) and mostConcise(cases, A, B)
 
 def newcaseattacks(newcase, targetcase):
   return not newcase.factors.issuperset(targetcase.factors)

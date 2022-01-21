@@ -1,5 +1,5 @@
 test:
-	cd src ; pipenv run pytest ../tests/
+	cd src ; pipenv run pytest -rxXs ../tests/
 
 check_python_version:
 	which python
