@@ -22,7 +22,7 @@ def run():
     return subprocess.run(args, capture_output=True)
   return do_run
 
-def test_run_aacbr_cli_default_arguments(tmp_path, run):
+def _test_run_aacbr_cli_default_arguments(tmp_path, run):
   data_files = ["cb.json", "new_5.json", "cb_to_new_5.json"]
   data_dir = "."
 
