@@ -3,12 +3,12 @@
 from context import aacbr
 import pytest
 
-@pytest.mark.xfail(reason="Not defined yet.")
 def test_import():
   from aacbr import Aacbr
   pass
 
 @pytest.mark.skip(reason="Undefined tests")
+@pytest.mark.usefixtures("test_import")
 class TestAacbr:
   def test_argumentation_framework():
     pass
@@ -28,7 +28,8 @@ class TestAacbr:
     assert expected_output == predicted_output
 
 @pytest.mark.skip(reason="Undefined tests")
-class TestCaacbr:
+@pytest.mark.usefixtures("test_import")
+class TestAacbr:
   def test_argumentation_framework_cautious():
     pass
   def test_predictions_cautious():
@@ -46,7 +47,7 @@ class TestCaacbr:
 
 #### old tests
 import json
-from aacbr.aacbr import Caacbr, Case
+from aacbr.aacbr import Aacbr, Case
 import sys
 TEST_PATH_PREFIX = "../tests/data/"
 
@@ -84,7 +85,7 @@ TESTS = prepare_tests(TEST_FILES)
 @pytest.fixture(params=TESTS)
 def setup(request):
   test = request.param
-  setup_result = Caacbr(test["outcomes"]["default"], test["outcomes"]["nondefault"], test["outcomes"]["undecided"])
+  setup_result = Aacbr(test["outcomes"]["default"], test["outcomes"]["nondefault"], test["outcomes"]["undecided"])
   return test, setup_result
   
   

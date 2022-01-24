@@ -15,7 +15,7 @@ import numpy as np
 from functools import cmp_to_key
 from collections import deque
 
-class Caacbr:
+class Aacbr:
   ID_DEFAULT = 'default'
   ID_NON_DEFAULT = 'non_default'
 
@@ -715,72 +715,3 @@ class Caacbr:
 
   #   return reverse_encoded_factors
 
-#   def interact(self, cases_filename: str, newcases_filename: str, nr_defaults, dir_to_save, lime=False,
-#          mapping_name=None):
-#     print('{now}: Started'.format(now=datetime.now().strftime('%Y-%m-%d_%H.%M.%S')))
-#     if os.path.isfile('{}.json'.format(cases_filename)):
-#       cases_file = '{}.json'.format(cases_filename)
-#     else:
-#       return print('Casebase file {} not found. Try again.\n'.format(cases_filename))
-#     cases = self.load_cases(cases_file, nr_defaults, lime, mapping_name)
-#     print(len(cases))
-#     cases = self.give_coherent_dataset(cases)
-#     print(len(cases))
-#     # min_ordered_casebase = self.min_ordering_casebase(cases)
-#     min_ordered_casebase = self.topological_sort(self.give_casebase(cases))
-#     self.reset_attack_relations(min_ordered_casebase)
-#     min_ordered_casebase.reverse()
-#     current_casebase = self.give_cautious_subset_of_casebase(min_ordered_casebase)
-#     print(len(current_casebase))
-#     outcome_map = self.get_outcome_map(current_casebase)
-
-#     if os.path.isfile('{}.json'.format(newcases_filename)):
-#       newcases_file = '{}.json'.format(newcases_filename)
-#     else:
-#       return print('New cases file {} not found. Try again.\n'.format(newcases_filename))
-
-#     new_cases = self.load_cases(newcases_file, nr_defaults, lime, mapping_name)
-#     # new_cases = self.give_coherent_dataset(new_cases)
-#     newcases = self.give_new_cases(current_casebase, new_cases)
-
-#     dialectical_box, predictions = self.give_predictions(current_casebase, newcases, nr_defaults, lime=lime,
-#                                outcome_map=outcome_map, cautious=True)
-#     print(self.check_coherent_predictions(predictions, newcases))
-
-#     with open(dir_to_save + "/cb_to_new_caacbr.json", 'w', newline='', encoding='utf-8') as output:
-#       json.dump(predictions, output, indent=4, ensure_ascii=False)
-#     output.close()
-
-#     print('{now}: Done'.format(now=datetime.now().strftime('%Y-%m-%d_%H.%M.%S')))
-#     scores = np.array([[1, 0]])
-#     for prediction in predictions:
-#       if prediction['Prediction'] == self.outcome_def:
-#         score = np.array([[1, 0]])
-#         scores = np.concatenate((scores, score), axis=0)
-
-#       else:
-#         score = np.array([[0, 1]])
-#         scores = np.concatenate((scores, score), axis=0)
-
-#     if lime is False:
-#       return dialectical_box
-#     else:
-#       return scores[1:, :]
-#     # return self.give_accuracy(predictions, newcases)
-
-#   # commented out so that it only tests one file not all 10 files for cross validation, results in cb_to_new2
-#   def cross_validation(self, casebase_path, new_path):
-
-#     directory_path = 'C:/Users/Ruxandra/PycharmProjects/compas/data/cbCompas'
-#     accuracies = []
-#     for index in range(10):
-#       accuracy = self.interact(directory_path + '/' + casebase_path + str(index),
-#                    directory_path + '/' + new_path + str(index), 1,
-#                    directory_path)
-#       accuracies.append(accuracy)
-
-#     return print(accuracies, sum(accuracies) / float(len(accuracies)))
-
-# # if __name__ == "__main__":
-# #   caacbr = Caacbr(outcome_def='0', outcome_nondef='1', outcome_unknown='-1')
-# #   caacbr.cross_validation("cbCompasT", "newCompasT")
