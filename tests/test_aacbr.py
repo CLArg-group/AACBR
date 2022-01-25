@@ -30,7 +30,7 @@ class TestAacbr:
   @pytest.mark.parametrize("cb", example_cbs)
   def test_aacbr_methods(self, cb):
     clf = Aacbr(cb)
-    assert clf.casebase == cb
+    assert clf.casebase_initial == cb
     
   # def test_attack(self):
   #   default = Case('default', set(), outcome=0)
@@ -133,15 +133,40 @@ AACBR_TYPES_FUNCTION = {
 
 TESTS = prepare_tests(TEST_FILES)
 
+@pytest.mark.parametrize("test", TESTS)
+def run_test_from_files(aacbr_type, test):  
+  # TODO: change this interface in line below in the future
+  # -- it should not be inside Aacbr
+  casebase = Aacbr.load_cases(TEST_PATH_PREFIX + test["casebase"])
+  clf = Aacbr(outcome_def=test["outcomes"]["default"],
+              outcome_nondef=test["outcomes"]["nondefault"],
+              outcome_unknown=test["outcomes"]["undecided"],
+              cautious=aacbr_type)
+  clf.fit(casebase)
+  casebase_active_ids = set(map(lambda x: getattr(x, "id"), clf.casebase_active))
+  assert set(casebase_active_ids) == set(test["casebase_expected"][aacbr_type])
+
+  for newcase_spec in test["newcases"]:
+    newcase = Case(id=newcase_spec["id"], factors=set(newcase_spec["factors"]))
+    result = clf.predict([newcase])
+    prediction = result[1][0]["Prediction"]
+    assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
+
+@pytest.mark.xfail(reason="New interface not yet implemented.")
+def test_files_non_cautious(setup):
+  run_test_from_files("non_cautious", setup)
+
+@pytest.mark.skip(reason="Cautious is currently bugged.")
+def test_files_cautious(setup):
+  run_test_from_files("cautious", setup)
 
 @pytest.fixture(params=TESTS)
 def setup(request):
   test = request.param
   setup_result = Aacbr(test["outcomes"]["default"], test["outcomes"]["nondefault"], test["outcomes"]["undecided"])
-  return test, setup_result
+  return test, setup_result  
   
-  
-def run_test_with_aacbr_type(aacbr_type, setup):
+def run_test_from_files_old_interface(aacbr_type, setup):
   test, scenario = setup
   casebase = scenario.load_cases(TEST_PATH_PREFIX + test["casebase"])
   casebase_prepared = getattr(scenario, AACBR_TYPES_FUNCTION[aacbr_type])(casebase)
@@ -155,9 +180,10 @@ def run_test_with_aacbr_type(aacbr_type, setup):
     prediction = result[1][0]["Prediction"]
     assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
 
-def test_files_non_cautious(setup):
-  run_test_with_aacbr_type("non_cautious", setup)
+@pytest.mark.xfail(reason="Change of interface.")
+def test_files_non_cautious_old(setup):
+  run_test_from_files_old_interface("non_cautious", setup)
 
 @pytest.mark.skip(reason="Cautious is currently bugged.")
-def test_files_cautious(setup):
-  run_test_with_aacbr_type("cautious", setup)
+def test_files_cautious_old(setup):
+  run_test_from_files_old_interface("cautious", setup)
