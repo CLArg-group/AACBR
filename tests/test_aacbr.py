@@ -2,20 +2,72 @@
 
 from context import aacbr
 import pytest
+from itertools import product
 
+@pytest.fixture(autouse=True)
 def test_import():
-  from aacbr import Aacbr
+  from aacbr import Aacbr, Case
   pass
 
-@pytest.mark.skip(reason="Undefined tests")
+from aacbr import Aacbr, Case
+
 @pytest.mark.usefixtures("test_import")
 class TestAacbr:
+  default = Case('default', set(), outcome=0)
+  case1 = Case('1', {'a'}, outcome=1)
+  case2 = Case('2', {'a','b'}, outcome=0)
+  example_cb = (default, case1, case2)
+  
+  case3 = Case('3', {'a','b','c'}, outcome=0)
+  example_cb2 = tuple(list(example_cb) + [case3])
+  example_cbs = [example_cb, example_cb2]
+    
+  @pytest.mark.parametrize("cb", example_cbs)
+  def test_initialisation(self, cb):
+    clf = Aacbr(cb)
+    assert isinstance(clf, Aacbr)
+
+  @pytest.mark.parametrize("cb", example_cbs)
+  def test_aacbr_methods(self, cb):
+    clf = Aacbr(cb)
+    assert clf.casebase == cb
+    
+  # def test_attack(self):
+  #   default = Case('default', set(), outcome=0)
+  #   case1 = Case('1', {'a'}, outcome=1)
+  #   case2 = Case('2', {'a','b'}, outcome=0)
+  #   case3 = Case('3', {'a','b','c'}, outcome=0)
+  #   cb = (default, case1, case2)
+  #   clf = Aacbr(cb)
+  #   list_of_attacks = ((case1, default), (case2,case1))
+  #   for pair in product(cb, repeat=2):
+  #     assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks
+      
+  #   cb = (default, case1, case2, case3)
+  #   clf = Aacbr(cb)
+  #   for pair in product(cb, repeat=2):
+  #     assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks
+
+  @pytest.mark.parametrize("cb", example_cbs)
+  def test_attack(self, cb):
+    clf = Aacbr(cb)
+    if cb == self.example_cb or cb == self.example_cb2:
+      list_of_attacks = ((self.case1, self.default), (self.case2, self.case1))
+    else:
+      raise(Exception("Undefined test"))
+    for pair in product(cb, repeat=2):
+      assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks   
+      
+  @pytest.mark.skip(reason="Undefined tests")      
   def test_argumentation_framework():
     pass
+  @pytest.mark.skip(reason="Undefined tests")
   def test_predictions():
     pass
+  @pytest.mark.skip(reason="Undefined tests")
   def test_grounded_extension():
     pass
+  @pytest.mark.skip(reason="Undefined tests")
   def scikit_learning_like_api():
     # It would be nice to have it compatible with the scikit-learn API:
     # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
@@ -29,7 +81,7 @@ class TestAacbr:
 
 @pytest.mark.skip(reason="Undefined tests")
 @pytest.mark.usefixtures("test_import")
-class TestAacbr:
+class TestCaacbr:
   def test_argumentation_framework_cautious():
     pass
   def test_predictions_cautious():

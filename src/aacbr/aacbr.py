@@ -9,17 +9,20 @@ from datetime import timedelta
 import time
 import json
 
-from .cases import Case
 import numpy as np
 
 from functools import cmp_to_key
 from collections import deque
 
+from .cases import Case
+from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
+
+
 class Aacbr:
   ID_DEFAULT = 'default'
   ID_NON_DEFAULT = 'non_default'
 
-  def __init__(self, outcome_def, outcome_nondef, outcome_unknown):
+  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN):
     self.outcome_def = outcome_def
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
