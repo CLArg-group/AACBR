@@ -9,6 +9,7 @@ verify_ssl = true
 networkx = "*"
 matplotlib = "*"
 pytest = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.9"
