@@ -24,12 +24,12 @@ class TestAacbr:
     
   @pytest.mark.parametrize("cb", example_cbs)
   def test_initialisation(self, cb):
-    clf = Aacbr(cb)
+    clf = Aacbr().fit(cb)
     assert isinstance(clf, Aacbr)
 
   @pytest.mark.parametrize("cb", example_cbs)
   def test_aacbr_methods(self, cb):
-    clf = Aacbr(cb)
+    clf = Aacbr().fit(cb)
     assert clf.casebase_initial == cb
     
   # def test_attack(self):
@@ -41,12 +41,12 @@ class TestAacbr:
   #   clf = Aacbr(cb)
   #   list_of_attacks = ((case1, default), (case2,case1))
   #   for pair in product(cb, repeat=2):
-  #     assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks
+  #     assert clf.attacks(pair[0],pair[1]) == (pair in list_of_attacks)
       
   #   cb = (default, case1, case2, case3)
   #   clf = Aacbr(cb)
   #   for pair in product(cb, repeat=2):
-  #     assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks
+  #     assert clf.attacks(pair[0],pair[1]) == (pair in list_of_attacks)
 
   @pytest.mark.parametrize("cb", example_cbs)
   def test_attack(self, cb):
@@ -56,7 +56,7 @@ class TestAacbr:
     else:
       raise(Exception("Undefined test"))
     for pair in product(cb, repeat=2):
-      assert clf.attacks(pair[0],pair[1]) == pair in list_of_attacks   
+      assert clf.attacks(pair[0],pair[1]) == (pair in list_of_attacks)
       
   @pytest.mark.skip(reason="Undefined tests")      
   def test_argumentation_framework():

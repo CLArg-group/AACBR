@@ -17,7 +17,8 @@ class Case:
   def __str__(self):
     return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome})'
   def __repr__(self):
-    return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome}'
+    # return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome})'
+    return self.__str__()
   def __eq__(self, other):
     if not isinstance(other, Case):
       return NotImplemented

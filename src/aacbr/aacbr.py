@@ -12,6 +12,7 @@ import json
 import numpy as np
 
 from functools import cmp_to_key
+from operator import lt
 from collections import deque
 
 from .cases import Case
@@ -22,10 +23,20 @@ class Aacbr:
   ID_DEFAULT = 'default'
   ID_NON_DEFAULT = 'non_default'
 
-  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN):
+  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN, default_case=None):
     self.outcome_def = outcome_def
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
+    self.default_case = default_case
+    self.partial_order = None
+    self.casebase_initial = None
+    self.casebase_active = None
+
+  def fit(self, casebase=set(), partial_order=lt):
+    self.casebase_initial = casebase
+    self.partial_order = partial_order
+    # TODO
+    return self
 
   @staticmethod
   def different_outcomes(A, B):
@@ -45,8 +56,8 @@ class Aacbr:
       case in cases)
 
   # attack relation defined
-  def attacks(self, cases, A, B):
-    return self.different_outcomes(A, B) and self.more_specific(A, B) and self.most_concise(cases, A, B)
+  def attacks(self, A, B):
+    return self.different_outcomes(A, B) and self.more_specific(A, B) and self.most_concise(self.casebase_active, A, B)
 
   # unlabbled datapoint newcase
   @staticmethod
