@@ -10,6 +10,7 @@ def test_import():
   pass
 
 from aacbr import Aacbr, Case
+from aacbr.cases import load_cases
 
 @pytest.mark.usefixtures("test_import")
 class TestAacbr:
@@ -50,13 +51,46 @@ class TestAacbr:
 
   @pytest.mark.parametrize("cb", example_cbs)
   def test_attack(self, cb):
-    clf = Aacbr(cb)
+    clf = Aacbr()
+    clf.fit(cb)
     if cb == self.example_cb or cb == self.example_cb2:
       list_of_attacks = ((self.case1, self.default), (self.case2, self.case1))
     else:
       raise(Exception("Undefined test"))
     for pair in product(cb, repeat=2):
-      assert clf.attacks(pair[0],pair[1]) == (pair in list_of_attacks)
+      assert ((clf.attacks(pair[0],pair[1])) == (pair in list_of_attacks)), f"Violated by pair {pair}"
+
+  @pytest.mark.parametrize("cb", example_cbs)
+  def test_attack_new_case(self, cb):
+    new = Case('new', {'a', 'd'})
+    clf = Aacbr()
+    clf.fit(cb)
+    assert not clf.new_case_attacks(new, self.default)
+    if self.case1 in cb:
+      assert not clf.new_case_attacks(new, self.case1)
+    if self.case2 in cb:
+      assert clf.new_case_attacks(new, self.case2)
+    if self.case3 in cb:
+      assert clf.new_case_attacks(new, self.case3)
+
+  def test_conciseness(self):
+    cb = self.example_cb2
+    clf = Aacbr()
+    clf.fit(cb)
+    assert clf.attacks(self.case2, self.case1)
+    assert not clf.attacks(self.case3, self.case1), "case3 is attacking case1 even if case2 already does so. Violating conciseness."
+
+  def test_inconsistent(self):
+    # Even if already tested in test_cases.py, it should Aacbr should
+    # have its own interface to it.
+    case1 = Case('1', {'a','b'}, outcome=0)
+    case2 = Case('2', {'a','b'}, outcome=1)
+    cb = [case1, case2]
+    clf = Aacbr().fit(cb)
+    assert clf.attacks(case1, case2)
+    assert clf.attacks(case2, case1)
+    assert clf.inconsistent_attacks(case1, case2)
+    assert clf.inconsistent_attacks(case2, case1)
       
   @pytest.mark.skip(reason="Undefined tests")      
   def test_argumentation_framework():
@@ -67,14 +101,18 @@ class TestAacbr:
   @pytest.mark.skip(reason="Undefined tests")
   def test_grounded_extension():
     pass
-  @pytest.mark.skip(reason="Undefined tests")
-  def scikit_learning_like_api():
+
+  def test_scikit_learning_like_api(self):
     # It would be nice to have it compatible with the scikit-learn API:
     # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
     # import data...
-    train_data = None
-    test_data = None
-    expected_output = None
+    train_data = self.example_cb2
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set())]    
+    expected_output = [1, 0, 1, 0, 0]
     clf = Aacbr()
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
@@ -82,6 +120,7 @@ class TestAacbr:
 @pytest.mark.skip(reason="Undefined tests")
 @pytest.mark.usefixtures("test_import")
 class TestCaacbr:
+  # TODO: perhaps delete this class, pass as parameter
   def test_argumentation_framework_cautious():
     pass
   def test_predictions_cautious():
@@ -97,7 +136,7 @@ class TestCaacbr:
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
 
-#### old tests
+#### json-defined tests
 import json
 from aacbr.aacbr import Aacbr, Case
 import sys
@@ -133,15 +172,15 @@ AACBR_TYPES_FUNCTION = {
 
 TESTS = prepare_tests(TEST_FILES)
 
-@pytest.mark.parametrize("test", TESTS)
 def run_test_from_files(aacbr_type, test):  
   # TODO: change this interface in line below in the future
   # -- it should not be inside Aacbr
-  casebase = Aacbr.load_cases(TEST_PATH_PREFIX + test["casebase"])
+  cautious = True if aacbr_type == "cautious" else False
+  casebase = load_cases(TEST_PATH_PREFIX + test["casebase"])
   clf = Aacbr(outcome_def=test["outcomes"]["default"],
               outcome_nondef=test["outcomes"]["nondefault"],
               outcome_unknown=test["outcomes"]["undecided"],
-              cautious=aacbr_type)
+              cautious=cautious)
   clf.fit(casebase)
   casebase_active_ids = set(map(lambda x: getattr(x, "id"), clf.casebase_active))
   assert set(casebase_active_ids) == set(test["casebase_expected"][aacbr_type])
@@ -152,13 +191,15 @@ def run_test_from_files(aacbr_type, test):
     prediction = result[1][0]["Prediction"]
     assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
 
-@pytest.mark.xfail(reason="New interface not yet implemented.")
-def test_files_non_cautious(setup):
-  run_test_from_files("non_cautious", setup)
+# @pytest.mark.xfail(reason="New interface not yet implemented.")
+@pytest.mark.parametrize("test", TESTS)
+def test_files_non_cautious(test):
+  run_test_from_files("non_cautious", test)
 
 @pytest.mark.skip(reason="Cautious is currently bugged.")
-def test_files_cautious(setup):
-  run_test_from_files("cautious", setup)
+@pytest.mark.parametrize("test", TESTS)
+def test_files_cautious(test):
+  run_test_from_files("cautious", test)
 
 @pytest.fixture(params=TESTS)
 def setup(request):

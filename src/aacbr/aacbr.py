@@ -23,21 +23,31 @@ class Aacbr:
   ID_DEFAULT = 'default'
   ID_NON_DEFAULT = 'non_default'
 
-  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN, default_case=None):
+  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN, default_case=None, cautious=False):
     self.outcome_def = outcome_def
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
     self.default_case = default_case
+    self.cautious = cautious
     self.partial_order = None
     self.casebase_initial = None
     self.casebase_active = None
+    self.attack_mapping = None # for storing inside an Aacbr instance the attacks, not in the cases
 
   def fit(self, casebase=set(), partial_order=lt):
+    if not isinstance(self, Aacbr):
+      raise(Exception(f"{self} is not an instance of {Aacbr}"))
     self.casebase_initial = casebase
     self.partial_order = partial_order
-    # TODO
+    if not self.cautious:
+      self.casebase_active = self.give_casebase(casebase) # NEXT_ACTION
+      # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
+      # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
+      # command 2: save attacks state
+    else:
+      raise(Exception("Cautious case not implemented"))
     return self
-
+  
   @staticmethod
   def different_outcomes(A, B):
     return A.outcome != B.outcome
@@ -54,9 +64,14 @@ class Aacbr:
     return not any(
       (self.more_specific(A, case) and self.more_specific(case, B) and not (self.different_outcomes(A, case))) for
       case in cases)
+  # and old implementation, compare 
+  # return moreSpecific(A,B) and not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
 
   # attack relation defined
   def attacks(self, A, B):
+    if not all(x in self.casebase_active for x in (A,B)):
+      raise RuntimeError(f"Arguments {(A,B)} are not both in the active casebase.")
+    
     return self.different_outcomes(A, B) and self.more_specific(A, B) and self.most_concise(self.casebase_active, A, B)
 
   # unlabbled datapoint newcase
@@ -70,6 +85,10 @@ class Aacbr:
   def inconsistent_attacks(self, A, B):
     return self.different_outcomes(A, B) and B.factors == A.factors
 
+  def predict(self, newcases):
+    _, predictions = self.give_predictions(self.casebase_active, newcases, cautious = self.cautious)
+    return [prediction_dict["Prediction"] for prediction_dict in predictions]
+  
   # predictions for multiple points
   def give_predictions(self, casebase, newcases, nr_defaults=1, lime=None, outcome_map=None, cautious=None):
     predictions = []

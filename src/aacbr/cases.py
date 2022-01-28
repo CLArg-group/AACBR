@@ -29,25 +29,26 @@ class Case:
 def differentOutcomes(A, B):
   return A.outcome != B.outcome
 
-def moreSpecific(A, B):
+def moreSpecific(A, B, partial_order=set.issubset):
   return B.factors.issubset(A.factors) and B.factors != A.factors
 
-def mostConcise(cases, A, B):
-  return moreSpecific(A,B) and not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
+# should be in aacbr
+# def mostConcise(cases, A, B):
+#   return moreSpecific(A,B) and not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
 
-def attacks(cases, A, B):
-  return differentOutcomes(A, B) and mostConcise(cases, A, B)
+# def attacks(cases, A, B):
+#   return differentOutcomes(A, B) and mostConcise(cases, A, B)
 
-def newcaseattacks(newcase, targetcase):
-  return not newcase.factors.issuperset(targetcase.factors)
+# def newcaseattacks(newcase, targetcase):
+#   return not newcase.factors.issuperset(targetcase.factors)
     
-def inconsistentattacks(A, B):
-  return differentOutcomes(A, B) and B.factors == A.factors
+# def inconsistentattacks(A, B):
+#   return differentOutcomes(A, B) and B.factors == A.factors
 
 def load_cases(file: str) -> list:
   '''Loads cases form a file'''
 
-  global ID_DEFAULT, OUTCOME_DEFAULT, ID_NON_DEFAULT, OUTCOME_NON_DEFAULT
+  global ID_DEFAULT, OUTCOME_DEFAULT, ID_NON_DEFAULT, OUTCOME_NON_DEFAULT 
 
   cases = []
   with open(file, encoding = 'utf-8') as json_file:
@@ -75,6 +76,7 @@ def give_casebase(cases: list) -> list:
     duplicate = False
     for case in casebase:
       if candidate_case.id != case.id and candidate_case.factors == case.factors and candidate_case.outcome == case.outcome:
+        # What if two cases have the same id (and same factors and outcome)? Why not marked as duplicate as well?
         duplicate = True
     if not duplicate:
       casebase.append(candidate_case)  
