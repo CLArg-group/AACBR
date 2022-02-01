@@ -112,7 +112,7 @@ class TestAacbr:
   def test_grounded_extension():
     pass
 
-  def test_scikit_learning_like_api(self):
+  def test_scikit_learning_like_api_with_case_input(self):
     # It would be nice to have it compatible with the scikit-learn API:
     # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
     # import data...
@@ -125,6 +125,22 @@ class TestAacbr:
     expected_output = [1, 0, 1, 0, 0]
     clf = Aacbr()
     predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output
+
+  @pytest.mark.skip(reason="not implemented")
+  def test_scikit_learning_like_api_with_characterisation_input(self):
+    train_data = self.example_cb2
+    train_X = [c.factors for c in cb]
+    train_Y = [c.outcome for c in cb]
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set())]
+    test_X = [c.factors for c in test_data]
+    expected_output = [1, 0, 1, 0, 0]
+    clf = Aacbr()
+    predicted_output = clf.fit(train_X, train_Y).predict(test_X)
     assert expected_output == predicted_output
 
 @pytest.mark.skip(reason="Undefined tests")
