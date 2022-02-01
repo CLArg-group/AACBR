@@ -82,6 +82,7 @@ class Aacbr:
   
   # predictions for multiple points
   def give_predictions(self, casebase, newcases, nr_defaults=1, lime=None, outcome_map=None, cautious=None):
+    newcases = self.give_new_cases(casebase, newcases)
     predictions = []
     for newcase in newcases:
       newcase_prediction = dict()
@@ -330,13 +331,17 @@ class Aacbr:
   #   return current_casebase
 
   # calculate which cases are attacked by the new case
-  def give_new_cases(self, casebase, cases):
-    newcases = []
-    for newcase in cases:
+  def give_new_cases(self, casebase, newcases):
+    # newcases = []
+    self.reset_attack_relations(newcases)
+    for newcase in newcases:
       for case in casebase:
         if self.new_case_attacks(newcase, case):
           newcase.attackees.append(case)
-      newcases.append(newcase)
+          # TODO?: we are not adding newcase to case.attackers, is
+          # this an issue?
+          # we do not do it since cleaning it afterwards would be harder
+      # newcases.append(newcase)
 
     return newcases
 

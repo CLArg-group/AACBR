@@ -22,6 +22,7 @@ def run():
     return subprocess.run(args, capture_output=True)
   return do_run
 
+@pytest.mark.skip(reason="CLI file needs to be updated, it uses old implementations. We would like to only keep the interface.")
 def test_run_aacbr_cli_default_arguments(tmp_path, run):
   data_files = ["cb.json", "new_5.json", "cb_to_new_5.json"]
   data_dir = "../tests/data"

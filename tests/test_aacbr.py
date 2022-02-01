@@ -92,7 +92,7 @@ class TestAacbr:
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
       
-  # @pytest.mark.skip(reason="Undefined tests")
+  @pytest.mark.skip(reason="For visualising what is happening with AF, but not a proper test.") # this is because this AF implementation is to be changed
   def test_argumentation_framework(self):
     cb = self.example_cb
     # newcase = self.case3
@@ -207,7 +207,7 @@ def run_test_from_files(aacbr_type, test):
 def test_files_non_cautious(test):
   run_test_from_files("non_cautious", test)
 
-@pytest.mark.skip(reason="Cautious is currently bugged.")
+@pytest.mark.xfail(reason="Cautious is currently bugged.")
 @pytest.mark.parametrize("test", TESTS)
 def test_files_cautious(test):
   run_test_from_files("cautious", test)
