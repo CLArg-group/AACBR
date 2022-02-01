@@ -2,7 +2,7 @@
 from context import aacbr
 
 import pytest
-from aacbr.cases import Case, differentOutcomes, moreSpecific #, mostConcise, attacks, newcaseattacks, 
+from aacbr.cases import Case, different_outcomes, more_specific_weakly, inconsistent_pair #, mostConcise, attacks, newcaseattacks, 
 
 def test_create_case():
   empty_case = Case('empty', set())
@@ -12,18 +12,18 @@ def test_create_case():
 def test_specificity():
   case1 = Case('1', {'a'})
   case2 = Case('2', {'a','b'})
-  assert moreSpecific(case2, case1)
-  assert not moreSpecific(case1, case2)
-  assert not moreSpecific(case1, case1)
-  assert not moreSpecific(case2, case2)
+  assert more_specific_weakly(case2, case1)
+  assert not more_specific_weakly(case1, case2)
+  assert more_specific_weakly(case1, case1)
+  assert more_specific_weakly(case2, case2)
 
 def test_different_outcomes():
   case1 = Case('1', {'a'}, outcome=0)
   case2 = Case('2', {'a','b'}, outcome=1)
-  assert differentOutcomes(case1, case2)
-  assert differentOutcomes(case2, case1)
-  assert not differentOutcomes(case1, case1)
-  assert not differentOutcomes(case2, case2)
+  assert different_outcomes(case1, case2)
+  assert different_outcomes(case2, case1)
+  assert not different_outcomes(case1, case1)
+  assert not different_outcomes(case2, case2)
   
 # def test_conciseness():
 #   case1 = Case('1', {'a'})
@@ -44,15 +44,33 @@ def test_different_outcomes():
 #   assert not newcaseattacks(newcase, case1)
 #   assert not newcaseattacks(newcase, default)
   
-@pytest.mark.xfail(reason="Inconsistent cases not yet solved here.")
-def test_inconsistent():
+def test_inconsistent_pair():
   case1 = Case('1', {'a','b'}, outcome=0)
   case2 = Case('2', {'a','b'}, outcome=1)
-  cases = [case1, case2]
-  assert attacks(cases, case1, case2)
-  assert attacks(cases, case2, case1)
-  assert inconsistentattacks(case1, case2)
+  assert inconsistent_pair(case1, case2)
 
+def test_order_notation():
+  default = Case('default', set(), outcome=0)
+  case1 = Case('1', {'a'}, outcome=1)
+  case2 = Case('2', {'a','b'}, outcome=0)
+  case2b = Case('2b', {'a','b'}, outcome=1)
+  case3 = Case('3', {'c'})
+  case4 = Case('4', {'a','b', 'c'}, outcome=1)
+  cases = [default, case1, case2, case2b, case3, case4]
+  assert all([default <= case for case in cases])
+  assert all([case <= case for case in cases])
+  assert not any([case < case for case in cases])
+  assert case1 < case2
+  assert not case1 < case3
+  assert not case3 < case1
+  assert all([case >= default for case in cases])
+  assert all([case >= case for case in cases])
+  assert case4 > case1 and case4 > case3
+  assert case4 > case2 and case4 > case2b
+  assert case2 >= case2b and case2b >= case2
+  assert not case2 == case2b
+  assert case2 != case2b
+  
 # @pytest.mark.xfail(reason="No uniform notation yet.")
 # [2022-01-27 Thu 22:35]: Removing this test since new cases will not be part of the casebase itself.
 # def test_uniform_attack_notation():

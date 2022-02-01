@@ -58,7 +58,7 @@ class TestAacbr:
     else:
       raise(Exception("Undefined test"))
     for pair in product(cb, repeat=2):
-      assert ((clf.attacks(pair[0],pair[1])) == (pair in list_of_attacks)), f"Violated by pair {pair}"
+      assert ((clf.past_case_attacks(pair[0],pair[1])) == (pair in list_of_attacks)), f"Violated by pair {pair}. Expected {pair in list_of_attacks}."
 
   @pytest.mark.parametrize("cb", example_cbs)
   def test_attack_new_case(self, cb):
@@ -77,24 +77,34 @@ class TestAacbr:
     cb = self.example_cb2
     clf = Aacbr()
     clf.fit(cb)
-    assert clf.attacks(self.case2, self.case1)
-    assert not clf.attacks(self.case3, self.case1), "case3 is attacking case1 even if case2 already does so. Violating conciseness."
+    assert clf.past_case_attacks(self.case2, self.case1)
+    assert not clf.past_case_attacks(self.case3, self.case1), "case3 is attacking case1 even if case2 already does so. Violating conciseness."
 
   def test_inconsistent(self):
-    # Even if already tested in test_cases.py, it should Aacbr should
-    # have its own interface to it.
+    # Even if already tested in test_cases.py, Aacbr should have its
+    # own interface to it.
     case1 = Case('1', {'a','b'}, outcome=0)
     case2 = Case('2', {'a','b'}, outcome=1)
     cb = [case1, case2]
     clf = Aacbr().fit(cb)
-    assert clf.attacks(case1, case2)
-    assert clf.attacks(case2, case1)
+    assert clf.past_case_attacks(case1, case2)
+    assert clf.past_case_attacks(case2, case1)
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
       
-  @pytest.mark.skip(reason="Undefined tests")      
-  def test_argumentation_framework():
-    pass
+  # @pytest.mark.skip(reason="Undefined tests")
+  def test_argumentation_framework(self):
+    cb = self.example_cb
+    # newcase = self.case3
+    newcase = Case('4', {'a', 'd'}, outcome=1)
+    expected_output = newcase.outcome
+    clf = Aacbr().fit(cb)
+    aa_framework, format_mapping = clf.format_aaframework(clf.casebase_active, newcase)    
+    result_string = f"{aa_framework}\n{format_mapping}"
+    output = clf.predict([newcase])
+    result_string += f"\n{output}, {expected_output}"
+    raise Exception(result_string)
+  
   @pytest.mark.skip(reason="Undefined tests")
   def test_predictions():
     pass
@@ -188,7 +198,8 @@ def run_test_from_files(aacbr_type, test):
   for newcase_spec in test["newcases"]:
     newcase = Case(id=newcase_spec["id"], factors=set(newcase_spec["factors"]))
     result = clf.predict([newcase])
-    prediction = result[1][0]["Prediction"]
+    # prediction = result[1][0]["Prediction"]
+    prediction = result[0]
     assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
 
 # @pytest.mark.xfail(reason="New interface not yet implemented.")

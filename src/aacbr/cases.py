@@ -25,12 +25,25 @@ class Case:
     return all([self.id == other.id, set(self.factors) == set(other.factors), self.outcome == other.outcome])
   def __hash__(self):
     return hash((self.id, frozenset(self.factors), self.outcome))
+  def __ge__(self, other):
+    return more_specific_weakly(self, other)
+  def __gt__(self, other):
+    return self.__ge__(other) and self.factors != other.factors
     
-def differentOutcomes(A, B):
+def different_outcomes(A, B):
   return A.outcome != B.outcome
 
-def moreSpecific(A, B, partial_order=set.issubset):
-  return B.factors.issubset(A.factors) and B.factors != A.factors
+def more_specific_weakly(A, B):
+  """Partial order >= for two cases."""
+  # Important to check whether correct partial order is being used
+  # return sum(A.weight) > sum(B.weight)
+  # return B.factors.issubset(A.factors) and B.factors != A.factors # this disallows incoherence
+  # return B.factors.issubset(A.factors) and (B.factors != A.factors or B.outcome != A.outcome)
+  return B.factors.issubset(A.factors)
+
+def inconsistent_pair(A, B):
+  return A.factors == B.factors and different_outcomes(A, B)
+
 
 # should be in aacbr
 # def mostConcise(cases, A, B):

@@ -15,7 +15,7 @@ from functools import cmp_to_key
 from operator import lt
 from collections import deque
 
-from .cases import Case
+from .cases import Case, more_specific_weakly, different_outcomes
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
 
 
@@ -29,18 +29,20 @@ class Aacbr:
     self.outcome_unknown = outcome_unknown
     self.default_case = default_case
     self.cautious = cautious
-    self.partial_order = None
+    # self.partial_order = None
     self.casebase_initial = None
     self.casebase_active = None
     self.attack_mapping = None # for storing inside an Aacbr instance the attacks, not in the cases
-
-  def fit(self, casebase=set(), partial_order=lt):
+  
+  def fit(self, casebase=set()):
     if not isinstance(self, Aacbr):
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
+    
     self.casebase_initial = casebase
-    self.partial_order = partial_order
+    # self.partial_order = partial_order
     if not self.cautious:
-      self.casebase_active = self.give_casebase(casebase) # NEXT_ACTION
+      self.casebase_active = casebase
+      self.casebase_active = self.give_casebase(casebase) # adding attacks
       # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
       # command 2: save attacks state
@@ -48,31 +50,21 @@ class Aacbr:
       raise(Exception("Cautious case not implemented"))
     return self
   
-  @staticmethod
-  def different_outcomes(A, B):
-    return A.outcome != B.outcome
-
-  # A is a superset of B -> partial order
-  @staticmethod
-  def more_specific(A, B):
-    # return sum(A.weight) > sum(B.weight)
-    # return B.factors.issubset(A.factors) and B.factors != A.factors # this disallows incoherence
-    return B.factors.issubset(A.factors) and (B.factors != A.factors or B.outcome != A.outcome)
-
   # not something in the set of all possible cases in the middle
   def most_concise(self, cases, A, B):
-    return not any(
-      (self.more_specific(A, case) and self.more_specific(case, B) and not (self.different_outcomes(A, case))) for
-      case in cases)
-  # and old implementation, compare 
-  # return moreSpecific(A,B) and not any((moreSpecific(A, case) and moreSpecific(case, B) and not(differentOutcomes(A, case))) for case in cases)
+    return not any((B < case and
+                    case < A and
+                    not (different_outcomes(A, case)))
+                   for case in cases)
 
   # attack relation defined
-  def attacks(self, A, B):
+  def past_case_attacks(self, A, B):
     if not all(x in self.casebase_active for x in (A,B)):
       raise RuntimeError(f"Arguments {(A,B)} are not both in the active casebase.")
     
-    return self.different_outcomes(A, B) and self.more_specific(A, B) and self.most_concise(self.casebase_active, A, B)
+    return (different_outcomes(A, B) and
+            B <= A and
+            self.most_concise(self.casebase_active, A, B))
 
   # unlabbled datapoint newcase
   @staticmethod
@@ -81,9 +73,8 @@ class Aacbr:
     return not newcase.factors.issuperset(targetcase.factors)
 
   # noisy points
-
   def inconsistent_attacks(self, A, B):
-    return self.different_outcomes(A, B) and B.factors == A.factors
+    return different_outcomes(A, B) and B.factors == A.factors
 
   def predict(self, newcases):
     _, predictions = self.give_predictions(self.casebase_active, newcases, cautious = self.cautious)
@@ -112,9 +103,8 @@ class Aacbr:
     non_def_arg = 'argument({})'.format(self.ID_NON_DEFAULT) + " " + 'factors:{}'.format('set()')
     prediction = None
     dialectical_box = None
-
+    
     if nr_defaults == 1:
-
       if def_arg in grounded['in'] and non_def_arg not in grounded['in']:
         prediction = self.outcome_def
         sink = def_arg
@@ -128,8 +118,7 @@ class Aacbr:
     # graph drawing part
     if sink and cautious and outcome_map and lime is False:
       newcase_format = format_mapping[newcase]
-      graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format,
-                           unattacked)
+      graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format, unattacked)
       outcome_map.update({str(newcase.id): prediction})
       excess_feature_map = self.compute_excess_features(newcase, graph, format_mapping)
       dialectical_box = self.compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
@@ -343,7 +332,6 @@ class Aacbr:
   # calculate which cases are attacked by the new case
   def give_new_cases(self, casebase, cases):
     newcases = []
-
     for newcase in cases:
       for case in casebase:
         if self.new_case_attacks(newcase, case):
@@ -356,7 +344,6 @@ class Aacbr:
   # compute the attackees and attackers set
   def give_casebase(self, cases):
     self.reset_attack_relations(cases) # gpp
-    
     casebase = []
     for candidate_case in cases:
       casebase.append(candidate_case)
@@ -369,7 +356,7 @@ class Aacbr:
 
     for case in casebase:
       for othercase in casebase:
-        if self.attacks(casebase, case, othercase):
+        if self.past_case_attacks(case, othercase):
           case.attackees.append(othercase)
           othercase.attackers.append(case)
 
@@ -424,8 +411,8 @@ class Aacbr:
 
   #   return order_casebase
   def topological_sort(self, casebase):
-    # compare = lambda x,y: 1 if self.more_specific(x,y) else (0 if x.factors == y.factors else -1)
-    order_dag = self.build_order_dag(casebase, self.more_specific)
+    # compare = lambda x,y: 1 if more_specific(x,y) else (0 if x.factors == y.factors else -1)
+    order_dag = self.build_order_dag(casebase, more_specific_weakly)
     output = self.topological_sort_graph(*order_dag)
     return output
     # return sorted(casebase, key=cmp_to_key(comparison_function))
