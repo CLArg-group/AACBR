@@ -1,6 +1,4 @@
 ### Tests the model/classifier itself, predictions, argumentation framework, etc
-
-from context import aacbr
 import pytest
 from itertools import product
 

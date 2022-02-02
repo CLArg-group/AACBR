@@ -77,11 +77,12 @@ class Aacbr:
     return different_outcomes(A, B) and B.factors == A.factors
 
   def predict(self, newcases):
-    _, predictions = self.give_predictions(self.casebase_active, newcases, cautious = self.cautious)
+    _, predictions = self.give_predictions(newcases, cautious = self.cautious)
     return [prediction_dict["Prediction"] for prediction_dict in predictions]
   
   # predictions for multiple points
-  def give_predictions(self, casebase, newcases, nr_defaults=1, lime=None, outcome_map=None, cautious=None):
+  def give_predictions(self, newcases, nr_defaults=1, lime=None, outcome_map=None, cautious=None):
+    casebase = self.casebase_active
     newcases = self.give_new_cases(casebase, newcases)
     predictions = []
     for newcase in newcases:

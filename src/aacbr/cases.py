@@ -81,37 +81,37 @@ def load_cases(file: str) -> list:
   return cases
   
   
-def give_casebase(cases: list) -> list:
-  '''Returns a casebase given a list of cases'''
+# def give_casebase(cases: list) -> list:
+#   '''Returns a casebase given a list of cases'''
 
-  casebase = []
-  for candidate_case in cases:
-    duplicate = False
-    for case in casebase:
-      if candidate_case.id != case.id and candidate_case.factors == case.factors and candidate_case.outcome == case.outcome:
-        # What if two cases have the same id (and same factors and outcome)? Why not marked as duplicate as well?
-        duplicate = True
-    if not duplicate:
-      casebase.append(candidate_case)  
+#   casebase = []
+#   for candidate_case in cases:
+#     duplicate = False
+#     for case in casebase:
+#       if candidate_case.id != case.id and candidate_case.factors == case.factors and candidate_case.outcome == case.outcome:
+#         # What if two cases have the same id (and same factors and outcome)? Why not marked as duplicate as well?
+#         duplicate = True
+#     if not duplicate:
+#       casebase.append(candidate_case)  
   
-  for case in casebase:
-    for othercase in casebase:
-      if attacks(casebase, case, othercase) or inconsistentattacks(case, othercase):
-        case.attackees.append(othercase)
-        othercase.attackers.append(case)
+#   for case in casebase:
+#     for othercase in casebase:
+#       if attacks(casebase, case, othercase) or inconsistentattacks(case, othercase):
+#         case.attackees.append(othercase)
+#         othercase.attackers.append(case)
         
-  return casebase
+#   return casebase
 
 
-def give_newcases(casebase: list, cases: list) -> list:
-  '''Returns a a list of new cases given a list of cases and a casebase'''
+# def give_newcases(casebase: list, cases: list) -> list:
+#   '''Returns a a list of new cases given a list of cases and a casebase'''
 
-  newcases = []
-  for newcase in cases:
-    for case in casebase:
-      if newcaseattacks(newcase, case):
-        newcase.attackees.append(case)
-    newcases.append(newcase)
+#   newcases = []
+#   for newcase in cases:
+#     for case in casebase:
+#       if newcaseattacks(newcase, case):
+#         newcase.attackees.append(case)
+#     newcases.append(newcase)
     
-  return newcases
+#   return newcases
 

@@ -1,5 +1,4 @@
 ### Tests cases input, partial order, relevance, etc.
-from context import aacbr
 
 import pytest
 from aacbr.cases import Case, different_outcomes, more_specific_weakly, inconsistent_pair #, mostConcise, attacks, newcaseattacks, 
