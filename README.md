@@ -80,10 +80,10 @@ You can run tests by using `make test`.
 ## Roadmap (refactoring and debugging)
 This project is under heavy refactoring and expected to change. We expect the API in the previous section to be stable, but it is subject to change.
  - [ ] Add a proper installation mechanism (via setup.py / setup.cfg)
- - [ ] (Re-)allow CLI usage via json files
  - [ ] Draw graphs
  - [ ] Adapt to a more sklearn API style
- - [ ] Allow cautious AA-CBR
+ - [X] (Re-)allow CLI usage via json files
+ - [X] Allow cautious AA-CBR
 
 <!-- ## Execution -->
 
