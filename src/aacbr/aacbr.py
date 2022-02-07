@@ -65,7 +65,10 @@ class Aacbr:
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
       # command 2: save attacks state
     else:
-      raise(Exception("Cautious case not implemented"))
+      self.casebase_active = []
+      self.casebase_active = self.give_cautious_subset_of_casebase(casebase)
+      self.give_casebase(self.casebase_active)
+      # raise(Exception("Cautious case not implemented"))
     return self
   
   # not something in the set of all possible cases in the middle
@@ -99,7 +102,7 @@ class Aacbr:
     return [prediction_dict["Prediction"] for prediction_dict in predictions]
   
   # predictions for multiple points
-  def give_predictions(self, newcases, nr_defaults=1, lime=None, outcome_map=None, cautious=None):
+  def give_predictions(self, newcases, nr_defaults=1, outcome_map=None, cautious=None):
     casebase = self.casebase_active
     newcases = self.give_new_cases(casebase, newcases)
     predictions = []
@@ -109,13 +112,13 @@ class Aacbr:
       aa_framework, format_mapping = self.format_aaframework(casebase, newcase)
       dialectical_box, prediction = self.give_prediction(aa_framework, nr_defaults, number, newcase, outcome_map,
                                  format_mapping,
-                                 cautious, lime)
+                                 cautious)
       newcase_prediction.update({'No.': number, 'ID': newcase.id, 'Prediction': prediction})
       predictions.append(newcase_prediction)
 
     return dialectical_box, predictions
 
-  def give_prediction(self, framework, nr_defaults, number, newcase, outcome_map, format_mapping, cautious, lime):
+  def give_prediction(self, framework, nr_defaults, number, newcase, outcome_map, format_mapping, cautious):
     arguments = framework['arguments']
     attacks = framework['attacks']
     grounded, unattacked = self.compute_grounded(arguments, attacks)
@@ -136,7 +139,7 @@ class Aacbr:
         sink = None
 
     # graph drawing part
-    if sink and cautious and outcome_map and lime is False:
+    if sink and cautious and outcome_map is False:
       newcase_format = format_mapping[newcase]
       graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format, unattacked)
       outcome_map.update({str(newcase.id): prediction})
@@ -285,7 +288,12 @@ class Aacbr:
     self.reset_attack_relations(ordered_casebase)
     
     current_casebase_set = [ordered_casebase[0]]  # default is the minimal one
-    current_casebase = self.give_casebase(current_casebase_set)
+    base_clf = Aacbr(outcome_def=self.outcome_def,
+                     outcome_nondef=self.outcome_nondef,
+                     outcome_unknown=self.outcome_unknown,
+                     default_case=self.default_case,
+                     cautious=False)
+    current_casebase = base_clf.fit(current_casebase_set).casebase_active
     unprocessed = ordered_casebase[1:]
     
     while unprocessed:
@@ -294,17 +302,18 @@ class Aacbr:
       # print("Stratum is {}".format(stratum))
       unprocessed.pop(0)
       
-      newcases = self.give_new_cases(current_casebase, stratum)
+      newcases = base_clf.give_new_cases(current_casebase, stratum)
       
-      box, predicted_outcomes = self.give_predictions(current_casebase, newcases, 1, lime=False)
+      # box, predicted_outcomes = base_clf.give_predictions(newcases)
+      predicted_outcomes = base_clf.predict(newcases)
       to_add = []
       
       for index in range(len(stratum)):
         # print(f"Current case is {stratum[index]}")
-        if stratum[index].outcome != predicted_outcomes[index]['Prediction']:
+        if stratum[index].outcome != predicted_outcomes[index]:
           inconsistent = False
           for case in current_casebase:
-            if self.inconsistent_attacks(stratum[index], case):
+            if base_clf.inconsistent_attacks(stratum[index], case):
               print(f"Incoherence found between:\n{stratum[index]} and {case}")
               inconsistent = True
           if not inconsistent:
@@ -312,14 +321,14 @@ class Aacbr:
             # we need to check for the incoherence. The
             # order is not a problem since only of the two
             # will pass the predicted_outcome test above.
-            self.attacked_by[stratum[index]] = []
-            self.attackers_of[stratum[index]] = []
-            to_add.append(stratum[index])      
+            self.reset_attack_relations([stratum[index]])
+            to_add.append(stratum[index])
 
       # print("Adding the list of cases: {}".format(to_add))
       current_casebase_set.extend(to_add)
-      current_casebase = self.give_casebase(current_casebase_set)
-
+      # current_casebase = self.give_casebase(current_casebase_set)
+      current_casebase = base_clf.fit(current_casebase_set).casebase_active
+  
     return current_casebase
 
   #comment out if the partial order is subset
@@ -436,7 +445,7 @@ class Aacbr:
   #   return order_casebase
   def topological_sort(self, casebase):
     # compare = lambda x,y: 1 if more_specific(x,y) else (0 if x.factors == y.factors else -1)
-    order_dag = self.build_order_dag(casebase, more_specific_weakly)
+    order_dag = self.build_order_dag(casebase, lt)
     output = self.topological_sort_graph(*order_dag)
     return output
     # return sorted(casebase, key=cmp_to_key(comparison_function))
@@ -446,7 +455,7 @@ class Aacbr:
     order."""
     # Currently a very inefficient implementation, O(n^2)
     # I am sure this could be optimised
-    edges = tuple((a,b) for a in nodes for b in nodes if compare(b,a))
+    edges = tuple((a,b) for a in nodes for b in nodes if compare(a,b))
     return (tuple(nodes), edges)
   
   def topological_sort_graph(self, nodes, edges):
@@ -747,6 +756,7 @@ class Aacbr:
   def reset_attack_relations(self, casebase):
     # self.attackers_of.clear()
     # self.attacked_by.clear()
+    # TODO: does not work if I am removing just some cases from the AF, I should make a different interface for new cases, which I add and remove
     for case in casebase:
       self.attackers_of[case] = []
       self.attacked_by[case] = []

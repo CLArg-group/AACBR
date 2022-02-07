@@ -125,6 +125,29 @@ class TestAacbr:
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
 
+  def test_scikit_learning_like_api_with_case_input_cautious(self):
+    # It would be nice to have it compatible with the scikit-learn API:
+    # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
+    # import data...
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'c'}, outcome=1)
+    case4 = Case('4', {'c','d'}, outcome=0)
+    case5 = Case('5', {'a','b','c'}, outcome=1)
+    cb = [default, case1, case2, case3, case4]
+    train_data = cb
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set()),
+                 Case('new6', {'a','c','d'})]
+    expected_output = [1, 0, 1, 0, 0, 1]
+    clf = Aacbr(cautious=True)
+    predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output
+
   @pytest.mark.skip(reason="not implemented")
   def test_scikit_learning_like_api_with_characterisation_input(self):
     train_data = self.example_cb2
@@ -221,7 +244,7 @@ def run_test_from_files(aacbr_type, test):
 def test_files_non_cautious(test):
   run_test_from_files("non_cautious", test)
 
-@pytest.mark.xfail(reason="Cautious is currently bugged.")
+# @pytest.mark.xfail(reason="Cautious is currently bugged.")
 @pytest.mark.parametrize("test", TESTS)
 def test_files_cautious(test):
   run_test_from_files("cautious", test)
