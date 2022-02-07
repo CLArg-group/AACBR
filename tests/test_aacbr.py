@@ -148,6 +148,44 @@ class TestAacbr:
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
 
+  def test_inconsistent_IO(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'a', 'b'}, outcome=1)
+    cb = [default, case1, case2, case3, case4]
+    train_data = cb
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set()),
+                 Case('new6', {'a','c','d'})]
+    expected_output = [1, 1, 1, 1, 0, 1]
+    clf = Aacbr(cautious=False)
+    predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output
+
+  def test_inconsistent_cautious_IO(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'a', 'b'}, outcome=1)
+    cb = [default, case1, case2, case3, case4]
+    train_data = cb
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set()),
+                 Case('new6', {'a','c','d'})]
+    expected_output = [1, 0, 1, 0, 0, 1]
+    clf = Aacbr(cautious=True)
+    predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output    
+
   @pytest.mark.skip(reason="not implemented")
   def test_scikit_learning_like_api_with_characterisation_input(self):
     train_data = self.example_cb2
