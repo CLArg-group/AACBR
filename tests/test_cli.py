@@ -24,15 +24,18 @@ def run():
   return do_run
 
 # @pytest.mark.skip(reason="CLI file needs to be updated, it uses old implementations. We would like to only keep the interface.")
-def test_run_aacbr_cli_default_arguments(tmp_path, run):
-  data_files = ["cb.json", "new_5.json", "cb_to_new_5.json"]
+@pytest.mark.parametrize("cb_file, new_file, expected_file",
+                         [("cb_basic.json", "new_basic.json", "cb_to_new_basic.json")])
+def test_run_aacbr_cli_default_arguments(tmp_path, run,
+                                         cb_file, new_file, expected_file):
+  # data_files = ["cb.json", "new_5.json", "cb_to_new_5.json"]
   data_dir = "../tests/data"
 
-  copy(Path(f"{data_dir}/cb_10.json"), f"{tmp_path}/cb.json")
-  copy(Path(f"{data_dir}/new_5.json"), f"{tmp_path}/new.json")
+  copy(Path(f"{data_dir}/{cb_file}"), f"{tmp_path}/cb.json")
+  copy(Path(f"{data_dir}/{new_file}"), f"{tmp_path}/new.json")
   # copy(Path(f"{data_dir}/cb_to_new_5.json"), f"{tmp_path}/cb_to_new.json")
 
-  with open(f"{data_dir}/cb_to_new_5.json") as f:
+  with open(f"{data_dir}/{expected_file}") as f:
     expected = f.read()
   
   # raise(Exception(tmp_path))
