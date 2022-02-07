@@ -13,7 +13,7 @@ import numpy as np
 
 from functools import cmp_to_key
 from operator import lt
-from collections import deque
+from collections import deque, defaultdict
 
 from .cases import Case, more_specific_weakly, different_outcomes
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
@@ -32,7 +32,25 @@ class Aacbr:
     # self.partial_order = None
     self.casebase_initial = None
     self.casebase_active = None
-    self.attack_mapping = None # for storing inside an Aacbr instance the attacks, not in the cases
+    self.attacked_by = defaultdict(list) # for storing inside an Aacbr instance the attacks, not in the cases # attacked_by[a] = {b such that a attacks b}
+    self.attackers_of = defaultdict(list)  # attackers_of[a] = {b such that b attacks a}
+
+  # def attacked_by(self, case):
+  #   """List of cases that `case' attacks.
+  #   Gets in memory."""
+  #   if not case in self.casebase_active:
+  #     raise Exception(f"{case} not in active casebase of {self}")
+  #   return self._attacks[case]
+
+  # def attackers_of(self, case):
+  #   """List of cases that attacks `case'.
+  #   Gets in memory."""
+  #   if not case in self.casebase_active:
+  #     raise Exception(f"{case} not in active casebase of {self}")
+  #   return self._attacked[case]
+
+  # attacks(self, case1, case2)
+  # is_attacked(self, case1, case2)
   
   def fit(self, casebase=set()):
     if not isinstance(self, Aacbr):
@@ -223,12 +241,12 @@ class Aacbr:
       arguments.add('argument({})'.format(str(case.id)) + " " + 'factors:{}'.format(str(case.factors)))
       format_mapping.update(\
         {case: 'argument({})'.format(str(case.id)) + " " + 'factors:{}'.format(str(case.factors))})
-      for attackee in case.attackees:
+      for attackee in self.attacked_by[case]:
         attacks.add(('argument({attacker_argument})'.format(attacker_argument=str(case.id)) + " " +
                'factors:{}'.format(str(case.factors)),
                'argument({attacked_argument})'.format(attacked_argument=str(attackee.id)) + " " +
                'factors:{}'.format(str(attackee.factors))))
-      for attacker in case.attackers:
+      for attacker in self.attackers_of[case]:
         attacks.add(('argument({attacker_argument})'.format(attacker_argument=str(attacker.id)) + " " +
                'factors:{}'.format(str(attacker.factors)),
                'argument({attacked_argument})'.format(attacked_argument=str(case.id)) + " " +
@@ -238,7 +256,7 @@ class Aacbr:
       # arguments1, attacks1 = self.remove_arguments_not_attackee(arguments, attacks)
       arguments.add(newcase_format)
       format_mapping.update({newcase: newcase_format})
-      for attackee in newcase.attackees:
+      for attackee in self.attacked_by[newcase]:
         attacks.add((newcase_format,
                'argument({attacked_argument})'.format(attacked_argument=str(attackee.id)) + " " +
                'factors:{}'.format(str(attackee.factors))))
@@ -294,8 +312,8 @@ class Aacbr:
             # we need to check for the incoherence. The
             # order is not a problem since only of the two
             # will pass the predicted_outcome test above.
-            stratum[index].attackees = []
-            stratum[index].attackers = []
+            self.attacked_by[stratum[index]] = []
+            self.attackers_of[stratum[index]] = []
             to_add.append(stratum[index])      
 
       # print("Adding the list of cases: {}".format(to_add))
@@ -322,8 +340,8 @@ class Aacbr:
   #
   #     for index in range(len(stratum)):
   #       if stratum[index].outcome != predicted_outcomes[index]['Prediction']:
-  #         stratum[index].attackees = []
-  #         stratum[index].attackers = []
+  #         self.attacked_by[stratum[index]] = []
+  #         self.attackers_of[stratum[index]] = []
   #         to_add.append(stratum[index])
   #
   #     current_casebase_set.extend(to_add)
@@ -338,8 +356,8 @@ class Aacbr:
     for newcase in newcases:
       for case in casebase:
         if self.new_case_attacks(newcase, case):
-          newcase.attackees.append(case)
-          # TODO?: we are not adding newcase to case.attackers, is
+          self.attacked_by[newcase].append(case)
+          # TODO?: we are not adding newcase to self.attackers_of[case], is
           # this an issue?
           # we do not do it since cleaning it afterwards would be harder
       # newcases.append(newcase)
@@ -363,8 +381,8 @@ class Aacbr:
     for case in casebase:
       for othercase in casebase:
         if self.past_case_attacks(case, othercase):
-          case.attackees.append(othercase)
-          othercase.attackers.append(case)
+          self.attacked_by[case].append(othercase)
+          self.attackers_of[othercase].append(case)
 
     return casebase
 
@@ -410,7 +428,7 @@ class Aacbr:
   #     first_case = unattacked.pop(0)
   #     order_casebase.append(first_case)
 
-  #     for attackee in first_case.attackees:
+  #     for attackee in self.attacked_by[first_case]:
   #       no_attackers[attackee] -= 1
   #       if no_attackers[attackee] == 0:
   #         unattacked.append(attackee)
@@ -488,7 +506,7 @@ class Aacbr:
       entries = json.load(json_file)
       for entry in entries:
         if entry['id'] == self.ID_DEFAULT:
-          default_case = Case(self.ID_DEFAULT, set(), self.outcome_def, [], [], 0)
+          default_case = Case(self.ID_DEFAULT, set(), self.outcome_def)
           cases.insert(0, default_case)
 
           if nr_defaults == 2:
@@ -499,7 +517,7 @@ class Aacbr:
             factors = self.lime_preprocessing(entry['factors'], mapping_name)
           else:
             factors = entry['factors']
-          case = Case(entry['id'], set(factors), entry['outcome'], [], [], 0)
+          case = Case(entry['id'], set(factors), entry['outcome'])
           cases.append(case)
     json_file.close()
 
@@ -727,9 +745,11 @@ class Aacbr:
     return outcome_map
 
   def reset_attack_relations(self, casebase):
+    # self.attackers_of.clear()
+    # self.attacked_by.clear()
     for case in casebase:
-      case.attackers = []
-      case.attackees = []
+      self.attackers_of[case] = []
+      self.attacked_by[case] = []
 
   # @staticmethod
   # def lime_preprocessing(factors, mapping_name):

@@ -103,10 +103,10 @@ class TestAacbr:
     result_string += f"\n{output}, {expected_output}"
     raise Exception(result_string)
   
-  @pytest.mark.skip(reason="Undefined tests")
+  @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
   def test_predictions():
     pass
-  @pytest.mark.skip(reason="Undefined tests")
+  @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
   def test_grounded_extension():
     pass
 
@@ -231,8 +231,10 @@ def setup(request):
   test = request.param
   setup_result = Aacbr(test["outcomes"]["default"], test["outcomes"]["nondefault"], test["outcomes"]["undecided"])
   return test, setup_result  
-  
+
 def run_test_from_files_old_interface(aacbr_type, setup):
+  """Kept for reference, not expected to work.
+  """
   test, scenario = setup
   casebase = scenario.load_cases(TEST_PATH_PREFIX + test["casebase"])
   casebase_prepared = getattr(scenario, AACBR_TYPES_FUNCTION[aacbr_type])(casebase)
@@ -246,10 +248,10 @@ def run_test_from_files_old_interface(aacbr_type, setup):
     prediction = result[1][0]["Prediction"]
     assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
 
-@pytest.mark.xfail(reason="Change of interface.")
+@pytest.mark.skip(reason="Deprecated interface.")
 def test_files_non_cautious_old(setup):
   run_test_from_files_old_interface("non_cautious", setup)
 
-@pytest.mark.skip(reason="Cautious is currently bugged.")
+@pytest.mark.skip(reason="Deprecated interface.")
 def test_files_cautious_old(setup):
   run_test_from_files_old_interface("cautious", setup)

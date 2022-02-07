@@ -6,12 +6,10 @@ class Case:
   '''Defines a case to comprise id, factors, outcome, 
     lists of attackees and attackers.'''
   
-  def __init__(self, id, factors, outcome=None, attackees=None, attackers=None, weight=None):
+  def __init__(self, id, factors, outcome=None, weight=None):
     self.id = id
     self.factors = set(factors)
     self.outcome = outcome
-    self.attackees = attackees if attackees else []
-    self.attackers = attackers if attackers else []
     if weight: # currently unused
       self.weight = weight
   def __str__(self):
@@ -68,50 +66,14 @@ def load_cases(file: str) -> list:
     entries = json.load(json_file)
     for entry in entries:
       if entry['id'] == ID_DEFAULT:
-        default_case = Case(ID_DEFAULT, set(), OUTCOME_DEFAULT, [], [], 0)
+        default_case = Case(ID_DEFAULT, set(), OUTCOME_DEFAULT)
         cases.insert(0, default_case)
         # uncomment the following 2 lines for two defaults
 #        non_default_case = Case(ID_NON_DEFAULT, set(), OUTCOME_NON_DEFAULT, [], [], 0)
 #        cases.insert(0, non_default_case)
       else:
-        case = Case(entry['id'], set(entry['factors']), entry['outcome'], [], [], 0)
+        case = Case(entry['id'], set(entry['factors']), entry['outcome'])
         cases.append(case)
   json_file.close()
   
   return cases
-  
-  
-# def give_casebase(cases: list) -> list:
-#   '''Returns a casebase given a list of cases'''
-
-#   casebase = []
-#   for candidate_case in cases:
-#     duplicate = False
-#     for case in casebase:
-#       if candidate_case.id != case.id and candidate_case.factors == case.factors and candidate_case.outcome == case.outcome:
-#         # What if two cases have the same id (and same factors and outcome)? Why not marked as duplicate as well?
-#         duplicate = True
-#     if not duplicate:
-#       casebase.append(candidate_case)  
-  
-#   for case in casebase:
-#     for othercase in casebase:
-#       if attacks(casebase, case, othercase) or inconsistentattacks(case, othercase):
-#         case.attackees.append(othercase)
-#         othercase.attackers.append(case)
-        
-#   return casebase
-
-
-# def give_newcases(casebase: list, cases: list) -> list:
-#   '''Returns a a list of new cases given a list of cases and a casebase'''
-
-#   newcases = []
-#   for newcase in cases:
-#     for case in casebase:
-#       if newcaseattacks(newcase, case):
-#         newcase.attackees.append(case)
-#     newcases.append(newcase)
-    
-#   return newcases
-
