@@ -316,11 +316,14 @@ class Aacbr:
             if base_clf.inconsistent_attacks(stratum[index], case):
               print(f"Incoherence found between:\n{stratum[index]} and {case}")
               inconsistent = True
+              pass
+              # GPP: Since cases are processed one by one,
+              # we need to check for the incoherence. The
+              # order is not a problem since only of the two
+              # will pass the predicted_outcome test above.
+              # That is, incoherence will happen iff the correct case
+              # was already added, so the other should not be.
           if not inconsistent:
-            # GPP: Since cases are processed one by one,
-            # we need to check for the incoherence. The
-            # order is not a problem since only of the two
-            # will pass the predicted_outcome test above.
             self.reset_attack_relations([stratum[index]])
             to_add.append(stratum[index])
 

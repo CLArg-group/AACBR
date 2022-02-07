@@ -143,11 +143,12 @@ class TestAacbr:
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
+    assert set(clf.casebase_active) == set([default, case1, case2, case3, case4])
     #
     clf_noncautious = Aacbr(cautious=False)
     expected_output = [1, 0, 1, 1, 0, 1]
     predicted_output = clf_noncautious.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output
+    assert expected_output == predicted_output, "Non-cautious is not giving expected result!"
 
   def test_inconsistent_IO(self):
     default = Case('default', set(), outcome=0)
@@ -172,8 +173,8 @@ class TestAacbr:
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
     case2 = Case('2', {'a'}, outcome=0)
-    case3 = Case('3', {'a', 'b'}, outcome=0)
-    case4 = Case('4', {'a', 'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=1)
+    case4 = Case('4', {'a', 'b'}, outcome=0)
     cb = [default, case1, case2, case3, case4]
     train_data = cb
     test_data = [Case('new1', {'a'}),
@@ -185,7 +186,8 @@ class TestAacbr:
     expected_output = [1, 0, 1, 0, 0, 1]
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output    
+    assert expected_output == predicted_output
+    assert set(clf.casebase_active) == set([default, case1, case4])
 
   @pytest.mark.skip(reason="not implemented")
   def test_scikit_learning_like_api_with_characterisation_input(self):
