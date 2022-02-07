@@ -113,7 +113,6 @@ class TestAacbr:
   def test_scikit_learning_like_api_with_case_input(self):
     # It would be nice to have it compatible with the scikit-learn API:
     # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
-    # import data...
     train_data = self.example_cb2
     test_data = [Case('new1', {'a'}),
                  Case('new2', {'a', 'b'}),
@@ -126,16 +125,13 @@ class TestAacbr:
     assert expected_output == predicted_output
 
   def test_scikit_learning_like_api_with_case_input_cautious(self):
-    # It would be nice to have it compatible with the scikit-learn API:
-    # https://scikit-learn.org/stable/developers/develop.html#apis-of-scikit-learn-objects
-    # import data...
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
     case2 = Case('2', {'a','b'}, outcome=0)
     case3 = Case('3', {'c'}, outcome=1)
     case4 = Case('4', {'c','d'}, outcome=0)
     case5 = Case('5', {'a','b','c'}, outcome=1)
-    cb = [default, case1, case2, case3, case4]
+    cb = [default, case1, case2, case3, case4, case5]
     train_data = cb
     test_data = [Case('new1', {'a'}),
                  Case('new2', {'a', 'b'}),
@@ -146,6 +142,11 @@ class TestAacbr:
     expected_output = [1, 0, 1, 0, 0, 1]
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output
+    #
+    clf_noncautious = Aacbr(cautious=False)
+    expected_output = [1, 0, 1, 1, 0, 1]
+    predicted_output = clf_noncautious.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
 
   def test_inconsistent_IO(self):
