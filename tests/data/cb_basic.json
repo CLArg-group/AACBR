@@ -1,0 +1,40 @@
+[
+    {
+        "outcome": 0,
+        "factors": [],
+        "id": "default"
+    },
+    {
+        "outcome": 1,
+        "factors": [
+            "a"
+        ],
+        "id": "0"
+    },
+    {
+        "outcome": 1,
+        "factors": [
+            "b"
+            
+        ],
+        "id": "1"
+    },
+    {
+        "outcome": 0,
+        "factors": [
+            "a",
+            "a2"
+            
+        ],
+        "id": "1"
+    },
+    {
+        "outcome": 0,
+        "factors": [
+            "b",
+            "b2"
+            
+        ],
+        "id": "1"
+    }
+]

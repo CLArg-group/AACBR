@@ -1,0 +1,52 @@
+[
+    {
+        "outcome": "unknown",
+        "factors": [
+            "a"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "b"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "a",
+            "a2",
+            "b"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "a",
+            "a2",
+            "b",
+            "b2"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "a",
+            "a2",
+            "b2"
+        ],
+        "id": "new"
+    },
+    {
+        "outcome": "unknown",
+        "factors": [
+            "a",
+            "b2"
+        ],
+        "id": "new"
+    }
+]

@@ -1,11 +1,11 @@
 [
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [],
         "id": "default"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -27,7 +27,7 @@
         "id": "0"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -44,7 +44,7 @@
         "id": "1"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -62,7 +62,7 @@
         "id": "2"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -81,7 +81,7 @@
         "id": "3"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -101,7 +101,7 @@
         "id": "4"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -120,7 +120,7 @@
         "id": "5"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -140,7 +140,7 @@
         "id": "6"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -157,7 +157,7 @@
         "id": "7"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -174,7 +174,7 @@
         "id": "8"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -192,7 +192,7 @@
         "id": "9"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -210,7 +210,7 @@
         "id": "10"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -230,7 +230,7 @@
         "id": "11"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -248,7 +248,7 @@
         "id": "12"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -266,7 +266,7 @@
         "id": "13"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -287,7 +287,7 @@
         "id": "14"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -306,7 +306,7 @@
         "id": "15"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -324,7 +324,7 @@
         "id": "16"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -343,7 +343,7 @@
         "id": "17"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -363,7 +363,7 @@
         "id": "18"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -381,7 +381,7 @@
         "id": "19"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -397,7 +397,7 @@
         "id": "20"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -414,7 +414,7 @@
         "id": "21"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -432,7 +432,7 @@
         "id": "22"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -450,7 +450,7 @@
         "id": "23"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -470,7 +470,7 @@
         "id": "24"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -487,7 +487,7 @@
         "id": "25"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -505,7 +505,7 @@
         "id": "26"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -523,7 +523,7 @@
         "id": "27"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -541,7 +541,7 @@
         "id": "28"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -558,7 +558,7 @@
         "id": "29"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -577,7 +577,7 @@
         "id": "30"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -594,7 +594,7 @@
         "id": "31"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -613,7 +613,7 @@
         "id": "32"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -633,7 +633,7 @@
         "id": "33"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -653,7 +653,7 @@
         "id": "34"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -672,7 +672,7 @@
         "id": "35"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -691,7 +691,7 @@
         "id": "36"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -709,7 +709,7 @@
         "id": "37"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -729,7 +729,7 @@
         "id": "38"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -747,7 +747,7 @@
         "id": "39"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -765,7 +765,7 @@
         "id": "40"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -782,7 +782,7 @@
         "id": "41"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -799,7 +799,7 @@
         "id": "42"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -816,7 +816,7 @@
         "id": "43"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -835,7 +835,7 @@
         "id": "44"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -853,7 +853,7 @@
         "id": "45"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -872,7 +872,7 @@
         "id": "46"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -892,7 +892,7 @@
         "id": "47"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -913,7 +913,7 @@
         "id": "48"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -931,7 +931,7 @@
         "id": "49"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -947,7 +947,7 @@
         "id": "50"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -964,7 +964,7 @@
         "id": "51"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -984,7 +984,7 @@
         "id": "52"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1004,7 +1004,7 @@
         "id": "53"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1022,7 +1022,7 @@
         "id": "54"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1043,7 +1043,7 @@
         "id": "55"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1061,7 +1061,7 @@
         "id": "56"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1080,7 +1080,7 @@
         "id": "57"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1098,7 +1098,7 @@
         "id": "58"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1118,7 +1118,7 @@
         "id": "59"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1136,7 +1136,7 @@
         "id": "60"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1157,7 +1157,7 @@
         "id": "61"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1172,7 +1172,7 @@
         "id": "62"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1189,7 +1189,7 @@
         "id": "63"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1207,7 +1207,7 @@
         "id": "64"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1224,7 +1224,7 @@
         "id": "65"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1244,7 +1244,7 @@
         "id": "66"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1261,7 +1261,7 @@
         "id": "67"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1279,7 +1279,7 @@
         "id": "68"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1298,7 +1298,7 @@
         "id": "69"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1318,7 +1318,7 @@
         "id": "70"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1337,7 +1337,7 @@
         "id": "71"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1359,7 +1359,7 @@
         "id": "72"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1375,7 +1375,7 @@
         "id": "73"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1392,7 +1392,7 @@
         "id": "74"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1412,7 +1412,7 @@
         "id": "75"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1430,7 +1430,7 @@
         "id": "76"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1449,7 +1449,7 @@
         "id": "77"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1467,7 +1467,7 @@
         "id": "78"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1485,7 +1485,7 @@
         "id": "79"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1502,7 +1502,7 @@
         "id": "80"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1518,7 +1518,7 @@
         "id": "81"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1536,7 +1536,7 @@
         "id": "82"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1553,7 +1553,7 @@
         "id": "83"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1569,7 +1569,7 @@
         "id": "84"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1586,7 +1586,7 @@
         "id": "85"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1602,7 +1602,7 @@
         "id": "86"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1621,7 +1621,7 @@
         "id": "87"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1640,7 +1640,7 @@
         "id": "88"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1660,7 +1660,7 @@
         "id": "89"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1677,7 +1677,7 @@
         "id": "90"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1695,7 +1695,7 @@
         "id": "91"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1711,7 +1711,7 @@
         "id": "92"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1727,7 +1727,7 @@
         "id": "93"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1744,7 +1744,7 @@
         "id": "94"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1761,7 +1761,7 @@
         "id": "95"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1780,7 +1780,7 @@
         "id": "96"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1800,7 +1800,7 @@
         "id": "97"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1820,7 +1820,7 @@
         "id": "98"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1839,7 +1839,7 @@
         "id": "99"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1859,7 +1859,7 @@
         "id": "100"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1877,7 +1877,7 @@
         "id": "101"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1895,7 +1895,7 @@
         "id": "102"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1914,7 +1914,7 @@
         "id": "103"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1933,7 +1933,7 @@
         "id": "104"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1952,7 +1952,7 @@
         "id": "105"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1974,7 +1974,7 @@
         "id": "106"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -1991,7 +1991,7 @@
         "id": "107"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2008,7 +2008,7 @@
         "id": "108"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2024,7 +2024,7 @@
         "id": "109"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2042,7 +2042,7 @@
         "id": "110"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2061,7 +2061,7 @@
         "id": "111"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2079,7 +2079,7 @@
         "id": "112"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2096,7 +2096,7 @@
         "id": "113"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2116,7 +2116,7 @@
         "id": "114"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2135,7 +2135,7 @@
         "id": "115"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2154,7 +2154,7 @@
         "id": "116"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2171,7 +2171,7 @@
         "id": "117"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2189,7 +2189,7 @@
         "id": "118"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2207,7 +2207,7 @@
         "id": "119"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2225,7 +2225,7 @@
         "id": "120"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2245,7 +2245,7 @@
         "id": "121"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2265,7 +2265,7 @@
         "id": "122"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2284,7 +2284,7 @@
         "id": "123"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2304,7 +2304,7 @@
         "id": "124"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2324,7 +2324,7 @@
         "id": "125"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2346,7 +2346,7 @@
         "id": "126"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2363,7 +2363,7 @@
         "id": "127"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2381,7 +2381,7 @@
         "id": "128"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2400,7 +2400,7 @@
         "id": "129"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2417,7 +2417,7 @@
         "id": "130"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2437,7 +2437,7 @@
         "id": "131"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2457,7 +2457,7 @@
         "id": "132"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2474,7 +2474,7 @@
         "id": "133"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2496,7 +2496,7 @@
         "id": "134"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2517,7 +2517,7 @@
         "id": "135"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2536,7 +2536,7 @@
         "id": "136"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2556,7 +2556,7 @@
         "id": "137"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2573,7 +2573,7 @@
         "id": "138"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2590,7 +2590,7 @@
         "id": "139"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2606,7 +2606,7 @@
         "id": "140"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2623,7 +2623,7 @@
         "id": "141"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2641,7 +2641,7 @@
         "id": "142"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2661,7 +2661,7 @@
         "id": "143"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2681,7 +2681,7 @@
         "id": "144"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2699,7 +2699,7 @@
         "id": "145"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2719,7 +2719,7 @@
         "id": "146"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2741,7 +2741,7 @@
         "id": "147"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2761,7 +2761,7 @@
         "id": "148"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2780,7 +2780,7 @@
         "id": "149"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2798,7 +2798,7 @@
         "id": "150"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2816,7 +2816,7 @@
         "id": "151"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2835,7 +2835,7 @@
         "id": "152"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2855,7 +2855,7 @@
         "id": "153"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2874,7 +2874,7 @@
         "id": "154"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2892,7 +2892,7 @@
         "id": "155"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2909,7 +2909,7 @@
         "id": "156"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2928,7 +2928,7 @@
         "id": "157"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2948,7 +2948,7 @@
         "id": "158"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2965,7 +2965,7 @@
         "id": "159"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -2984,7 +2984,7 @@
         "id": "160"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3002,7 +3002,7 @@
         "id": "161"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3021,7 +3021,7 @@
         "id": "162"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3037,7 +3037,7 @@
         "id": "163"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3058,7 +3058,7 @@
         "id": "164"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3077,7 +3077,7 @@
         "id": "165"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3095,7 +3095,7 @@
         "id": "166"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3113,7 +3113,7 @@
         "id": "167"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3130,7 +3130,7 @@
         "id": "168"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3147,7 +3147,7 @@
         "id": "169"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3165,7 +3165,7 @@
         "id": "170"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3184,7 +3184,7 @@
         "id": "171"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3202,7 +3202,7 @@
         "id": "172"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3221,7 +3221,7 @@
         "id": "173"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3240,7 +3240,7 @@
         "id": "174"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3260,7 +3260,7 @@
         "id": "175"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3280,7 +3280,7 @@
         "id": "176"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3300,7 +3300,7 @@
         "id": "177"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3319,7 +3319,7 @@
         "id": "178"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3338,7 +3338,7 @@
         "id": "179"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3353,7 +3353,7 @@
         "id": "180"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3373,7 +3373,7 @@
         "id": "181"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3391,7 +3391,7 @@
         "id": "182"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3408,7 +3408,7 @@
         "id": "183"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3429,7 +3429,7 @@
         "id": "184"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3444,7 +3444,7 @@
         "id": "185"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3464,7 +3464,7 @@
         "id": "186"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3483,7 +3483,7 @@
         "id": "187"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3500,7 +3500,7 @@
         "id": "188"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3519,7 +3519,7 @@
         "id": "189"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3536,7 +3536,7 @@
         "id": "190"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3553,7 +3553,7 @@
         "id": "191"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3572,7 +3572,7 @@
         "id": "192"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3593,7 +3593,7 @@
         "id": "193"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3611,7 +3611,7 @@
         "id": "194"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3630,7 +3630,7 @@
         "id": "195"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3650,7 +3650,7 @@
         "id": "196"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3669,7 +3669,7 @@
         "id": "197"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3687,7 +3687,7 @@
         "id": "198"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3706,7 +3706,7 @@
         "id": "199"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3724,7 +3724,7 @@
         "id": "200"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3742,7 +3742,7 @@
         "id": "201"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3762,7 +3762,7 @@
         "id": "202"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3780,7 +3780,7 @@
         "id": "203"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3797,7 +3797,7 @@
         "id": "204"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3817,7 +3817,7 @@
         "id": "205"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3836,7 +3836,7 @@
         "id": "206"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3855,7 +3855,7 @@
         "id": "207"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3873,7 +3873,7 @@
         "id": "208"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3892,7 +3892,7 @@
         "id": "209"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3910,7 +3910,7 @@
         "id": "210"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3928,7 +3928,7 @@
         "id": "211"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3946,7 +3946,7 @@
         "id": "212"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3966,7 +3966,7 @@
         "id": "213"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -3983,7 +3983,7 @@
         "id": "214"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4003,7 +4003,7 @@
         "id": "215"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4020,7 +4020,7 @@
         "id": "216"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4039,7 +4039,7 @@
         "id": "217"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4057,7 +4057,7 @@
         "id": "218"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4075,7 +4075,7 @@
         "id": "219"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4092,7 +4092,7 @@
         "id": "220"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4112,7 +4112,7 @@
         "id": "221"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4133,7 +4133,7 @@
         "id": "222"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4150,7 +4150,7 @@
         "id": "223"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4168,7 +4168,7 @@
         "id": "224"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4186,7 +4186,7 @@
         "id": "225"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4206,7 +4206,7 @@
         "id": "226"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4224,7 +4224,7 @@
         "id": "227"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4244,7 +4244,7 @@
         "id": "228"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4263,7 +4263,7 @@
         "id": "229"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4283,7 +4283,7 @@
         "id": "230"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4298,7 +4298,7 @@
         "id": "231"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4316,7 +4316,7 @@
         "id": "232"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4334,7 +4334,7 @@
         "id": "233"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4353,7 +4353,7 @@
         "id": "234"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4371,7 +4371,7 @@
         "id": "235"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4388,7 +4388,7 @@
         "id": "236"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4408,7 +4408,7 @@
         "id": "237"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4428,7 +4428,7 @@
         "id": "238"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4445,7 +4445,7 @@
         "id": "239"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4462,7 +4462,7 @@
         "id": "240"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4480,7 +4480,7 @@
         "id": "241"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4499,7 +4499,7 @@
         "id": "242"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4516,7 +4516,7 @@
         "id": "243"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4535,7 +4535,7 @@
         "id": "244"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4555,7 +4555,7 @@
         "id": "245"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4576,7 +4576,7 @@
         "id": "246"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4598,7 +4598,7 @@
         "id": "247"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4615,7 +4615,7 @@
         "id": "248"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4632,7 +4632,7 @@
         "id": "249"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4649,7 +4649,7 @@
         "id": "250"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4668,7 +4668,7 @@
         "id": "251"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4687,7 +4687,7 @@
         "id": "252"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4706,7 +4706,7 @@
         "id": "253"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4726,7 +4726,7 @@
         "id": "254"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4742,7 +4742,7 @@
         "id": "255"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4760,7 +4760,7 @@
         "id": "256"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4779,7 +4779,7 @@
         "id": "257"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4795,7 +4795,7 @@
         "id": "258"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4815,7 +4815,7 @@
         "id": "259"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4835,7 +4835,7 @@
         "id": "260"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4851,7 +4851,7 @@
         "id": "261"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4871,7 +4871,7 @@
         "id": "262"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4890,7 +4890,7 @@
         "id": "263"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4908,7 +4908,7 @@
         "id": "264"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4925,7 +4925,7 @@
         "id": "265"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4943,7 +4943,7 @@
         "id": "266"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4963,7 +4963,7 @@
         "id": "267"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4980,7 +4980,7 @@
         "id": "268"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -4996,7 +4996,7 @@
         "id": "269"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5014,7 +5014,7 @@
         "id": "270"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5034,7 +5034,7 @@
         "id": "271"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5052,7 +5052,7 @@
         "id": "272"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5071,7 +5071,7 @@
         "id": "273"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5090,7 +5090,7 @@
         "id": "274"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5109,7 +5109,7 @@
         "id": "275"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5128,7 +5128,7 @@
         "id": "276"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5147,7 +5147,7 @@
         "id": "277"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5163,7 +5163,7 @@
         "id": "278"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5180,7 +5180,7 @@
         "id": "279"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5198,7 +5198,7 @@
         "id": "280"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5214,7 +5214,7 @@
         "id": "281"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5235,7 +5235,7 @@
         "id": "282"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5253,7 +5253,7 @@
         "id": "283"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5272,7 +5272,7 @@
         "id": "284"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5290,7 +5290,7 @@
         "id": "285"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5307,7 +5307,7 @@
         "id": "286"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5323,7 +5323,7 @@
         "id": "287"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5343,7 +5343,7 @@
         "id": "288"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5361,7 +5361,7 @@
         "id": "289"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5379,7 +5379,7 @@
         "id": "290"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5398,7 +5398,7 @@
         "id": "291"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5419,7 +5419,7 @@
         "id": "292"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5436,7 +5436,7 @@
         "id": "293"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5454,7 +5454,7 @@
         "id": "294"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5475,7 +5475,7 @@
         "id": "295"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5492,7 +5492,7 @@
         "id": "296"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5512,7 +5512,7 @@
         "id": "297"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5530,7 +5530,7 @@
         "id": "298"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5547,7 +5547,7 @@
         "id": "299"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5567,7 +5567,7 @@
         "id": "300"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5583,7 +5583,7 @@
         "id": "301"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5603,7 +5603,7 @@
         "id": "302"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5625,7 +5625,7 @@
         "id": "303"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5643,7 +5643,7 @@
         "id": "304"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5663,7 +5663,7 @@
         "id": "305"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5681,7 +5681,7 @@
         "id": "306"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5698,7 +5698,7 @@
         "id": "307"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5716,7 +5716,7 @@
         "id": "308"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5735,7 +5735,7 @@
         "id": "309"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5752,7 +5752,7 @@
         "id": "310"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5771,7 +5771,7 @@
         "id": "311"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5791,7 +5791,7 @@
         "id": "312"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5809,7 +5809,7 @@
         "id": "313"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5828,7 +5828,7 @@
         "id": "314"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5845,7 +5845,7 @@
         "id": "315"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5863,7 +5863,7 @@
         "id": "316"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5883,7 +5883,7 @@
         "id": "317"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5903,7 +5903,7 @@
         "id": "318"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5922,7 +5922,7 @@
         "id": "319"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5942,7 +5942,7 @@
         "id": "320"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5963,7 +5963,7 @@
         "id": "321"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -5984,7 +5984,7 @@
         "id": "322"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6002,7 +6002,7 @@
         "id": "323"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6021,7 +6021,7 @@
         "id": "324"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6042,7 +6042,7 @@
         "id": "325"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6058,7 +6058,7 @@
         "id": "326"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6078,7 +6078,7 @@
         "id": "327"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6099,7 +6099,7 @@
         "id": "328"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6116,7 +6116,7 @@
         "id": "329"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6134,7 +6134,7 @@
         "id": "330"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6152,7 +6152,7 @@
         "id": "331"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6173,7 +6173,7 @@
         "id": "332"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6192,7 +6192,7 @@
         "id": "333"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6209,7 +6209,7 @@
         "id": "334"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6227,7 +6227,7 @@
         "id": "335"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6245,7 +6245,7 @@
         "id": "336"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6266,7 +6266,7 @@
         "id": "337"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6284,7 +6284,7 @@
         "id": "338"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6305,7 +6305,7 @@
         "id": "339"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6323,7 +6323,7 @@
         "id": "340"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6341,7 +6341,7 @@
         "id": "341"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6358,7 +6358,7 @@
         "id": "342"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6375,7 +6375,7 @@
         "id": "343"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6394,7 +6394,7 @@
         "id": "344"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6414,7 +6414,7 @@
         "id": "345"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6433,7 +6433,7 @@
         "id": "346"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6451,7 +6451,7 @@
         "id": "347"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6470,7 +6470,7 @@
         "id": "348"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6490,7 +6490,7 @@
         "id": "349"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6509,7 +6509,7 @@
         "id": "350"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6528,7 +6528,7 @@
         "id": "351"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6547,7 +6547,7 @@
         "id": "352"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6565,7 +6565,7 @@
         "id": "353"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6583,7 +6583,7 @@
         "id": "354"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6600,7 +6600,7 @@
         "id": "355"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6620,7 +6620,7 @@
         "id": "356"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6638,7 +6638,7 @@
         "id": "357"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6655,7 +6655,7 @@
         "id": "358"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6676,7 +6676,7 @@
         "id": "359"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6694,7 +6694,7 @@
         "id": "360"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6714,7 +6714,7 @@
         "id": "361"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6731,7 +6731,7 @@
         "id": "362"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6749,7 +6749,7 @@
         "id": "363"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6766,7 +6766,7 @@
         "id": "364"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6784,7 +6784,7 @@
         "id": "365"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6803,7 +6803,7 @@
         "id": "366"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6823,7 +6823,7 @@
         "id": "367"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6841,7 +6841,7 @@
         "id": "368"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6858,7 +6858,7 @@
         "id": "369"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6875,7 +6875,7 @@
         "id": "370"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6896,7 +6896,7 @@
         "id": "371"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6912,7 +6912,7 @@
         "id": "372"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6930,7 +6930,7 @@
         "id": "373"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6950,7 +6950,7 @@
         "id": "374"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6970,7 +6970,7 @@
         "id": "375"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -6987,7 +6987,7 @@
         "id": "376"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7006,7 +7006,7 @@
         "id": "377"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7024,7 +7024,7 @@
         "id": "378"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7041,7 +7041,7 @@
         "id": "379"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7062,7 +7062,7 @@
         "id": "380"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7083,7 +7083,7 @@
         "id": "381"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7103,7 +7103,7 @@
         "id": "382"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7121,7 +7121,7 @@
         "id": "383"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7143,7 +7143,7 @@
         "id": "384"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7163,7 +7163,7 @@
         "id": "385"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7182,7 +7182,7 @@
         "id": "386"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7203,7 +7203,7 @@
         "id": "387"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7218,7 +7218,7 @@
         "id": "388"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7237,7 +7237,7 @@
         "id": "389"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7254,7 +7254,7 @@
         "id": "390"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7273,7 +7273,7 @@
         "id": "391"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7291,7 +7291,7 @@
         "id": "392"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7311,7 +7311,7 @@
         "id": "393"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7329,7 +7329,7 @@
         "id": "394"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7347,7 +7347,7 @@
         "id": "395"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7365,7 +7365,7 @@
         "id": "396"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7382,7 +7382,7 @@
         "id": "397"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7402,7 +7402,7 @@
         "id": "398"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7420,7 +7420,7 @@
         "id": "399"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7438,7 +7438,7 @@
         "id": "400"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7458,7 +7458,7 @@
         "id": "401"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7476,7 +7476,7 @@
         "id": "402"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7494,7 +7494,7 @@
         "id": "403"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7513,7 +7513,7 @@
         "id": "404"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7530,7 +7530,7 @@
         "id": "405"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7549,7 +7549,7 @@
         "id": "406"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7567,7 +7567,7 @@
         "id": "407"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7585,7 +7585,7 @@
         "id": "408"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7604,7 +7604,7 @@
         "id": "409"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7622,7 +7622,7 @@
         "id": "410"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7640,7 +7640,7 @@
         "id": "411"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7661,7 +7661,7 @@
         "id": "412"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7679,7 +7679,7 @@
         "id": "413"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7697,7 +7697,7 @@
         "id": "414"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7716,7 +7716,7 @@
         "id": "415"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7737,7 +7737,7 @@
         "id": "416"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7757,7 +7757,7 @@
         "id": "417"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7776,7 +7776,7 @@
         "id": "418"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7793,7 +7793,7 @@
         "id": "419"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7814,7 +7814,7 @@
         "id": "420"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7832,7 +7832,7 @@
         "id": "421"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7851,7 +7851,7 @@
         "id": "422"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7870,7 +7870,7 @@
         "id": "423"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7887,7 +7887,7 @@
         "id": "424"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7904,7 +7904,7 @@
         "id": "425"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7923,7 +7923,7 @@
         "id": "426"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7941,7 +7941,7 @@
         "id": "427"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7959,7 +7959,7 @@
         "id": "428"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7980,7 +7980,7 @@
         "id": "429"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -7998,7 +7998,7 @@
         "id": "430"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8017,7 +8017,7 @@
         "id": "431"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8033,7 +8033,7 @@
         "id": "432"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8049,7 +8049,7 @@
         "id": "433"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8067,7 +8067,7 @@
         "id": "434"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8086,7 +8086,7 @@
         "id": "435"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8104,7 +8104,7 @@
         "id": "436"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8121,7 +8121,7 @@
         "id": "437"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8141,7 +8141,7 @@
         "id": "438"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8160,7 +8160,7 @@
         "id": "439"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8178,7 +8178,7 @@
         "id": "440"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8200,7 +8200,7 @@
         "id": "441"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8219,7 +8219,7 @@
         "id": "442"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8237,7 +8237,7 @@
         "id": "443"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8254,7 +8254,7 @@
         "id": "444"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8271,7 +8271,7 @@
         "id": "445"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8291,7 +8291,7 @@
         "id": "446"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8312,7 +8312,7 @@
         "id": "447"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8331,7 +8331,7 @@
         "id": "448"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8349,7 +8349,7 @@
         "id": "449"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8369,7 +8369,7 @@
         "id": "450"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8389,7 +8389,7 @@
         "id": "451"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8408,7 +8408,7 @@
         "id": "452"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8429,7 +8429,7 @@
         "id": "453"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8449,7 +8449,7 @@
         "id": "454"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8471,7 +8471,7 @@
         "id": "455"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8491,7 +8491,7 @@
         "id": "456"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8509,7 +8509,7 @@
         "id": "457"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8530,7 +8530,7 @@
         "id": "458"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8547,7 +8547,7 @@
         "id": "459"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8567,7 +8567,7 @@
         "id": "460"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8584,7 +8584,7 @@
         "id": "461"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8601,7 +8601,7 @@
         "id": "462"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8623,7 +8623,7 @@
         "id": "463"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8642,7 +8642,7 @@
         "id": "464"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8661,7 +8661,7 @@
         "id": "465"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8681,7 +8681,7 @@
         "id": "466"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8701,7 +8701,7 @@
         "id": "467"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8719,7 +8719,7 @@
         "id": "468"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8738,7 +8738,7 @@
         "id": "469"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8755,7 +8755,7 @@
         "id": "470"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8773,7 +8773,7 @@
         "id": "471"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8790,7 +8790,7 @@
         "id": "472"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8806,7 +8806,7 @@
         "id": "473"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8824,7 +8824,7 @@
         "id": "474"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8841,7 +8841,7 @@
         "id": "475"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8857,7 +8857,7 @@
         "id": "476"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8878,7 +8878,7 @@
         "id": "477"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8898,7 +8898,7 @@
         "id": "478"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8916,7 +8916,7 @@
         "id": "479"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8937,7 +8937,7 @@
         "id": "480"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8959,7 +8959,7 @@
         "id": "481"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8977,7 +8977,7 @@
         "id": "482"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -8997,7 +8997,7 @@
         "id": "483"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9017,7 +9017,7 @@
         "id": "484"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9036,7 +9036,7 @@
         "id": "485"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9055,7 +9055,7 @@
         "id": "486"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9073,7 +9073,7 @@
         "id": "487"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9093,7 +9093,7 @@
         "id": "488"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9110,7 +9110,7 @@
         "id": "489"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9132,7 +9132,7 @@
         "id": "490"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9151,7 +9151,7 @@
         "id": "491"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9171,7 +9171,7 @@
         "id": "492"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9190,7 +9190,7 @@
         "id": "493"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9208,7 +9208,7 @@
         "id": "494"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9227,7 +9227,7 @@
         "id": "495"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9244,7 +9244,7 @@
         "id": "496"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9260,7 +9260,7 @@
         "id": "497"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9279,7 +9279,7 @@
         "id": "498"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9297,7 +9297,7 @@
         "id": "499"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9316,7 +9316,7 @@
         "id": "500"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9336,7 +9336,7 @@
         "id": "501"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9353,7 +9353,7 @@
         "id": "502"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9373,7 +9373,7 @@
         "id": "503"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9395,7 +9395,7 @@
         "id": "504"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9413,7 +9413,7 @@
         "id": "505"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9431,7 +9431,7 @@
         "id": "506"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9452,7 +9452,7 @@
         "id": "507"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9469,7 +9469,7 @@
         "id": "508"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9487,7 +9487,7 @@
         "id": "509"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9505,7 +9505,7 @@
         "id": "510"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9524,7 +9524,7 @@
         "id": "511"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9542,7 +9542,7 @@
         "id": "512"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9559,7 +9559,7 @@
         "id": "513"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9575,7 +9575,7 @@
         "id": "514"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9595,7 +9595,7 @@
         "id": "515"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9610,7 +9610,7 @@
         "id": "516"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9631,7 +9631,7 @@
         "id": "517"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9654,7 +9654,7 @@
         "id": "518"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9673,7 +9673,7 @@
         "id": "519"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9690,7 +9690,7 @@
         "id": "520"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9709,7 +9709,7 @@
         "id": "521"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9728,7 +9728,7 @@
         "id": "522"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9748,7 +9748,7 @@
         "id": "523"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9767,7 +9767,7 @@
         "id": "524"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9784,7 +9784,7 @@
         "id": "525"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9804,7 +9804,7 @@
         "id": "526"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9823,7 +9823,7 @@
         "id": "527"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9843,7 +9843,7 @@
         "id": "528"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9859,7 +9859,7 @@
         "id": "529"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9879,7 +9879,7 @@
         "id": "530"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9899,7 +9899,7 @@
         "id": "531"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9917,7 +9917,7 @@
         "id": "532"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9939,7 +9939,7 @@
         "id": "533"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9957,7 +9957,7 @@
         "id": "534"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9975,7 +9975,7 @@
         "id": "535"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -9991,7 +9991,7 @@
         "id": "536"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10011,7 +10011,7 @@
         "id": "537"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10028,7 +10028,7 @@
         "id": "538"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10046,7 +10046,7 @@
         "id": "539"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10065,7 +10065,7 @@
         "id": "540"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10085,7 +10085,7 @@
         "id": "541"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10105,7 +10105,7 @@
         "id": "542"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10123,7 +10123,7 @@
         "id": "543"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10141,7 +10141,7 @@
         "id": "544"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10159,7 +10159,7 @@
         "id": "545"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10176,7 +10176,7 @@
         "id": "546"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10195,7 +10195,7 @@
         "id": "547"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10214,7 +10214,7 @@
         "id": "548"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10234,7 +10234,7 @@
         "id": "549"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10251,7 +10251,7 @@
         "id": "550"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10268,7 +10268,7 @@
         "id": "551"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10286,7 +10286,7 @@
         "id": "552"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10305,7 +10305,7 @@
         "id": "553"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10323,7 +10323,7 @@
         "id": "554"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10342,7 +10342,7 @@
         "id": "555"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10359,7 +10359,7 @@
         "id": "556"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10374,7 +10374,7 @@
         "id": "557"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10391,7 +10391,7 @@
         "id": "558"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10406,7 +10406,7 @@
         "id": "559"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10424,7 +10424,7 @@
         "id": "560"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10444,7 +10444,7 @@
         "id": "561"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10464,7 +10464,7 @@
         "id": "562"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10482,7 +10482,7 @@
         "id": "563"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10498,7 +10498,7 @@
         "id": "564"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10515,7 +10515,7 @@
         "id": "565"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10535,7 +10535,7 @@
         "id": "566"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10553,7 +10553,7 @@
         "id": "567"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10571,7 +10571,7 @@
         "id": "568"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10590,7 +10590,7 @@
         "id": "569"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10609,7 +10609,7 @@
         "id": "570"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10627,7 +10627,7 @@
         "id": "571"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10648,7 +10648,7 @@
         "id": "572"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10667,7 +10667,7 @@
         "id": "573"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10684,7 +10684,7 @@
         "id": "574"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10703,7 +10703,7 @@
         "id": "575"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10721,7 +10721,7 @@
         "id": "576"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10740,7 +10740,7 @@
         "id": "577"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10759,7 +10759,7 @@
         "id": "578"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10779,7 +10779,7 @@
         "id": "579"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10795,7 +10795,7 @@
         "id": "580"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10817,7 +10817,7 @@
         "id": "581"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10836,7 +10836,7 @@
         "id": "582"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10857,7 +10857,7 @@
         "id": "583"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10875,7 +10875,7 @@
         "id": "584"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10895,7 +10895,7 @@
         "id": "585"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10916,7 +10916,7 @@
         "id": "586"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10933,7 +10933,7 @@
         "id": "587"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10953,7 +10953,7 @@
         "id": "588"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10972,7 +10972,7 @@
         "id": "589"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -10993,7 +10993,7 @@
         "id": "590"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11012,7 +11012,7 @@
         "id": "591"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11028,7 +11028,7 @@
         "id": "592"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11044,7 +11044,7 @@
         "id": "593"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11063,7 +11063,7 @@
         "id": "594"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11082,7 +11082,7 @@
         "id": "595"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11101,7 +11101,7 @@
         "id": "596"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11118,7 +11118,7 @@
         "id": "597"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11139,7 +11139,7 @@
         "id": "598"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11159,7 +11159,7 @@
         "id": "599"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11180,7 +11180,7 @@
         "id": "600"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11197,7 +11197,7 @@
         "id": "601"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11214,7 +11214,7 @@
         "id": "602"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11230,7 +11230,7 @@
         "id": "603"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11250,7 +11250,7 @@
         "id": "604"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11267,7 +11267,7 @@
         "id": "605"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11282,7 +11282,7 @@
         "id": "606"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11300,7 +11300,7 @@
         "id": "607"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11319,7 +11319,7 @@
         "id": "608"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11336,7 +11336,7 @@
         "id": "609"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11358,7 +11358,7 @@
         "id": "610"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11376,7 +11376,7 @@
         "id": "611"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11397,7 +11397,7 @@
         "id": "612"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11416,7 +11416,7 @@
         "id": "613"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11435,7 +11435,7 @@
         "id": "614"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11454,7 +11454,7 @@
         "id": "615"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11471,7 +11471,7 @@
         "id": "616"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11489,7 +11489,7 @@
         "id": "617"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11507,7 +11507,7 @@
         "id": "618"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11522,7 +11522,7 @@
         "id": "619"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11541,7 +11541,7 @@
         "id": "620"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11558,7 +11558,7 @@
         "id": "621"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11576,7 +11576,7 @@
         "id": "622"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11592,7 +11592,7 @@
         "id": "623"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11614,7 +11614,7 @@
         "id": "624"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11635,7 +11635,7 @@
         "id": "625"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11657,7 +11657,7 @@
         "id": "626"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11672,7 +11672,7 @@
         "id": "627"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11693,7 +11693,7 @@
         "id": "628"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11712,7 +11712,7 @@
         "id": "629"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11733,7 +11733,7 @@
         "id": "630"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11751,7 +11751,7 @@
         "id": "631"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11771,7 +11771,7 @@
         "id": "632"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11789,7 +11789,7 @@
         "id": "633"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11807,7 +11807,7 @@
         "id": "634"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11828,7 +11828,7 @@
         "id": "635"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11847,7 +11847,7 @@
         "id": "636"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11868,7 +11868,7 @@
         "id": "637"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11886,7 +11886,7 @@
         "id": "638"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11908,7 +11908,7 @@
         "id": "639"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11928,7 +11928,7 @@
         "id": "640"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11944,7 +11944,7 @@
         "id": "641"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11959,7 +11959,7 @@
         "id": "642"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11976,7 +11976,7 @@
         "id": "643"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -11993,7 +11993,7 @@
         "id": "644"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12008,7 +12008,7 @@
         "id": "645"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12025,7 +12025,7 @@
         "id": "646"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12044,7 +12044,7 @@
         "id": "647"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12063,7 +12063,7 @@
         "id": "648"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12084,7 +12084,7 @@
         "id": "649"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12101,7 +12101,7 @@
         "id": "650"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12121,7 +12121,7 @@
         "id": "651"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12141,7 +12141,7 @@
         "id": "652"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12162,7 +12162,7 @@
         "id": "653"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12180,7 +12180,7 @@
         "id": "654"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12200,7 +12200,7 @@
         "id": "655"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12220,7 +12220,7 @@
         "id": "656"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12237,7 +12237,7 @@
         "id": "657"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12256,7 +12256,7 @@
         "id": "658"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12274,7 +12274,7 @@
         "id": "659"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12294,7 +12294,7 @@
         "id": "660"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12310,7 +12310,7 @@
         "id": "661"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12328,7 +12328,7 @@
         "id": "662"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12346,7 +12346,7 @@
         "id": "663"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12362,7 +12362,7 @@
         "id": "664"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12382,7 +12382,7 @@
         "id": "665"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12402,7 +12402,7 @@
         "id": "666"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12419,7 +12419,7 @@
         "id": "667"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12436,7 +12436,7 @@
         "id": "668"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12456,7 +12456,7 @@
         "id": "669"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12474,7 +12474,7 @@
         "id": "670"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12492,7 +12492,7 @@
         "id": "671"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12510,7 +12510,7 @@
         "id": "672"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12529,7 +12529,7 @@
         "id": "673"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12547,7 +12547,7 @@
         "id": "674"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12565,7 +12565,7 @@
         "id": "675"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12584,7 +12584,7 @@
         "id": "676"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12602,7 +12602,7 @@
         "id": "677"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12620,7 +12620,7 @@
         "id": "678"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12640,7 +12640,7 @@
         "id": "679"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12657,7 +12657,7 @@
         "id": "680"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12679,7 +12679,7 @@
         "id": "681"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12700,7 +12700,7 @@
         "id": "682"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12721,7 +12721,7 @@
         "id": "683"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12739,7 +12739,7 @@
         "id": "684"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12754,7 +12754,7 @@
         "id": "685"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12772,7 +12772,7 @@
         "id": "686"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12793,7 +12793,7 @@
         "id": "687"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12815,7 +12815,7 @@
         "id": "688"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12832,7 +12832,7 @@
         "id": "689"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12849,7 +12849,7 @@
         "id": "690"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12870,7 +12870,7 @@
         "id": "691"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12888,7 +12888,7 @@
         "id": "692"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12906,7 +12906,7 @@
         "id": "693"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12925,7 +12925,7 @@
         "id": "694"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12943,7 +12943,7 @@
         "id": "695"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12960,7 +12960,7 @@
         "id": "696"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12977,7 +12977,7 @@
         "id": "697"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -12996,7 +12996,7 @@
         "id": "698"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13015,7 +13015,7 @@
         "id": "699"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13031,7 +13031,7 @@
         "id": "700"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13047,7 +13047,7 @@
         "id": "701"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13064,7 +13064,7 @@
         "id": "702"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13082,7 +13082,7 @@
         "id": "703"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13101,7 +13101,7 @@
         "id": "704"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13120,7 +13120,7 @@
         "id": "705"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13140,7 +13140,7 @@
         "id": "706"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13160,7 +13160,7 @@
         "id": "707"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13182,7 +13182,7 @@
         "id": "708"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13198,7 +13198,7 @@
         "id": "709"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13216,7 +13216,7 @@
         "id": "710"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13234,7 +13234,7 @@
         "id": "711"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13252,7 +13252,7 @@
         "id": "712"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13270,7 +13270,7 @@
         "id": "713"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13289,7 +13289,7 @@
         "id": "714"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13308,7 +13308,7 @@
         "id": "715"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13329,7 +13329,7 @@
         "id": "716"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13348,7 +13348,7 @@
         "id": "717"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13365,7 +13365,7 @@
         "id": "718"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13383,7 +13383,7 @@
         "id": "719"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13401,7 +13401,7 @@
         "id": "720"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13419,7 +13419,7 @@
         "id": "721"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13438,7 +13438,7 @@
         "id": "722"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13459,7 +13459,7 @@
         "id": "723"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13478,7 +13478,7 @@
         "id": "724"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13496,7 +13496,7 @@
         "id": "725"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13513,7 +13513,7 @@
         "id": "726"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13533,7 +13533,7 @@
         "id": "727"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13552,7 +13552,7 @@
         "id": "728"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13574,7 +13574,7 @@
         "id": "729"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13591,7 +13591,7 @@
         "id": "730"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13610,7 +13610,7 @@
         "id": "731"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13629,7 +13629,7 @@
         "id": "732"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13649,7 +13649,7 @@
         "id": "733"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13668,7 +13668,7 @@
         "id": "734"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13686,7 +13686,7 @@
         "id": "735"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13703,7 +13703,7 @@
         "id": "736"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13723,7 +13723,7 @@
         "id": "737"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13743,7 +13743,7 @@
         "id": "738"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13763,7 +13763,7 @@
         "id": "739"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13782,7 +13782,7 @@
         "id": "740"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13798,7 +13798,7 @@
         "id": "741"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13820,7 +13820,7 @@
         "id": "742"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13836,7 +13836,7 @@
         "id": "743"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13854,7 +13854,7 @@
         "id": "744"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13872,7 +13872,7 @@
         "id": "745"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13894,7 +13894,7 @@
         "id": "746"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13912,7 +13912,7 @@
         "id": "747"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13930,7 +13930,7 @@
         "id": "748"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13946,7 +13946,7 @@
         "id": "749"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13963,7 +13963,7 @@
         "id": "750"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -13981,7 +13981,7 @@
         "id": "751"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14001,7 +14001,7 @@
         "id": "752"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14022,7 +14022,7 @@
         "id": "753"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14039,7 +14039,7 @@
         "id": "754"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14058,7 +14058,7 @@
         "id": "755"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14075,7 +14075,7 @@
         "id": "756"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14094,7 +14094,7 @@
         "id": "757"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14112,7 +14112,7 @@
         "id": "758"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14131,7 +14131,7 @@
         "id": "759"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14150,7 +14150,7 @@
         "id": "760"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14169,7 +14169,7 @@
         "id": "761"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14185,7 +14185,7 @@
         "id": "762"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14205,7 +14205,7 @@
         "id": "763"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14224,7 +14224,7 @@
         "id": "764"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14243,7 +14243,7 @@
         "id": "765"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14264,7 +14264,7 @@
         "id": "766"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14280,7 +14280,7 @@
         "id": "767"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14298,7 +14298,7 @@
         "id": "768"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14316,7 +14316,7 @@
         "id": "769"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14334,7 +14334,7 @@
         "id": "770"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14353,7 +14353,7 @@
         "id": "771"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14370,7 +14370,7 @@
         "id": "772"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14389,7 +14389,7 @@
         "id": "773"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14411,7 +14411,7 @@
         "id": "774"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14429,7 +14429,7 @@
         "id": "775"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14449,7 +14449,7 @@
         "id": "776"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14469,7 +14469,7 @@
         "id": "777"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14486,7 +14486,7 @@
         "id": "778"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14507,7 +14507,7 @@
         "id": "779"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14527,7 +14527,7 @@
         "id": "780"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14544,7 +14544,7 @@
         "id": "781"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14562,7 +14562,7 @@
         "id": "782"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14580,7 +14580,7 @@
         "id": "783"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14596,7 +14596,7 @@
         "id": "784"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14611,7 +14611,7 @@
         "id": "785"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14628,7 +14628,7 @@
         "id": "786"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14648,7 +14648,7 @@
         "id": "787"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14668,7 +14668,7 @@
         "id": "788"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14685,7 +14685,7 @@
         "id": "789"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14702,7 +14702,7 @@
         "id": "790"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14722,7 +14722,7 @@
         "id": "791"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14740,7 +14740,7 @@
         "id": "792"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14759,7 +14759,7 @@
         "id": "793"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14777,7 +14777,7 @@
         "id": "794"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14795,7 +14795,7 @@
         "id": "795"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14816,7 +14816,7 @@
         "id": "796"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14837,7 +14837,7 @@
         "id": "797"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14856,7 +14856,7 @@
         "id": "798"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14874,7 +14874,7 @@
         "id": "799"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14895,7 +14895,7 @@
         "id": "800"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14913,7 +14913,7 @@
         "id": "801"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14930,7 +14930,7 @@
         "id": "802"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14947,7 +14947,7 @@
         "id": "803"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14964,7 +14964,7 @@
         "id": "804"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -14984,7 +14984,7 @@
         "id": "805"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15003,7 +15003,7 @@
         "id": "806"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15022,7 +15022,7 @@
         "id": "807"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15042,7 +15042,7 @@
         "id": "808"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15060,7 +15060,7 @@
         "id": "809"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15080,7 +15080,7 @@
         "id": "810"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15096,7 +15096,7 @@
         "id": "811"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15116,7 +15116,7 @@
         "id": "812"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15135,7 +15135,7 @@
         "id": "813"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15153,7 +15153,7 @@
         "id": "814"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15173,7 +15173,7 @@
         "id": "815"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15194,7 +15194,7 @@
         "id": "816"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15210,7 +15210,7 @@
         "id": "817"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15230,7 +15230,7 @@
         "id": "818"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15248,7 +15248,7 @@
         "id": "819"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15265,7 +15265,7 @@
         "id": "820"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15283,7 +15283,7 @@
         "id": "821"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15302,7 +15302,7 @@
         "id": "822"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15321,7 +15321,7 @@
         "id": "823"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15339,7 +15339,7 @@
         "id": "824"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15355,7 +15355,7 @@
         "id": "825"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15374,7 +15374,7 @@
         "id": "826"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15394,7 +15394,7 @@
         "id": "827"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15410,7 +15410,7 @@
         "id": "828"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15429,7 +15429,7 @@
         "id": "829"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15445,7 +15445,7 @@
         "id": "830"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15465,7 +15465,7 @@
         "id": "831"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15485,7 +15485,7 @@
         "id": "832"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15504,7 +15504,7 @@
         "id": "833"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15523,7 +15523,7 @@
         "id": "834"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15541,7 +15541,7 @@
         "id": "835"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15561,7 +15561,7 @@
         "id": "836"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15580,7 +15580,7 @@
         "id": "837"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15598,7 +15598,7 @@
         "id": "838"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15616,7 +15616,7 @@
         "id": "839"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15637,7 +15637,7 @@
         "id": "840"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15656,7 +15656,7 @@
         "id": "841"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15677,7 +15677,7 @@
         "id": "842"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15695,7 +15695,7 @@
         "id": "843"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15714,7 +15714,7 @@
         "id": "844"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15731,7 +15731,7 @@
         "id": "845"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15747,7 +15747,7 @@
         "id": "846"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15765,7 +15765,7 @@
         "id": "847"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15784,7 +15784,7 @@
         "id": "848"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15803,7 +15803,7 @@
         "id": "849"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15820,7 +15820,7 @@
         "id": "850"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15836,7 +15836,7 @@
         "id": "851"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15854,7 +15854,7 @@
         "id": "852"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15875,7 +15875,7 @@
         "id": "853"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15894,7 +15894,7 @@
         "id": "854"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15913,7 +15913,7 @@
         "id": "855"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15933,7 +15933,7 @@
         "id": "856"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15954,7 +15954,7 @@
         "id": "857"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15972,7 +15972,7 @@
         "id": "858"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -15991,7 +15991,7 @@
         "id": "859"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16009,7 +16009,7 @@
         "id": "860"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16027,7 +16027,7 @@
         "id": "861"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16045,7 +16045,7 @@
         "id": "862"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16065,7 +16065,7 @@
         "id": "863"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16088,7 +16088,7 @@
         "id": "864"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16107,7 +16107,7 @@
         "id": "865"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16126,7 +16126,7 @@
         "id": "866"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16146,7 +16146,7 @@
         "id": "867"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16163,7 +16163,7 @@
         "id": "868"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16181,7 +16181,7 @@
         "id": "869"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16200,7 +16200,7 @@
         "id": "870"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16217,7 +16217,7 @@
         "id": "871"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16232,7 +16232,7 @@
         "id": "872"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16252,7 +16252,7 @@
         "id": "873"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16270,7 +16270,7 @@
         "id": "874"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16288,7 +16288,7 @@
         "id": "875"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16306,7 +16306,7 @@
         "id": "876"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16323,7 +16323,7 @@
         "id": "877"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16341,7 +16341,7 @@
         "id": "878"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16361,7 +16361,7 @@
         "id": "879"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16382,7 +16382,7 @@
         "id": "880"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16400,7 +16400,7 @@
         "id": "881"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16420,7 +16420,7 @@
         "id": "882"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16437,7 +16437,7 @@
         "id": "883"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16456,7 +16456,7 @@
         "id": "884"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16473,7 +16473,7 @@
         "id": "885"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16491,7 +16491,7 @@
         "id": "886"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16509,7 +16509,7 @@
         "id": "887"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16528,7 +16528,7 @@
         "id": "888"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16547,7 +16547,7 @@
         "id": "889"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16565,7 +16565,7 @@
         "id": "890"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16582,7 +16582,7 @@
         "id": "891"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16603,7 +16603,7 @@
         "id": "892"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16620,7 +16620,7 @@
         "id": "893"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16639,7 +16639,7 @@
         "id": "894"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16659,7 +16659,7 @@
         "id": "895"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16678,7 +16678,7 @@
         "id": "896"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16697,7 +16697,7 @@
         "id": "897"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16716,7 +16716,7 @@
         "id": "898"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16735,7 +16735,7 @@
         "id": "899"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16753,7 +16753,7 @@
         "id": "900"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16770,7 +16770,7 @@
         "id": "901"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16787,7 +16787,7 @@
         "id": "902"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16807,7 +16807,7 @@
         "id": "903"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16825,7 +16825,7 @@
         "id": "904"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16844,7 +16844,7 @@
         "id": "905"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16861,7 +16861,7 @@
         "id": "906"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16881,7 +16881,7 @@
         "id": "907"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16902,7 +16902,7 @@
         "id": "908"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16917,7 +16917,7 @@
         "id": "909"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16934,7 +16934,7 @@
         "id": "910"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16953,7 +16953,7 @@
         "id": "911"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16969,7 +16969,7 @@
         "id": "912"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -16987,7 +16987,7 @@
         "id": "913"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17007,7 +17007,7 @@
         "id": "914"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17026,7 +17026,7 @@
         "id": "915"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17046,7 +17046,7 @@
         "id": "916"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17067,7 +17067,7 @@
         "id": "917"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17084,7 +17084,7 @@
         "id": "918"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17103,7 +17103,7 @@
         "id": "919"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17120,7 +17120,7 @@
         "id": "920"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17135,7 +17135,7 @@
         "id": "921"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17155,7 +17155,7 @@
         "id": "922"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17171,7 +17171,7 @@
         "id": "923"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17188,7 +17188,7 @@
         "id": "924"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17206,7 +17206,7 @@
         "id": "925"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17224,7 +17224,7 @@
         "id": "926"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17243,7 +17243,7 @@
         "id": "927"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17262,7 +17262,7 @@
         "id": "928"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17282,7 +17282,7 @@
         "id": "929"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17297,7 +17297,7 @@
         "id": "930"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17312,7 +17312,7 @@
         "id": "931"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17329,7 +17329,7 @@
         "id": "932"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17345,7 +17345,7 @@
         "id": "933"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17362,7 +17362,7 @@
         "id": "934"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17380,7 +17380,7 @@
         "id": "935"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17398,7 +17398,7 @@
         "id": "936"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17416,7 +17416,7 @@
         "id": "937"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17436,7 +17436,7 @@
         "id": "938"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17456,7 +17456,7 @@
         "id": "939"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17474,7 +17474,7 @@
         "id": "940"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17497,7 +17497,7 @@
         "id": "941"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17515,7 +17515,7 @@
         "id": "942"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17532,7 +17532,7 @@
         "id": "943"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17550,7 +17550,7 @@
         "id": "944"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17569,7 +17569,7 @@
         "id": "945"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17586,7 +17586,7 @@
         "id": "946"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17603,7 +17603,7 @@
         "id": "947"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17621,7 +17621,7 @@
         "id": "948"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17639,7 +17639,7 @@
         "id": "949"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17658,7 +17658,7 @@
         "id": "950"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17679,7 +17679,7 @@
         "id": "951"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17698,7 +17698,7 @@
         "id": "952"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17715,7 +17715,7 @@
         "id": "953"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17736,7 +17736,7 @@
         "id": "954"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17753,7 +17753,7 @@
         "id": "955"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17773,7 +17773,7 @@
         "id": "956"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17792,7 +17792,7 @@
         "id": "957"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17809,7 +17809,7 @@
         "id": "958"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17826,7 +17826,7 @@
         "id": "959"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17847,7 +17847,7 @@
         "id": "960"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17866,7 +17866,7 @@
         "id": "961"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17884,7 +17884,7 @@
         "id": "962"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17902,7 +17902,7 @@
         "id": "963"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17922,7 +17922,7 @@
         "id": "964"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17941,7 +17941,7 @@
         "id": "965"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17959,7 +17959,7 @@
         "id": "966"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17978,7 +17978,7 @@
         "id": "967"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -17995,7 +17995,7 @@
         "id": "968"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18015,7 +18015,7 @@
         "id": "969"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18033,7 +18033,7 @@
         "id": "970"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18050,7 +18050,7 @@
         "id": "971"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18069,7 +18069,7 @@
         "id": "972"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18086,7 +18086,7 @@
         "id": "973"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18107,7 +18107,7 @@
         "id": "974"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18127,7 +18127,7 @@
         "id": "975"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18145,7 +18145,7 @@
         "id": "976"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18164,7 +18164,7 @@
         "id": "977"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18184,7 +18184,7 @@
         "id": "978"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18200,7 +18200,7 @@
         "id": "979"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18217,7 +18217,7 @@
         "id": "980"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18237,7 +18237,7 @@
         "id": "981"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18254,7 +18254,7 @@
         "id": "982"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18274,7 +18274,7 @@
         "id": "983"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18293,7 +18293,7 @@
         "id": "984"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18313,7 +18313,7 @@
         "id": "985"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18329,7 +18329,7 @@
         "id": "986"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18347,7 +18347,7 @@
         "id": "987"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18366,7 +18366,7 @@
         "id": "988"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18382,7 +18382,7 @@
         "id": "989"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18400,7 +18400,7 @@
         "id": "990"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18419,7 +18419,7 @@
         "id": "991"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18440,7 +18440,7 @@
         "id": "992"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18456,7 +18456,7 @@
         "id": "993"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18473,7 +18473,7 @@
         "id": "994"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18492,7 +18492,7 @@
         "id": "995"
     },
     {
-        "outcome": "0",
+        "outcome": 0,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18508,7 +18508,7 @@
         "id": "996"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18528,7 +18528,7 @@
         "id": "997"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
@@ -18546,7 +18546,7 @@
         "id": "998"
     },
     {
-        "outcome": "1",
+        "outcome": 1,
         "factors": [
             "gill-attachment_free",
             "veil-color_white",
