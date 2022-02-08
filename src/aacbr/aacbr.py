@@ -9,8 +9,6 @@ from datetime import timedelta
 import time
 import json
 
-import numpy as np
-
 from functools import cmp_to_key
 from operator import lt
 from collections import deque, defaultdict
