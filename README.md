@@ -118,6 +118,9 @@ This project is under heavy refactoring and expected to change. We expect the AP
  - [X] Allow cautious AA-CBR
  - [X] Add a proper installation mechanism (via setup.py / setup.cfg)
 
+## Acknowledgements
+Code in this repository was originally adapted from work by Kristijonas Čyras and Ruxandra Istrate.
+
 ## References
 
 AA-CBR is a result of research carried out by the [Computational Logic and Argumentation group](https://clarg.doc.ic.ac.uk/), at Imperial College London. This repository is based on the following publications:
