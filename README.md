@@ -1,8 +1,8 @@
 # AA-CBR Basic Implementation
 
-This provides an implementation of the AA-CBR formalism [**Kristijonas Cyras, Ken Satoh, Francesca Toni**: *Abstract Argumentation for Case-Based Reasoning*. KR 2016: 549-552][1].
+This provides an implementation of the AA-CBR formalism [Abstract Argumentation for Case-Based Reasoning][1].
 
-This includes an implementation of cautiously monotonic AA-CBR (cAA-CBR), presented in [2], and supports general partial orders, as originally introduced in [3].
+This includes an implementation of cautiously monotonic AA-CBR (cAA-CBR), presented in [Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation][2], and supports general partial orders, as originally introduced in [Data-Empowered Argumentation for Dialectically Explainable Predictions][3].
 
 ## Project structure
 
@@ -50,6 +50,12 @@ You will be able to check whether you are using the correct environment by `make
 
 Then, from `src` you will be able to run `import aacbr`.
 
+Alternatively, you may also install with pip:
+```
+pip install .
+```
+This will install the package `aacbr`.
+
 ## Running
 
 Currently the supported and recommended interface is by defining cases via the `Case` class, as in the example below.
@@ -91,9 +97,17 @@ One can define the cautiously monotonic AA-CBR by the `cautious` flag:
   assert predicted_output == [0]
 ```
 
-See `tests/` for more examples of input/output behaviour.
+### Basic CLI
+You may also define a `cb.json` file in [a casebase file format](./tests/data/cb_basic.json), as well as a `new.json` file in a [new cases file format](tests/data/new.json), and simply run:
+```bash
+python -m aacbr
+```
+This will generate a `cb_to_new.json` file with the output labels.
 
-You can run tests by using `make test`.
+###
+
+See `tests/` for more examples of input/output behaviour.
+You can run all tests by using `make test`.
 
 
 ## Roadmap (refactoring and debugging)
@@ -106,68 +120,19 @@ This project is under heavy refactoring and expected to change. We expect the AP
 
 ## References
 
-[1]: https://dl.acm.org/doi/10.5555/3032027.3032100 (**Kristijonas Cyras, Ken Satoh, Francesca Toni**: *Abstract Argumentation for Case-Based Reasoning*. KR 2016: 549-552)
+AA-CBR is a result of research carried out by the [Computational Logic and Argumentation group](https://clarg.doc.ic.ac.uk/), at Imperial College London. This repository is based on the following publications:
+
+[1]: https://dl.acm.org/doi/10.5555/3032027.3032100 (Kristijonas Cyras, Ken Satoh, Francesca Toni: Abstract Argumentation for Case-Based Reasoning. KR 2016: 549-552)
 > **Kristijonas Cyras, Ken Satoh, Francesca Toni**: *Abstract Argumentation for Case-Based Reasoning*. KR 2016: 549-552
-```bibtex
-@inproceedings{DBLP:conf/kr/CyrasST16,
-  author    = {Kristijonas Cyras and
-               Ken Satoh and
-               Francesca Toni},
-  editor    = {Chitta Baral and
-               James P. Delgrande and
-               Frank Wolter},
-  title     = {Abstract Argumentation for Case-Based Reasoning},
-  booktitle = {Principles of Knowledge Representation and Reasoning: Proceedings
-               of the Fifteenth International Conference, {KR} 2016, Cape Town, South
-               Africa, April 25-29, 2016},
-  pages     = {549--552},
-  publisher = {{AAAI} Press},
-  year      = {2016},
-  url       = {http://www.aaai.org/ocs/index.php/KR/KR16/paper/view/12879},
-  timestamp = {Tue, 09 Feb 2021 08:33:50 +0100},
-  biburl    = {https://dblp.org/rec/conf/kr/CyrasST16.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-[2]: https://proceedings.kr.org/2021/48/ (**Guilherme Paulino-Passos and Francesca Toni**: *Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation*. KR 2021)
->**Guilherme Paulino-Passos and Francesca Toni**: *Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation*
-```bibtex
-@inproceedings{KR2021-48,
-    title     = {{Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation}},
-    author    = {Paulino-Passos, Guilherme and Toni, Francesca},
-    booktitle = {{Proceedings of the 18th International Conference on Principles of Knowledge Representation and Reasoning}},
-    pages     = {508--518},
-    year      = {2021},
-    month     = {11},
-    doi       = {10.24963/kr.2021/48},
-    url       = {https://doi.org/10.24963/kr.2021/48},
-  }
-```
-[3]: https://doi.org/10.3233/FAIA200377 (**Oana Cocarascu, Andria Stylianou, Kristijonas Čyras and Francesca Toni**: *Data-Empowered Argumentation for Dialectically Explainable Predictions*)
+([text](https://dl.acm.org/doi/10.5555/3032027.3032100), [bib](https://dblp.org/rec/conf/kr/CyrasST16.html?view=bibtex))
+
+[2]: https://doi.org/10.24963/kr.2021/48 (Guilherme Paulino-Passos and Francesca Toni: Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation. KR 2021)
+>**Guilherme Paulino-Passos and Francesca Toni**: *Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation*. KR 2021
+([text](https://doi.org/10.24963/kr.2021/48), [bib](https://dblp.org/rec/conf/kr/Paulino-PassosT21.html?view=bibtex))
+
+[3]: https://doi.org/10.3233/FAIA200377 (Oana Cocarascu, Andria Stylianou, Kristijonas Čyras and Francesca Toni: Data-Empowered Argumentation for Dialectically Explainable Predictions. ECAI 2020)
 >**Oana Cocarascu, Andria Stylianou, Kristijonas Čyras and Francesca Toni**: *Data-Empowered Argumentation for Dialectically Explainable Predictions*. ECAI 2020
-```bibtex
-@InProceedings{DBLP:conf/ecai/CocarascuSCT20,
-  author       = {Oana Cocarascu and Andria Stylianou and Kristijonas
-                  Čyras and Francesca Toni},
-  title        = {Data-Empowered Argumentation for Dialectically
-                  Explainable Predictions},
-  year         = 2020,
-  booktitle    = {{ECAI} 2020 - 24th European Conference on Artificial
-                  Intelligence, 29 August-8 September 2020, Santiago
-                  de Compostela, Spain, August 29 - September 8, 2020
-                  - Including 10th Conference on Prestigious
-                  Applications of Artificial Intelligence {(PAIS}
-                  2020)},
-  pages        = {2449-2456},
-  doi          = {10.3233/FAIA200377},
-  url          = {https://doi.org/10.3233/FAIA200377},
-  crossref     = {DBLP:conf/ecai/2020},
-  timestamp    = {Tue, 29 Dec 2020 18:37:52 +0100},
-  biburl       = {https://dblp.org/rec/conf/ecai/CocarascuSCT20.bib},
-  bibsource    = {dblp computer science bibliography,
-                  https://dblp.org}
-}
-```
+([text](https://doi.org/10.3233/FAIA200377), [bib](https://dblp.org/rec/conf/ecai/CocarascuSCT20.html?view=bibtex))
 
 <!-- ## Execution -->
 
