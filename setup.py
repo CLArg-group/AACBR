@@ -10,7 +10,7 @@ requires = [
     
 setuptools.setup(
     name="aacbr",
-    version="0.0.1",
+    version="0.1.0",
     author="Guilherme Paulino-Passos",
     author_email="g.passos18@imperial.ac.uk",
     description="CLArg's basic implementation of AA-CBR.",
