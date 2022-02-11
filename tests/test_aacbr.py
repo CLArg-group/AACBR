@@ -103,12 +103,25 @@ class TestAacbr:
     result_string += f"\n{output}, {expected_output}"
     raise Exception(result_string)
   
-  @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
-  def test_predictions():
-    pass
-  @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
-  def test_grounded_extension():
-    pass
+  # @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
+  def test_grounded_extension(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'a','b','c'}, outcome=0)
+    case4 = Case('4', {'c'}, outcome=1)
+    example_cb = (default, case1, case2, case3)
+
+    new = Case('new', {'a', 'c'})
+    new2 = Case('new2', {'a', 'b'})
+    ge = {case1, case4}
+    ge2 = {case2, default}
+    
+    clf = Aacbr()
+    clf.fit(example_cb)
+    assert clf.grounded_extension(new_case=new) == ge
+    assert clf.grounded_extension(new_case=new2) == ge2
+
 
   def test_scikit_learning_like_api_with_case_input(self):
     # It would be nice to have it compatible with the scikit-learn API:
