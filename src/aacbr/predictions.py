@@ -18,7 +18,7 @@ def givePredictions(casebase: list, newcases: list) -> list:
   return predictions
     
 
-def givePrediction(casebase: list, newcase, number: int) -> dict:
+def givePrediction(casebase: list, newcase, number: int = 0) -> dict:
   '''Returns an AA-CBR prediction given a casebase and a new case'''
 
   global ID_DEFAULT, ID_NON_DEFAULT, OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN

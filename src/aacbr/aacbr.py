@@ -26,6 +26,7 @@ class Aacbr:
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
     self.default_case = default_case
+    self._nondefault_case = None # the default for opposite outcome
     self.cautious = cautious
     # self.partial_order = None
     self.casebase_initial = None
@@ -55,6 +56,9 @@ class Aacbr:
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
     
     self.casebase_initial = casebase
+    default_in_input = self.default_in_casebase(casebase)
+    if default_in_input:
+      self.default_case = default_in_input
     # self.partial_order = partial_order
     if not self.cautious:
       self.casebase_active = casebase
@@ -68,6 +72,15 @@ class Aacbr:
       self.give_casebase(self.casebase_active)
       # raise(Exception("Cautious case not implemented"))
     return self
+
+  @staticmethod
+  def default_in_casebase(casebase):
+    try:
+      idx = [case.id for case in casebase].index(ID_DEFAULT)
+      return casebase[idx]
+    except ValueError:
+      return False
+    
   
   # not something in the set of all possible cases in the middle
   def most_concise(self, cases, A, B):
@@ -96,11 +109,12 @@ class Aacbr:
     return different_outcomes(A, B) and B.factors == A.factors
 
   def predict(self, newcases):
-    _, predictions = self.give_predictions(newcases, cautious = self.cautious)
-    return [prediction_dict["Prediction"] for prediction_dict in predictions]
+    predictions = self.give_predictions(newcases)
+    # return [prediction_dict["Prediction"] for prediction_dict in predictions]
+    return predictions
   
   # predictions for multiple points
-  def give_predictions(self, newcases, nr_defaults=1, outcome_map=None, cautious=None):
+  def give_predictions_old(self, newcases, nr_defaults=1, outcome_map=None, cautious=None):
     casebase = self.casebase_active
     newcases = self.give_new_cases(casebase, newcases)
     predictions = []
@@ -116,41 +130,113 @@ class Aacbr:
 
     return dialectical_box, predictions
 
-  def give_prediction(self, framework, nr_defaults, number, newcase, outcome_map, format_mapping, cautious):
+  def give_predictions(self, newcases, nr_defaults=1):
+    casebase = self.casebase_active
+    newcases = self.give_new_cases(casebase, newcases)
+    predictions = []
+    for newcase in newcases:
+      newcase_prediction = dict()
+      number = newcases.index(newcase)
+      prediction = self.give_prediction(casebase, newcase, nr_defaults, number)
+      predictions.append(prediction)
+    formatted = self.format_predictions(newcases, predictions)
+    # return dialectical_box, predictions
+    return predictions
+
+  @staticmethod
+  def format_predictions(newcases, predictions):
+    return [{'No.': number,
+             'ID': newcase.id,
+             'Prediction': prediction}
+            for (number,(newcase, prediction))
+                 in enumerate(zip(newcases, predictions))]
+  
+  
+  def give_prediction(self, casebase, newcase, nr_defaults: int = 1, number: int = 0):
+    '''Returns an AA-CBR prediction given a casebase and a new case'''
+
+    framework = self.format_aaframework(casebase, newcase)
     arguments = framework['arguments']
     attacks = framework['attacks']
     grounded, unattacked = self.compute_grounded(arguments, attacks)
-    def_arg = 'argument({})'.format(self.ID_DEFAULT) + " " + 'factors:{}'.format('set()')
-    non_def_arg = 'argument({})'.format(self.ID_NON_DEFAULT) + " " + 'factors:{}'.format('set()')
+    def_arg = self.default_case
+    non_def_arg = self._nondefault_case
     prediction = None
-    dialectical_box = None
-    
+
+    raise(Exception(f"{arguments}\n{attacks}\n{grounded}"))
     if nr_defaults == 1:
-      if def_arg in grounded['in'] and non_def_arg not in grounded['in']:
+      if def_arg in grounded['in']:
         prediction = self.outcome_def
         sink = def_arg
-      elif def_arg not in grounded['in']:
-        prediction = self.outcome_nondef
-        sink = def_arg
       else:
-        prediction = self.outcome_unknown
-        sink = None
+        prediction = self.outcome_nondef
+        sink = def_arg        
+      # elif def_arg not in grounded['in']:
+      #   prediction = self.outcome_nondef
+      #   sink = def_arg
+      # else:
+      #   prediction = self.outcome_unknown
+      #   sink = None
+    else:
+      raise(Exception("Unsupported nr_defaults: {nr_defaults}"))
 
-    # graph drawing part
-    if sink and cautious and outcome_map is False:
-      newcase_format = format_mapping[newcase]
-      graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format, unattacked)
-      outcome_map.update({str(newcase.id): prediction})
-      excess_feature_map = self.compute_excess_features(newcase, graph, format_mapping)
-      dialectical_box = self.compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
-      self.draw_graph(graph, newcase.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
+    # dialectical_box = None
+    # # graph drawing part
+    # if sink and cautious and outcome_map is False:
+    #   newcase_format = format_mapping[newcase]
+    #   graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format, unattacked)
+    #   outcome_map.update({str(newcase.id): prediction})
+    #   excess_feature_map = self.compute_excess_features(newcase, graph, format_mapping)
+    #   dialectical_box = self.compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
+    #   self.draw_graph(graph, newcase.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
 
-    return dialectical_box, prediction
+    return prediction
+  
+  def give_prediction_k(casebase: list, newcase, number: int = 0) -> dict:
+    '''Returns an AA-CBR prediction given a casebase and a new case'''
+
+    prediction = None  
+    aa_framework = self.format_aaframework(casebase, newcase)
+    arguments = aa_framework['arguments']
+    attacks = aa_framework['attacks']
+    grounded = self.compute_grounded(arguments, attacks)
+    def_arg = 'argument({})'.format(ID_DEFAULT)
+    non_def_arg = 'argument({})'.format(ID_NON_DEFAULT)
+    if def_arg in grounded['in'] and non_def_arg not in grounded['in']:
+      prediction = OUTCOME_DEFAULT
+      # comment the following line for one default; uncomment for two defaults
+  #    sink = non_def_arg
+      # uncomment the following line for one default; comment for two defaults
+      sink = def_arg
+    # comment the following line for one default; uncomment for two defaults
+  #  elif non_def_arg in grounded['in'] and def_arg not in grounded['in']: 
+    # uncomment the following line for one default; comment for two defaults
+    elif def_arg not in grounded['in']: 
+      prediction = OUTCOME_NON_DEFAULT
+      sink = def_arg  
+    else:
+      prediction = OUTCOME_UNKNOWN
+      sink = None
+
+    # comment the following 5 lines to not produce the graphs (images)
+    if sink:
+      graph = giveGraph(arguments, attacks)
+      path = getPath(graph, [sink])
+      directed_path = giveGraph(path)
+      drawGraph(directed_path, number)
+
+    return prediction
+
 
   # | operator means union of 2 sets; IN computes the unattacked arguments mainly G0(in the first step); OUT means the
   # arguments not in
   # the grounding. It computes the unattacked args first and afterwards it removes the form the remaing ones and i
   # continues.
+
+  def grounded_extension(self, new_case):
+    if not type(new_case) == Case:
+      raise RuntimeError(f"new_case argument needs to be of type {Case}, but is {type(new_case)}")
+    pass
 
   def compute_dialectically_box(self, graph, graph_level_map, prediction, root):
     ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
@@ -180,6 +266,7 @@ class Aacbr:
 
   @staticmethod
   def compute_grounded(args: set, att: set):
+    # raise(Exception(f'{args}\n{att}'))
     remaining = copy.copy(args)
     IN = set()
     OUT = set()
@@ -234,14 +321,11 @@ class Aacbr:
 
   # abstract argumentation framework formatted
   # arguments and attacks
-  def format_aaframework(self, casebase, newcase=None):
+  def format_aaframework_old(self, casebase, newcase=None):
     arguments = set()
     attacks = set()
-    format_mapping = {}
     for case in casebase:
       arguments.add('argument({})'.format(str(case.id)) + " " + 'factors:{}'.format(str(case.factors)))
-      format_mapping.update(\
-        {case: 'argument({})'.format(str(case.id)) + " " + 'factors:{}'.format(str(case.factors))})
       for attackee in self.attacked_by[case]:
         attacks.add(('argument({attacker_argument})'.format(attacker_argument=str(case.id)) + " " +
                'factors:{}'.format(str(case.factors)),
@@ -256,13 +340,30 @@ class Aacbr:
       newcase_format = 'argument({})'.format(str(newcase.id)) + " " + 'factors:{}'.format(str(newcase.factors))
       # arguments1, attacks1 = self.remove_arguments_not_attackee(arguments, attacks)
       arguments.add(newcase_format)
-      format_mapping.update({newcase: newcase_format})
       for attackee in self.attacked_by[newcase]:
         attacks.add((newcase_format,
                'argument({attacked_argument})'.format(attacked_argument=str(attackee.id)) + " " +
                'factors:{}'.format(str(attackee.factors))))
 
-    return {'arguments': arguments, 'attacks': attacks}, format_mapping
+    return {'arguments': arguments, 'attacks': attacks}
+
+  def format_aaframework(self, casebase, new_case = None) -> dict:
+    '''Returns an abstract argumentation framework given a casebase
+    and, optionally, a new case'''
+
+    arguments = set()
+    attacks = set()
+    arguments = {case for case in casebase}
+    for case in casebase:
+      for attacker in self.attackers_of[case]:
+        attacks.add((f'argument({attacker})', case))
+    if new_case != None:
+      arguments.add(new_case)
+      for attacked in self.attacked_by[new_case]:
+        attacks.add((new_case, attacked))
+
+    return {'arguments': arguments, 'attacks': attacks}
+  
 
   # remove arguments that do not attack to reduce the number of nodes and edges in the dispute tree
   def remove_arguments_not_attackee(self, arguments, attacks):
@@ -629,6 +730,7 @@ class Aacbr:
   def make_annotations(self, pos, text, outcome_map, graph_level_map, nodes_graph, gname, excess_feature_map,
              font_size=12,
              font_color='rgb(26,11,11)'):
+    # TODO: check relevance
     annotations = []
     index = 0
 
@@ -747,13 +849,6 @@ class Aacbr:
 
     return graph_level_map, graph1
 
-  @staticmethod
-  def get_outcome_map(cases):
-    outcome_map = {}
-    for case in cases:
-      outcome_map.update({str(case.id): str(case.outcome)})
-    return outcome_map
-
   def reset_attack_relations(self, casebase):
     # self.attackers_of.clear()
     # self.attacked_by.clear()
@@ -761,14 +856,3 @@ class Aacbr:
     for case in casebase:
       self.attackers_of[case] = []
       self.attacked_by[case] = []
-
-  # @staticmethod
-  # def lime_preprocessing(factors, mapping_name):
-  #   reverse_encoded_factors = []
-  #   for index in range(len(factors)):
-  #     key = mapping_name[index][int(factors[index])]
-  #     if key != 'Native American' and key != '25 - 45':
-  #       reverse_encoded_factors = np.append(reverse_encoded_factors, key)
-
-  #   return reverse_encoded_factors
-

@@ -102,8 +102,42 @@ class TestAacbr:
     output = clf.predict([newcase])
     result_string += f"\n{output}, {expected_output}"
     raise Exception(result_string)
+
+  def test_argumentation_grounded_extension(self):
+    """For inner working of grounded extension
+    """
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'a','b','c'}, outcome=0)
+    new1 = Case('new1', {'a', 'b'})
+    
+    arguments = {default, case1, case2, case3, new1}
+    attacks = {(case1, default),
+               (case2, case1),
+               (new1, case3)}
+
+    labels, unattacked = Aacbr.compute_grounded(arguments, attacks)
+    assert unattacked == {case2, new1}
+    assert labels['in'] == {case2, new1, default}
+    assert labels['out'] == {case3, case1}
+    assert labels['undec'] == set()
+
+    new2 = Case('new2', {'a'})
+    arguments = {default, case1, case2, case3, new2}
+    attacks = {(case1, default),
+               (case2, case1),
+               (new2, case2),
+               (new2, case3)}
+    labels, unattacked = Aacbr.compute_grounded(arguments, attacks)
+    assert unattacked == {new2}
+    assert labels['in'] == {case1, new2}
+    assert labels['out'] == {default, case2, case3}
+    assert labels['undec'] == set()
+    pass
   
   # @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
+  @pytest.mark.xfail(reason="Refactoring prediction workings.")
   def test_grounded_extension(self):
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
