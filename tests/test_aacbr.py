@@ -113,19 +113,27 @@ class TestAacbr:
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
       
-  @pytest.mark.skip(reason="For visualising what is happening with AF, but not a proper test.") # this is because this AF implementation is to be changed
+  # @pytest.mark.skip(reason="For visualising what is happening with AF, but not a proper test.") # this is because this AF implementation is to be changed
   def test_argumentation_framework(self):
     cb = self.example_cb
     # newcase = self.case3
     newcase = Case('4', {'a', 'd'}, outcome=1)
     expected_output = newcase.outcome
     clf = Aacbr().fit(cb)
-    aa_framework, format_mapping = clf.format_aaframework(clf.casebase_active, newcase)    
-    result_string = f"{aa_framework}\n{format_mapping}"
-    output = clf.predict([newcase])
-    result_string += f"\n{output}, {expected_output}"
-    raise Exception(result_string)
+    framework = clf.format_aaframework(clf.casebase_active, newcase)
+    arguments = framework["arguments"]
+    attacks = framework["attacks"]
+    assert arguments == set(cb + (newcase,))
+    expected_attacks = \
+      {(self.case2, self.case1),
+       (self.case1, self.default)}
+    assert attacks == expected_attacks
 
+
+  @pytest.mark.skip(reason="Not implemented")
+  def test_removing_spikes(self):
+    pass
+  
   def test_argumentation_grounded_extension(self):
     """For inner working of grounded extension
     """
