@@ -38,13 +38,14 @@ def interact(cases_filename: str, newcases_filename: str):
   
   # Predictions = givePredictions(casebase, newcases)
   try:
-    Predictions = clf.give_predictions(new_cases)[1]
-  except:
-    raise(Exception("Failed to give predictions"))
+    predictions = clf.give_predictions(new_cases)
+    predictions = Aacbr.format_predictions(new_cases, predictions)
+  except Exception as exc:
+    raise(Exception(f"Failed to give predictions")) from exc
   
   predictions_output_filename = '{c}_to_{n}.json'.format(c = cases_filename, n = newcases_filename)
   with open(os.path.join(os.getcwd(), predictions_output_filename), 'w', newline = '', encoding = 'utf-8') as output:
-    json.dump(Predictions, output, indent = 4, ensure_ascii = False)
+    json.dump(predictions, output, indent = 4, ensure_ascii = False)
     output.write("\n")
   output.close()
     

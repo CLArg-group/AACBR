@@ -163,7 +163,7 @@ class Aacbr:
     non_def_arg = self._nondefault_case
     prediction = None
 
-    raise(Exception(f"{arguments}\n{attacks}\n{grounded}"))
+    # raise(Exception(f"{arguments}\n{attacks}\n{grounded}\n{def_arg}\n{def_arg in grounded['in']}"))
     if nr_defaults == 1:
       if def_arg in grounded['in']:
         prediction = self.outcome_def
@@ -356,7 +356,7 @@ class Aacbr:
     arguments = {case for case in casebase}
     for case in casebase:
       for attacker in self.attackers_of[case]:
-        attacks.add((f'argument({attacker})', case))
+        attacks.add((attacker, case))
     if new_case != None:
       arguments.add(new_case)
       for attacked in self.attacked_by[new_case]:
