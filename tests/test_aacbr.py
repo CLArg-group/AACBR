@@ -117,8 +117,7 @@ class TestAacbr:
                (case2, case1),
                (new1, case3)}
 
-    labels, unattacked = Aacbr.compute_grounded(arguments, attacks)
-    assert unattacked == {case2, new1}
+    labels = Aacbr._compute_grounded(arguments, attacks)
     assert labels['in'] == {case2, new1, default}
     assert labels['out'] == {case3, case1}
     assert labels['undec'] == set()
@@ -129,27 +128,26 @@ class TestAacbr:
                (case2, case1),
                (new2, case2),
                (new2, case3)}
-    labels, unattacked = Aacbr.compute_grounded(arguments, attacks)
-    assert unattacked == {new2}
+    labels = Aacbr._compute_grounded(arguments, attacks)
     assert labels['in'] == {case1, new2}
     assert labels['out'] == {default, case2, case3}
     assert labels['undec'] == set()
     pass
   
   # @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
-  @pytest.mark.xfail(reason="Refactoring prediction workings.")
+  # @pytest.mark.xfail(reason="Refactoring prediction workings.")
   def test_grounded_extension(self):
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
     case2 = Case('2', {'a','b'}, outcome=0)
     case3 = Case('3', {'a','b','c'}, outcome=0)
     case4 = Case('4', {'c'}, outcome=1)
-    example_cb = (default, case1, case2, case3)
+    example_cb = (default, case1, case2, case3, case4)
 
     new = Case('new', {'a', 'c'})
     new2 = Case('new2', {'a', 'b'})
-    ge = {case1, case4}
-    ge2 = {case2, default}
+    ge = {case1, case4, new}
+    ge2 = {case2, default, new2}
     
     clf = Aacbr()
     clf.fit(example_cb)
@@ -355,7 +353,7 @@ def run_test_from_files_old_interface(aacbr_type, setup):
   for newcase_spec in test["newcases"]:
     newcase = Case(id=newcase_spec["id"], factors=set(newcase_spec["factors"]))
     newcase_prepared = scenario.give_new_cases(casebase_prepared, [newcase])
-    result = scenario.give_predictions(casebase_prepared, newcase_prepared)
+    result = scenario.give_predictions(newcase_prepared)
     prediction = result[1][0]["Prediction"]
     assert prediction == newcase_spec["outcome_expected"][aacbr_type], f"Failed for {newcase_spec}, in type {aacbr_type}" f"Failed on test {test}"
 

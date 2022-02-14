@@ -98,56 +98,51 @@ class Aacbr:
             B <= A and
             self.most_concise(self.casebase_active, A, B))
 
-  # unlabbled datapoint newcase
+  # unlabbled datapoint new_case
   @staticmethod
-  def new_case_attacks(newcase, targetcase):
-    # return sum(targetcase.weight) > sum(newcase.weight)
-    return not newcase.factors.issuperset(targetcase.factors)
+  def new_case_attacks(new_case, targetcase):
+    # return sum(targetcase.weight) > sum(new_case.weight)
+    return not new_case.factors.issuperset(targetcase.factors)
 
   # noisy points
   def inconsistent_attacks(self, A, B):
     return different_outcomes(A, B) and B.factors == A.factors
 
-  def predict(self, newcases):
-    predictions = self.give_predictions(newcases)
+  def predict(self, new_cases):
+    predictions = self.give_predictions(new_cases)
     # return [prediction_dict["Prediction"] for prediction_dict in predictions]
     return predictions
   
   # predictions for multiple points
-  def give_predictions(self, newcases, nr_defaults=1):
+  def give_predictions(self, new_cases, nr_defaults=1):
     casebase = self.casebase_active
-    newcases = self.give_new_cases(casebase, newcases)
+    # new_cases = self.give_new_cases(casebase, new_cases)
     predictions = []
-    for newcase in newcases:
-      newcase_prediction = dict()
-      number = newcases.index(newcase)
-      prediction = self.give_prediction(casebase, newcase, nr_defaults, number)
+    for new_case in new_cases:
+      new_case_prediction = dict()
+      number = new_cases.index(new_case)
+      prediction = self.give_prediction(new_case, nr_defaults, number)
       predictions.append(prediction)
-    formatted = self.format_predictions(newcases, predictions)
+    formatted = self.format_predictions(new_cases, predictions)
     # return dialectical_box, predictions
     return predictions
 
   @staticmethod
-  def format_predictions(newcases, predictions):
+  def format_predictions(new_cases, predictions):
     return [{'No.': number,
-             'ID': newcase.id,
+             'ID': new_case.id,
              'Prediction': prediction}
-            for (number,(newcase, prediction))
-                 in enumerate(zip(newcases, predictions))]
+            for (number,(new_case, prediction))
+                 in enumerate(zip(new_cases, predictions))]
   
   
-  def give_prediction(self, casebase, newcase, nr_defaults: int = 1, number: int = 0):
+  def give_prediction(self, new_case, nr_defaults: int = 1, number: int = 0):
     '''Returns an AA-CBR prediction given a casebase and a new case'''
-
-    framework = self.format_aaframework(casebase, newcase)
-    arguments = framework['arguments']
-    attacks = framework['attacks']
-    grounded, unattacked = self.compute_grounded(arguments, attacks)
+    grounded = self.grounded_extension(new_case, output_type="labelling")
     def_arg = self.default_case
     non_def_arg = self._nondefault_case
     prediction = None
 
-    # raise(Exception(f"{arguments}\n{attacks}\n{grounded}\n{def_arg}\n{def_arg in grounded['in']}"))
     if nr_defaults == 1:
       if def_arg in grounded['in']:
         prediction = self.outcome_def
@@ -167,50 +162,35 @@ class Aacbr:
     # dialectical_box = None
     # # graph drawing part
     # if sink and cautious and outcome_map is False:
-    #   newcase_format = format_mapping[newcase]
-    #   graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], newcase_format, unattacked)
-    #   outcome_map.update({str(newcase.id): prediction})
-    #   excess_feature_map = self.compute_excess_features(newcase, graph, format_mapping)
+    #   new_case_format = format_mapping[new_case]
+    #   graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], new_case_format, unattacked)
+    #   outcome_map.update({str(new_case.id): prediction})
+    #   excess_feature_map = self.compute_excess_features(new_case, graph, format_mapping)
     #   dialectical_box = self.compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
-    #   self.draw_graph(graph, newcase.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
+    #   self.draw_graph(graph, new_case.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
 
     return prediction
 
   
-  def grounded_extension(self, new_case):
+  def grounded_extension(self, new_case, output_type="subset"):
+    if not output_type in ("subset", "labelling"):
+      raise RuntimeError(f"output_type argument should be either 'subset' or 'labelling'")
     if not type(new_case) == Case:
       raise RuntimeError(f"new_case argument needs to be of type {Case}, but is {type(new_case)}")
-    pass
-
-  def compute_dialectically_box(self, graph, graph_level_map, prediction, root):
-    ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
-    str = ""
-
-    for (node, level) in ordered_graph_level_map:
-      if prediction == self.outcome_def:
-        if level % 2:
-          is_proposer = "L"
-        else:
-          is_proposer = "W"
-      else:
-        if level % 2:
-          is_proposer = "W"
-        else:
-          is_proposer = "L"
-      parent_mapping = nx.predecessor(graph, root)
-      if node == root:
-        str += is_proposer + ": " + node + "<br>"
-      else:
-
-        parents = parent_mapping[node]
-        for parent in parents:
-          str += is_proposer + ": " + node + " " + "attacks " + parent + "<br>"
-
-    return str
+    casebase = self.casebase_active
+    new_case = self.give_new_case(casebase, new_case)
+    framework = self.format_aaframework(casebase, new_case)
+    arguments = framework['arguments']
+    attacks = framework['attacks']
+    # raise(Exception(f"{self.attacked_by}\n{arguments}\n{attacks}"))
+    grounded = self._compute_grounded(arguments, attacks)
+    if output_type == "subset":
+      return grounded["in"]
+    else:
+      return grounded
 
   @staticmethod
-  def compute_grounded(args: set, att: set):
-    # raise(Exception(f'{args}\n{att}'))
+  def _compute_grounded(args: set, att: set):
     remaining = copy.copy(args)
     IN = set()
     OUT = set()
@@ -242,30 +222,57 @@ class Aacbr:
     # arguments mainly G0(in the first step); OUT means the arguments
     # not in the grounding. It computes the unattacked args first and
     # afterwards it removes them from the remaing ones and continues.
+    # raise(Exception(f"{args}\n{att}\n{ {'in': IN, 'out': OUT, 'undec': UNDEC}}"))
+    return {'in': IN, 'out': OUT, 'undec': UNDEC}
+    
+    
+  def compute_dialectically_box(self, graph, graph_level_map, prediction, root):
+    ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
+    str = ""
 
-    return {'in': IN, 'out': OUT, 'undec': UNDEC}, unattacked
+    for (node, level) in ordered_graph_level_map:
+      if prediction == self.outcome_def:
+        if level % 2:
+          is_proposer = "L"
+        else:
+          is_proposer = "W"
+      else:
+        if level % 2:
+          is_proposer = "W"
+        else:
+          is_proposer = "L"
+      parent_mapping = nx.predecessor(graph, root)
+      if node == root:
+        str += is_proposer + ": " + node + "<br>"
+      else:
+
+        parents = parent_mapping[node]
+        for parent in parents:
+          str += is_proposer + ": " + node + " " + "attacks " + parent + "<br>"
+
+    return str
 
   @staticmethod
-  def compute_excess_features(newcase, graph, format_mapping):
+  def compute_excess_features(new_case, graph, format_mapping):
     excess_feature_map = {}
     excess_features = set()
-    newcase_format = format_mapping[newcase]
+    new_case_format = format_mapping[new_case]
 
     for (arg1, arg2) in graph.edges:
       attackee = None
-      if newcase_format == arg1:
+      if new_case_format == arg1:
         attackee = arg2
-      elif newcase_format == arg2:
+      elif new_case_format == arg2:
         attackee = arg1
 
       if attackee:
         cases = [key for (key, value) in format_mapping.items() if value == attackee]
         for case in cases:
           for feature in case.factors:
-            if feature not in newcase.factors:
+            if feature not in new_case.factors:
               excess_features.add(feature)
 
-    excess_feature_map.update({str(newcase.id): str(excess_features)})
+    excess_feature_map.update({str(new_case.id): str(excess_features)})
     return excess_feature_map
 
   # abstract argumentation framework formatted
@@ -324,10 +331,10 @@ class Aacbr:
       # print("Stratum is {}".format(stratum))
       unprocessed.pop(0)
       
-      newcases = base_clf.give_new_cases(current_casebase, stratum)
+      new_cases = base_clf.give_new_cases(current_casebase, stratum)
       
-      # box, predicted_outcomes = base_clf.give_predictions(newcases)
-      predicted_outcomes = base_clf.predict(newcases)
+      # box, predicted_outcomes = base_clf.give_predictions(new_cases)
+      predicted_outcomes = base_clf.predict(new_cases)
       to_add = []
       
       for index in range(len(stratum)):
@@ -367,9 +374,9 @@ class Aacbr:
   #     min_len = len(unprocessed[0].factors)
   #     stratum = list(filter(lambda case: len(case.factors) == min_len, unprocessed))
   #     unprocessed = [item for item in unprocessed if item not in stratum]
-  #     newcases = self.give_new_cases(current_casebase, stratum)
+  #     new_cases = self.give_new_cases(current_casebase, stratum)
   #
-  #     predicted_outcomes = self.give_predictions(current_casebase, newcases, 1)
+  #     predicted_outcomes = self.give_predictions(current_casebase, new_cases, 1)
   #     to_add = []
   #
   #     for index in range(len(stratum)):
@@ -384,19 +391,20 @@ class Aacbr:
   #   return current_casebase
 
   # calculate which cases are attacked by the new case
-  def give_new_cases(self, casebase, newcases):
-    # newcases = []
-    self.reset_attack_relations(newcases)
-    for newcase in newcases:
-      for case in casebase:
-        if self.new_case_attacks(newcase, case):
-          self.attacked_by[newcase].append(case)
-          # TODO?: we are not adding newcase to self.attackers_of[case], is
-          # this an issue?
-          # we do not do it since cleaning it afterwards would be harder
-      # newcases.append(newcase)
+  def give_new_cases(self, casebase, new_cases):
+    for new_case in new_cases:
+      self.give_new_case(casebase, new_case)
+    return new_cases
 
-    return newcases
+  def give_new_case(self, casebase, new_case):
+    self.reset_attack_relations([new_case])
+    for case in casebase:
+      if self.new_case_attacks(new_case, case):
+        self.attacked_by[new_case].append(case)
+        # TODO?: we are not adding new_case to self.attackers_of[case], is
+        # this an issue?
+        # we do not do it since cleaning it afterwards would be harder
+    return new_case
 
   # give casebase-training dataset # (remove the duplicates) -- no!
   # compute the attackees and attackers set
@@ -570,22 +578,22 @@ class Aacbr:
     return casebase
 
   @staticmethod
-  def give_accuracy(predictions, newcases):
+  def give_accuracy(predictions, new_cases):
     accurate_prediction = 0
 
-    for index in range(len(newcases)):
-      if newcases[index].outcome == predictions[index]['Prediction']:
+    for index in range(len(new_cases)):
+      if new_cases[index].outcome == predictions[index]['Prediction']:
         accurate_prediction += 1
 
     return accurate_prediction / float(len(predictions))
 
   @staticmethod
-  def check_coherent_predictions(predictions, newcases):
+  def check_coherent_predictions(predictions, new_cases):
     not_coherency = 0
 
     for index in range(len(predictions)):
       for other_index in range(len(predictions)):
-        if newcases[index].factors == newcases[other_index].factors and predictions[index]['Prediction'] != \
+        if new_cases[index].factors == new_cases[other_index].factors and predictions[index]['Prediction'] != \
             predictions[other_index]['Prediction']:
           not_coherency += 1
 
@@ -704,7 +712,7 @@ class Aacbr:
 
   # graph drawing
   @staticmethod
-  def give_graph(nodes, root, edges, grounded, newcase, unattacked):
+  def give_graph(nodes, root, edges, grounded, new_case, unattacked):
     graph = nx.DiGraph()
     if edges:
       graph.add_nodes_from(nodes)
@@ -724,7 +732,7 @@ class Aacbr:
 
       if arguments not in unattacked:
         try:
-          paths = nx.all_shortest_paths(graph, source=newcase, target=arguments)
+          paths = nx.all_shortest_paths(graph, source=new_case, target=arguments)
           if arguments == root:
             not_def = True
           for path in map(nx.utils.pairwise, paths):
@@ -733,10 +741,10 @@ class Aacbr:
               nodes.add(arg1)
               nodes.add(arg2)
         except:
-          nodes.add(newcase)
+          nodes.add(new_case)
           nodes.add(arguments)
       else:
-        if newcase != arguments:
+        if new_case != arguments:
           try:
             paths = nx.all_shortest_paths(graph, source=arguments, target=root)
             if arguments == root:
@@ -753,7 +761,7 @@ class Aacbr:
     if not_def is False:
       for index in range(len(grounded1)):
         arguments = grounded1.pop()
-        if arguments != newcase:
+        if arguments != new_case:
           try:
             paths = nx.all_shortest_paths(graph, source=root, target=arguments)
             for path in map(nx.utils.pairwise, paths):
