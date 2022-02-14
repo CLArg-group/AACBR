@@ -78,6 +78,29 @@ class TestAacbr:
     assert clf.past_case_attacks(self.case2, self.case1)
     assert not clf.past_case_attacks(self.case3, self.case1), "case3 is attacking case1 even if case2 already does so. Violating conciseness."
 
+  def test_default_case_implict(self):
+    case1 = Case('1', {'a','b'}, outcome=0)
+    case2 = Case('2', {'a','b'}, outcome=1)
+    cb = [case1, case2]
+    clf = Aacbr().fit(cb)
+    assert clf.default_case == Case("default", set(), clf.outcome_def)
+
+  def test_default_case_in_casebase(self):
+    default = Case('default', {'a'}, outcome=0)
+    case1 = Case('1', {'a','b'}, outcome=0)
+    case2 = Case('2', {'a','b'}, outcome=1)
+    cb = [default, case1, case2]
+    clf = Aacbr().fit(cb)
+    assert clf.default_case == default
+
+  def test_default_case_in_arguments(self):
+    default = Case('default', {'a'}, outcome=0)
+    case1 = Case('1', {'a','b'}, outcome=0)
+    case2 = Case('2', {'a','b'}, outcome=1)
+    cb = [case1, case2]
+    clf = Aacbr(default_case=default).fit(cb)
+    assert clf.default_case == default    
+  
   def test_inconsistent(self):
     # Even if already tested in test_cases.py, Aacbr should have its
     # own interface to it.

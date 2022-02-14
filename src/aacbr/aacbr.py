@@ -18,9 +18,6 @@ from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID
 
 
 class Aacbr:
-  ID_DEFAULT = 'default'
-  ID_NON_DEFAULT = 'non_default'
-
   def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN, default_case=None, cautious=False):
     self.outcome_def = outcome_def
     self.outcome_nondef = outcome_nondef
@@ -56,9 +53,7 @@ class Aacbr:
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
     
     self.casebase_initial = casebase
-    default_in_input = self.default_in_casebase(casebase)
-    if default_in_input:
-      self.default_case = default_in_input
+    self.infer_default(casebase)
     # self.partial_order = partial_order
     if not self.cautious:
       self.casebase_active = casebase
@@ -72,6 +67,18 @@ class Aacbr:
       self.give_casebase(self.casebase_active)
       # raise(Exception("Cautious case not implemented"))
     return self
+  def infer_default(self, casebase):
+    default_in_input = self.default_in_casebase(casebase)
+    if default_in_input:
+      self.default_case = default_in_input
+    elif type(self.default_case) == Case:
+      if self.outcome_def != self.default_case.outcome:
+        raise(RuntimeError(f"Default case outcome is not the same as as passed default outcome: {self.default_case.outcome} != {self.outcome_def}"))
+      self.outcome_def = self.default_case.outcome
+    elif all([type(case.factors) == set for case in casebase]):
+      self.default_case = Case("default", set(), outcome=self.outcome_def)
+    else:
+      raise(RuntimeError("No default case to use!"))
 
   @staticmethod
   def default_in_casebase(casebase):
