@@ -114,22 +114,6 @@ class Aacbr:
     return predictions
   
   # predictions for multiple points
-  def give_predictions_old(self, newcases, nr_defaults=1, outcome_map=None, cautious=None):
-    casebase = self.casebase_active
-    newcases = self.give_new_cases(casebase, newcases)
-    predictions = []
-    for newcase in newcases:
-      newcase_prediction = dict()
-      number = newcases.index(newcase)
-      aa_framework, format_mapping = self.format_aaframework(casebase, newcase)
-      dialectical_box, prediction = self.give_prediction(aa_framework, nr_defaults, number, newcase, outcome_map,
-                                 format_mapping,
-                                 cautious)
-      newcase_prediction.update({'No.': number, 'ID': newcase.id, 'Prediction': prediction})
-      predictions.append(newcase_prediction)
-
-    return dialectical_box, predictions
-
   def give_predictions(self, newcases, nr_defaults=1):
     casebase = self.casebase_active
     newcases = self.give_new_cases(casebase, newcases)
@@ -191,48 +175,8 @@ class Aacbr:
     #   self.draw_graph(graph, newcase.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
 
     return prediction
+
   
-  def give_prediction_k(casebase: list, newcase, number: int = 0) -> dict:
-    '''Returns an AA-CBR prediction given a casebase and a new case'''
-
-    prediction = None  
-    aa_framework = self.format_aaframework(casebase, newcase)
-    arguments = aa_framework['arguments']
-    attacks = aa_framework['attacks']
-    grounded = self.compute_grounded(arguments, attacks)
-    def_arg = 'argument({})'.format(ID_DEFAULT)
-    non_def_arg = 'argument({})'.format(ID_NON_DEFAULT)
-    if def_arg in grounded['in'] and non_def_arg not in grounded['in']:
-      prediction = OUTCOME_DEFAULT
-      # comment the following line for one default; uncomment for two defaults
-  #    sink = non_def_arg
-      # uncomment the following line for one default; comment for two defaults
-      sink = def_arg
-    # comment the following line for one default; uncomment for two defaults
-  #  elif non_def_arg in grounded['in'] and def_arg not in grounded['in']: 
-    # uncomment the following line for one default; comment for two defaults
-    elif def_arg not in grounded['in']: 
-      prediction = OUTCOME_NON_DEFAULT
-      sink = def_arg  
-    else:
-      prediction = OUTCOME_UNKNOWN
-      sink = None
-
-    # comment the following 5 lines to not produce the graphs (images)
-    if sink:
-      graph = giveGraph(arguments, attacks)
-      path = getPath(graph, [sink])
-      directed_path = giveGraph(path)
-      drawGraph(directed_path, number)
-
-    return prediction
-
-
-  # | operator means union of 2 sets; IN computes the unattacked arguments mainly G0(in the first step); OUT means the
-  # arguments not in
-  # the grounding. It computes the unattacked args first and afterwards it removes the form the remaing ones and i
-  # continues.
-
   def grounded_extension(self, new_case):
     if not type(new_case) == Case:
       raise RuntimeError(f"new_case argument needs to be of type {Case}, but is {type(new_case)}")
@@ -293,6 +237,11 @@ class Aacbr:
       if attacked == remaining:
         break
     UNDEC = args - (IN | OUT)
+    
+    # | operator means union of 2 sets; IN computes the unattacked
+    # arguments mainly G0(in the first step); OUT means the arguments
+    # not in the grounding. It computes the unattacked args first and
+    # afterwards it removes them from the remaing ones and continues.
 
     return {'in': IN, 'out': OUT, 'undec': UNDEC}, unattacked
 
@@ -321,32 +270,6 @@ class Aacbr:
 
   # abstract argumentation framework formatted
   # arguments and attacks
-  def format_aaframework_old(self, casebase, newcase=None):
-    arguments = set()
-    attacks = set()
-    for case in casebase:
-      arguments.add('argument({})'.format(str(case.id)) + " " + 'factors:{}'.format(str(case.factors)))
-      for attackee in self.attacked_by[case]:
-        attacks.add(('argument({attacker_argument})'.format(attacker_argument=str(case.id)) + " " +
-               'factors:{}'.format(str(case.factors)),
-               'argument({attacked_argument})'.format(attacked_argument=str(attackee.id)) + " " +
-               'factors:{}'.format(str(attackee.factors))))
-      for attacker in self.attackers_of[case]:
-        attacks.add(('argument({attacker_argument})'.format(attacker_argument=str(attacker.id)) + " " +
-               'factors:{}'.format(str(attacker.factors)),
-               'argument({attacked_argument})'.format(attacked_argument=str(case.id)) + " " +
-               'factors:{}'.format(str(case.factors))))
-    if newcase != None:
-      newcase_format = 'argument({})'.format(str(newcase.id)) + " " + 'factors:{}'.format(str(newcase.factors))
-      # arguments1, attacks1 = self.remove_arguments_not_attackee(arguments, attacks)
-      arguments.add(newcase_format)
-      for attackee in self.attacked_by[newcase]:
-        attacks.add((newcase_format,
-               'argument({attacked_argument})'.format(attacked_argument=str(attackee.id)) + " " +
-               'factors:{}'.format(str(attackee.factors))))
-
-    return {'arguments': arguments, 'attacks': attacks}
-
   def format_aaframework(self, casebase, new_case = None) -> dict:
     '''Returns an abstract argumentation framework given a casebase
     and, optionally, a new case'''
