@@ -112,8 +112,9 @@ You can run all tests by using `make test`.
 
 ## Roadmap (refactoring and debugging)
 This project is under heavy refactoring and expected to change. We expect the API in the previous section to be stable, but it is subject to change.
- - [ ] Draw graphs
  - [ ] Adapt to a more sklearn API style
+ - [ ] Support graphviz for drawing graphs
+ - [X] Draw graphs
  - [X] (Re-)allow CLI usage via json files
  - [X] Allow cautious AA-CBR
  - [X] Add a proper installation mechanism (via setup.py / setup.cfg)

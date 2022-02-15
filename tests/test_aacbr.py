@@ -1,5 +1,6 @@
 ### Tests the model/classifier itself, predictions, argumentation framework, etc
 import pytest
+from pathlib import Path
 from itertools import product
 
 @pytest.fixture(autouse=True)
@@ -120,9 +121,8 @@ class TestAacbr:
     newcase = Case('4', {'a', 'd'}, outcome=1)
     expected_output = newcase.outcome
     clf = Aacbr().fit(cb)
-    framework = clf.format_aaframework(clf.casebase_active, newcase)
-    arguments = framework["arguments"]
-    attacks = framework["attacks"]
+    framework = clf.give_argumentation_framework(newcase)
+    arguments, attacks = framework
     assert arguments == set(cb + (newcase,))
     expected_attacks = \
       {(self.case2, self.case1),
@@ -281,6 +281,15 @@ class TestAacbr:
     predicted_output = clf.fit(train_X, train_Y).predict(test_X)
     assert expected_output == predicted_output
 
+  def test_graph_drawing(self, tmp_path):
+    "Checks if a graph is created"
+    cb = self.example_cb2
+    clf = Aacbr().fit(cb)
+    clf.draw_graph(output_dir = tmp_path)
+    output_path = tmp_path / "graph.png"
+    assert output_path.exists()
+    assert output_path.is_file()
+
 @pytest.mark.skip(reason="Undefined tests")
 @pytest.mark.usefixtures("test_import")
 class TestCaacbr:
@@ -299,7 +308,8 @@ class TestCaacbr:
     clf = Aacbr()
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
-
+    
+    
 #### json-defined tests
 import json
 from aacbr.aacbr import Aacbr, Case

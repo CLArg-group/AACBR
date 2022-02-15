@@ -14,6 +14,7 @@ from operator import lt
 from collections import deque, defaultdict
 
 from .cases import Case, more_specific_weakly, different_outcomes
+from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
 
 
@@ -87,7 +88,14 @@ class Aacbr:
       return casebase[idx]
     except ValueError:
       return False
-    
+
+  def reset_attack_relations(self, casebase):
+    # self.attackers_of.clear()
+    # self.attacked_by.clear()
+    # TODO: does not work if I am removing just some cases from the AF, I should make a different interface for new cases, which I add and remove
+    for case in casebase:
+      self.attackers_of[case] = []
+      self.attacked_by[case] = []
   
   # not something in the set of all possible cases in the middle
   def most_concise(self, cases, A, B):
@@ -186,10 +194,7 @@ class Aacbr:
       raise RuntimeError(f"new_case argument needs to be of type {Case}, but is {type(new_case)}")
     casebase = self.casebase_active
     new_case = self.give_new_case(casebase, new_case)
-    framework = self.format_aaframework(casebase, new_case)
-    arguments = framework['arguments']
-    attacks = framework['attacks']
-    # raise(Exception(f"{self.attacked_by}\n{arguments}\n{attacks}"))
+    arguments, attacks = self.give_argumentation_framework(new_case)
     grounded = self._compute_grounded(arguments, attacks)
     if output_type == "subset":
       return grounded["in"]
@@ -282,12 +287,11 @@ class Aacbr:
     excess_feature_map.update({str(new_case.id): str(excess_features)})
     return excess_feature_map
 
-  # abstract argumentation framework formatted
-  # arguments and attacks
-  def format_aaframework(self, casebase, new_case = None) -> dict:
-    '''Returns an abstract argumentation framework given a casebase
-    and, optionally, a new case'''
-
+  def give_argumentation_framework(self, new_case = None) -> tuple:
+    '''Returns an abstract argumentation framework (AAF) given a
+    casebase and, optionally, a new case.
+    The AAF is returned as a pair (arguments, attacks).'''
+    casebase = self.casebase_active
     arguments = set()
     attacks = set()
     arguments = {case for case in casebase}
@@ -299,7 +303,7 @@ class Aacbr:
       for attacked in self.attacked_by[new_case]:
         attacks.add((new_case, attacked))
 
-    return {'arguments': arguments, 'attacks': attacks}
+    return (arguments, attacks)
   
 
   # remove arguments that do not attack to reduce the number of nodes and edges in the dispute tree
@@ -439,7 +443,7 @@ class Aacbr:
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
     casebase = self.give_casebase(cases)
-    aaf, mapping = self.format_aaframework(casebase)
+    aaf, mapping = self.give_argumentation_framework()
     # print(set(cases).difference(set(mapping.keys())))
     nodes, edges = tuple(aaf["arguments"]), tuple(aaf["attacks"])
     graph = nx.DiGraph()
@@ -606,8 +610,17 @@ class Aacbr:
 
     return not_coherency
 
+  def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
+    sink = self.default_case
+    arguments, attacks = self.give_argumentation_framework(new_case)
+    graph = giveGraph(arguments, attacks)
+    path = getPath(graph, [sink])
+    directed_path = giveGraph(path)
+    drawGraph(directed_path, graph_name, output_dir)
+    pass
+
   # drawing the graph if needed
-  def draw_graph(self, graph, gname, outcome_map, graph_level_map, excess_feature_map, dialectical_box):
+  def _draw_graph_old(self, graph, gname, outcome_map, graph_level_map, excess_feature_map, dialectical_box):
     graph_dir = os.path.join(os.getcwd(), 'graphsCAACBR')
     if not os.path.isdir(graph_dir):
       os.makedirs(graph_dir)
@@ -652,7 +665,7 @@ class Aacbr:
           )
 
     figure.layout.update(title='Arbitrated Tree',
-               annotations=self.make_annotations(relative_positions, list(graph.nodes), outcome_map,
+               annotations=self._make_annotations_old(relative_positions, list(graph.nodes), outcome_map,
                                  graph_level_map, graph.nodes, gname, excess_feature_map),
                font_size=12,
                showlegend=False,
@@ -665,7 +678,7 @@ class Aacbr:
 
     figure.write_html(graph_name)
 
-  def make_annotations(self, pos, text, outcome_map, graph_level_map, nodes_graph, gname, excess_feature_map,
+  def _make_annotations_old(self, pos, text, outcome_map, graph_level_map, nodes_graph, gname, excess_feature_map,
              font_size=12,
              font_color='rgb(26,11,11)'):
     # TODO: check relevance
@@ -719,7 +732,7 @@ class Aacbr:
 
   # graph drawing
   @staticmethod
-  def give_graph(nodes, root, edges, grounded, new_case, unattacked):
+  def _give_graph_old(nodes, root, edges, grounded, new_case, unattacked):
     graph = nx.DiGraph()
     if edges:
       graph.add_nodes_from(nodes)
@@ -786,11 +799,3 @@ class Aacbr:
     graph_level_map = nx.single_source_shortest_path_length(graph1, root)
 
     return graph_level_map, graph1
-
-  def reset_attack_relations(self, casebase):
-    # self.attackers_of.clear()
-    # self.attacked_by.clear()
-    # TODO: does not work if I am removing just some cases from the AF, I should make a different interface for new cases, which I add and remove
-    for case in casebase:
-      self.attackers_of[case] = []
-      self.attacked_by[case] = []
