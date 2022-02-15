@@ -301,7 +301,7 @@ class TestAacbr:
     cb = (default, case1, case2, case3, case4, case5, case6)
     filtered_cb = {default, case1, case2}
     clf = Aacbr().fit(cb, remove_spikes=True)
-    assert clf.casebase_active == filtered_cb
+    assert set(clf.casebase_active) == filtered_cb
 
     
 @pytest.mark.skip(reason="Undefined tests")

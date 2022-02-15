@@ -96,6 +96,20 @@ One can define the cautiously monotonic AA-CBR by the `cautious` flag:
   predicted_output = clf.predict(test_data)
   assert predicted_output == [0]
 ```
+It is also possible to get AA-CBR without "spikes", that is, arguments from which there is no path to the default argument (in a graph-theoretic sense):
+```python
+   default = Case('default', set(), outcome=0)
+   case1 = Case('1', {'a'}, outcome=1)
+   case2 = Case('2', {'a','b'}, outcome=0)
+   case3 = Case('3', {'b'}, outcome=0)
+   case4 = Case('4', {'c'}, outcome=0)
+   case5 = Case('5', {'a','c'}, outcome=1)
+   case6 = Case('6', {'a','b','c'}, outcome=0)
+   cb = (default, case1, case2, case3, case4, case5, case6)
+   filtered_cb = {default, case1, case2}
+   clf = Aacbr().fit(cb, remove_spikes=True)
+   assert set(clf.casebase_active) == filtered_cb
+```
 
 ### Basic CLI
 You may also define a `cb.json` file in [a casebase file format](./tests/data/cb_basic.json), as well as a `new.json` file in a [new cases file format](tests/data/new.json), and simply run:

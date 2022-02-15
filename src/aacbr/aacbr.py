@@ -8,10 +8,12 @@ from datetime import datetime
 from datetime import timedelta
 import time
 import json
+import networkx as nx
 
 from functools import cmp_to_key
 from operator import lt
 from collections import deque, defaultdict
+from warnings import warn
 
 from .cases import Case, more_specific_weakly, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
@@ -49,7 +51,7 @@ class Aacbr:
   # attacks(self, case1, case2)
   # is_attacked(self, case1, case2)
   
-  def fit(self, casebase=set()):
+  def fit(self, casebase=set(), remove_spikes=False):
     if not isinstance(self, Aacbr):
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
     
@@ -57,18 +59,26 @@ class Aacbr:
     self.infer_default(casebase)
     # self.partial_order = partial_order
     if not self.cautious:
-      self.casebase_active = casebase
-      self.casebase_active = self.give_casebase(casebase) # adding attacks
+      if not remove_spikes:
+        self.casebase_active = casebase
+        self.casebase_active = self.give_casebase(casebase) # adding attacks
+      else:
+        self.casebase_active = casebase
+        self.casebase_active = self.give_casebase_without_spikes(casebase)
+      
       # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
       # command 2: save attacks state
     else:
+      if remove_spikes:
+        warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
       self.casebase_active = []
       self.casebase_active = self.give_cautious_subset_of_casebase(casebase)
       self.give_casebase(self.casebase_active)
       # raise(Exception("Cautious case not implemented"))
     return self
-  def infer_default(self, casebase):
+  
+  def infer_default(self, casebase):    
     default_in_input = self.default_in_casebase(casebase)
     if default_in_input:
       self.default_case = default_in_input
@@ -83,10 +93,12 @@ class Aacbr:
 
   @staticmethod
   def default_in_casebase(casebase):
-    try:
-      idx = [case.id for case in casebase].index(ID_DEFAULT)
-      return casebase[idx]
-    except ValueError:
+    candidates = [case for case in casebase if case.id == ID_DEFAULT]
+    if len(candidates) > 1:
+      raise(Exception(f"More than one case named 'default' in the casebase: {candidates}"))
+    elif len(candidates) == 1:
+      return candidates[0]
+    else:
       return False
 
   def reset_attack_relations(self, casebase):
@@ -107,7 +119,7 @@ class Aacbr:
   # attack relation defined
   def past_case_attacks(self, A, B):
     if not all(x in self.casebase_active for x in (A,B)):
-      raise RuntimeError(f"Arguments {(A,B)} are not both in the active casebase.")
+      raise(Exception(f"Arguments {(A,B)} are not both in the active casebase."))
     
     return (different_outcomes(A, B) and
             B <= A and
@@ -420,7 +432,7 @@ class Aacbr:
   # give casebase-training dataset # (remove the duplicates) -- no!
   # compute the attackees and attackers set
   def give_casebase(self, cases):
-    self.reset_attack_relations(cases) # gpp
+    self.reset_attack_relations(cases)
     casebase = []
     for candidate_case in cases:
       casebase.append(candidate_case)
@@ -443,18 +455,18 @@ class Aacbr:
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
     casebase = self.give_casebase(cases)
-    aaf, mapping = self.give_argumentation_framework()
+    aaf = self.give_argumentation_framework()
     # print(set(cases).difference(set(mapping.keys())))
-    nodes, edges = tuple(aaf["arguments"]), tuple(aaf["attacks"])
+    nodes, edges = aaf
     graph = nx.DiGraph()
     if edges:
       graph.add_nodes_from(nodes)
       graph.add_edges_from(edges)
     else:
       nx.add_path(graph, nodes)
-
+      
     new_nodes = set()
-    [def_arg] = [x for x in nodes if "default" in x]
+    def_arg = self.default_case
     for node in nodes:
       # print(f"node is {node}")
       if node not in new_nodes:
@@ -465,7 +477,7 @@ class Aacbr:
             new_nodes.add(arg)
         except nx.NetworkXNoPath:
           pass
-    new_cases = [case for case in cases if mapping[case] in new_nodes]
+    new_cases = [case for case in cases if case in new_nodes]
     clean_casebase = self.give_casebase(new_cases)
     return clean_casebase
 
