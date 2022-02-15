@@ -1,47 +1,40 @@
-
 import copy
 
-
-def giveAAframework(casebase: list, newcase) -> dict:
-  '''Returns an abstract argumentation framework given a casebase and a new case'''
-
-  arguments = set()
-  attacks = set()
-  for case in casebase:
-    arguments.add('argument({})'.format(case.id))
-    for attackee in case.attackees:
-      attacks.add(('argument({attacker_argument})'.format(attacker_argument = case.id), 'argument({attacked_argument})'.format(attacked_argument = attackee.id)))
-    for attacker in case.attackers:
-      attacks.add(('argument({attacker_argument})'.format(attacker_argument = attacker.id), 'argument({attacked_argument})'.format(attacked_argument = case.id)))
-  arguments.add('argument({})'.format(newcase.id))
-  for attackee in newcase.attackees:
-    attacks.add(('argument({attacker_argument})'.format(attacker_argument = newcase.id), 'argument({attacked_argument})'.format(attacked_argument = attackee.id)))
-  
-  return {'arguments': arguments, 'attacks': attacks}
-
-
-def computeGrounded(args: set, att: set) -> dict:
-  '''Returns the grounded labelling given an abstract argumentation framework'''
-
+def compute_grounded(args: set, att: set):
+  '''
+  Returns the grounded labelling given an abstract argumentation
+  framework.
+  '''
   remaining = copy.copy(args)
   IN = set()
   OUT = set()
   UNDEC = set()
+  unattacked = set()
+  computed_unattacked = False
   while remaining:
     attacked = set()
     for (arg1, arg2) in att:
       if (arg1 in remaining) and (arg2 in remaining):
         attacked.add(arg2)
     IN = IN | (remaining - attacked)
-    
+
+    if computed_unattacked is False:
+      unattacked.update(IN)
+      computed_unattacked = True
+
     for (arg1, arg2) in att:
       if (arg1 in IN) and (arg2 in attacked) and (arg2 not in OUT):
         OUT.add(arg2)
-    
+
     remaining = remaining - (IN | OUT)
+
     if attacked == remaining:
       break
   UNDEC = args - (IN | OUT)
-    
+
+  # | operator means union of 2 sets; IN computes the unattacked
+  # arguments mainly G0(in the first step); OUT means the arguments
+  # not in the grounding. It computes the unattacked args first and
+  # afterwards it removes them from the remaing ones and continues.
+  # raise(Exception(f"{args}\n{att}\n{ {'in': IN, 'out': OUT, 'undec': UNDEC}}"))
   return {'in': IN, 'out': OUT, 'undec': UNDEC}
-  

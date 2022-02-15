@@ -2,7 +2,6 @@
 
 import sys
 import os
-import copy
 
 from datetime import datetime
 from datetime import timedelta
@@ -15,6 +14,7 @@ from operator import lt
 from collections import deque, defaultdict
 from warnings import warn
 
+from .argumentation import compute_grounded
 from .cases import Case, more_specific_weakly, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
@@ -47,9 +47,6 @@ class Aacbr:
   #   if not case in self.casebase_active:
   #     raise Exception(f"{case} not in active casebase of {self}")
   #   return self._attacked[case]
-
-  # attacks(self, case1, case2)
-  # is_attacked(self, case1, case2)
   
   def fit(self, casebase=set(), outcomes=None, remove_spikes=False):
     if all((type(x)==Case for x in casebase)):
@@ -214,8 +211,8 @@ class Aacbr:
     #   new_case_format = format_mapping[new_case]
     #   graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], new_case_format, unattacked)
     #   outcome_map.update({str(new_case.id): prediction})
-    #   excess_feature_map = self.compute_excess_features(new_case, graph, format_mapping)
-    #   dialectical_box = self.compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
+    #   excess_feature_map = self._compute_excess_features(new_case, graph, format_mapping)
+    #   dialectical_box = self._compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
     #   self.draw_graph(graph, new_case.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
 
     return prediction
@@ -229,98 +226,12 @@ class Aacbr:
     casebase = self.casebase_active
     new_case = self.give_new_case(casebase, new_case)
     arguments, attacks = self.give_argumentation_framework(new_case)
-    grounded = self._compute_grounded(arguments, attacks)
+    grounded = compute_grounded(arguments, attacks)
     if output_type == "subset":
       return grounded["in"]
     else:
       return grounded
-
-  @staticmethod
-  def _compute_grounded(args: set, att: set):
-    remaining = copy.copy(args)
-    IN = set()
-    OUT = set()
-    UNDEC = set()
-    unattacked = set()
-    computed_unattacked = False
-    while remaining:
-      attacked = set()
-      for (arg1, arg2) in att:
-        if (arg1 in remaining) and (arg2 in remaining):
-          attacked.add(arg2)
-      IN = IN | (remaining - attacked)
-
-      if computed_unattacked is False:
-        unattacked.update(IN)
-        computed_unattacked = True
-
-      for (arg1, arg2) in att:
-        if (arg1 in IN) and (arg2 in attacked) and (arg2 not in OUT):
-          OUT.add(arg2)
-
-      remaining = remaining - (IN | OUT)
-
-      if attacked == remaining:
-        break
-    UNDEC = args - (IN | OUT)
     
-    # | operator means union of 2 sets; IN computes the unattacked
-    # arguments mainly G0(in the first step); OUT means the arguments
-    # not in the grounding. It computes the unattacked args first and
-    # afterwards it removes them from the remaing ones and continues.
-    # raise(Exception(f"{args}\n{att}\n{ {'in': IN, 'out': OUT, 'undec': UNDEC}}"))
-    return {'in': IN, 'out': OUT, 'undec': UNDEC}
-    
-    
-  def compute_dialectically_box(self, graph, graph_level_map, prediction, root):
-    ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
-    str = ""
-
-    for (node, level) in ordered_graph_level_map:
-      if prediction == self.outcome_def:
-        if level % 2:
-          is_proposer = "L"
-        else:
-          is_proposer = "W"
-      else:
-        if level % 2:
-          is_proposer = "W"
-        else:
-          is_proposer = "L"
-      parent_mapping = nx.predecessor(graph, root)
-      if node == root:
-        str += is_proposer + ": " + node + "<br>"
-      else:
-
-        parents = parent_mapping[node]
-        for parent in parents:
-          str += is_proposer + ": " + node + " " + "attacks " + parent + "<br>"
-
-    return str
-
-  @staticmethod
-  def compute_excess_features(new_case, graph, format_mapping):
-    excess_feature_map = {}
-    excess_features = set()
-    new_case_format = format_mapping[new_case]
-
-    for (arg1, arg2) in graph.edges:
-      attackee = None
-      if new_case_format == arg1:
-        attackee = arg2
-      elif new_case_format == arg2:
-        attackee = arg1
-
-      if attackee:
-        cases = [key for (key, value) in format_mapping.items() if value == attackee]
-        for case in cases:
-          for feature in case.factors:
-            if feature not in new_case.factors:
-              excess_features.add(feature)
-
-    excess_feature_map.update({str(new_case.id): str(excess_features)})
-    return excess_feature_map
-
   def give_argumentation_framework(self, new_case = None) -> tuple:
     '''Returns an abstract argumentation framework (AAF) given a
     casebase and, optionally, a new case.
@@ -339,21 +250,6 @@ class Aacbr:
 
     return (arguments, attacks)
   
-
-  # remove arguments that do not attack to reduce the number of nodes and edges in the dispute tree
-  def remove_arguments_not_attackee(self, arguments, attacks):
-    attackees = set()
-    for (arg1, arg2) in attacks:
-      if (arg1 in arguments) and (arg2 in arguments):
-        attackees.add(arg1)
-    if len(attackees) == len(arguments) - 1:
-      return arguments, attacks
-    else:
-      filtered_arguments = set([args for args in arguments if args in attackees or "argument(default)" in args])
-      filtered_attacks = set([(args1, args2) for (args1, args2) in attacks if
-                  args2 in filtered_arguments])
-      return self.remove_arguments_not_attackee(filtered_arguments, filtered_attacks)
-
   # cautious casebase computed + resetting the attack relations
   def give_cautious_subset_of_casebase(self, casebase):
     self.reset_attack_relations(casebase) # gpp
@@ -610,6 +506,15 @@ class Aacbr:
 
     return cases
 
+  def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
+    sink = self.default_case
+    arguments, attacks = self.give_argumentation_framework(new_case)
+    graph = giveGraph(arguments, attacks)
+    path = getPath(graph, [sink])
+    directed_path = giveGraph(path)
+    drawGraph(directed_path, graph_name, output_dir)
+    pass  
+  
   def give_coherent_dataset(self, cases):
     casebase = []
     for candidate_case in cases:
@@ -622,8 +527,71 @@ class Aacbr:
 
     return casebase
 
+  def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):
+    ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
+    str = ""
+
+    for (node, level) in ordered_graph_level_map:
+      if prediction == self.outcome_def:
+        if level % 2:
+          is_proposer = "L"
+        else:
+          is_proposer = "W"
+      else:
+        if level % 2:
+          is_proposer = "W"
+        else:
+          is_proposer = "L"
+      parent_mapping = nx.predecessor(graph, root)
+      if node == root:
+        str += is_proposer + ": " + node + "<br>"
+      else:
+
+        parents = parent_mapping[node]
+        for parent in parents:
+          str += is_proposer + ": " + node + " " + "attacks " + parent + "<br>"
+
+    return str
+
   @staticmethod
-  def give_accuracy(predictions, new_cases):
+  def _compute_excess_features(new_case, graph, format_mapping):
+    excess_feature_map = {}
+    excess_features = set()
+    new_case_format = format_mapping[new_case]
+
+    for (arg1, arg2) in graph.edges:
+      attackee = None
+      if new_case_format == arg1:
+        attackee = arg2
+      elif new_case_format == arg2:
+        attackee = arg1
+
+      if attackee:
+        cases = [key for (key, value) in format_mapping.items() if value == attackee]
+        for case in cases:
+          for feature in case.factors:
+            if feature not in new_case.factors:
+              excess_features.add(feature)
+
+    excess_feature_map.update({str(new_case.id): str(excess_features)})
+    return excess_feature_map
+  
+  # remove arguments that do not attack to reduce the number of nodes and edges in the dispute tree
+  def _remove_arguments_not_attackee(self, arguments, attacks):
+    attackees = set()
+    for (arg1, arg2) in attacks:
+      if (arg1 in arguments) and (arg2 in arguments):
+        attackees.add(arg1)
+    if len(attackees) == len(arguments) - 1:
+      return arguments, attacks
+    else:
+      filtered_arguments = set([args for args in arguments if args in attackees or "argument(default)" in args])
+      filtered_attacks = set([(args1, args2) for (args1, args2) in attacks if
+                  args2 in filtered_arguments])
+      return self._remove_arguments_not_attackee(filtered_arguments, filtered_attacks)
+  
+  @staticmethod
+  def _give_accuracy(predictions, new_cases):
     accurate_prediction = 0
 
     for index in range(len(new_cases)):
@@ -633,7 +601,7 @@ class Aacbr:
     return accurate_prediction / float(len(predictions))
 
   @staticmethod
-  def check_coherent_predictions(predictions, new_cases):
+  def _check_coherent_predictions(predictions, new_cases):
     not_coherency = 0
 
     for index in range(len(predictions)):
@@ -643,15 +611,6 @@ class Aacbr:
           not_coherency += 1
 
     return not_coherency
-
-  def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
-    sink = self.default_case
-    arguments, attacks = self.give_argumentation_framework(new_case)
-    graph = giveGraph(arguments, attacks)
-    path = getPath(graph, [sink])
-    directed_path = giveGraph(path)
-    drawGraph(directed_path, graph_name, output_dir)
-    pass
 
   # drawing the graph if needed
   def _draw_graph_old(self, graph, gname, outcome_map, graph_level_map, excess_feature_map, dialectical_box):

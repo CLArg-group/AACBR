@@ -10,6 +10,7 @@ def test_import():
 
 from aacbr import Aacbr, Case
 from aacbr.cases import load_cases
+from aacbr.argumentation import compute_grounded
 
 @pytest.mark.usefixtures("test_import")
 class TestAacbr:
@@ -142,7 +143,7 @@ class TestAacbr:
                (case2, case1),
                (new1, case3)}
 
-    labels = Aacbr._compute_grounded(arguments, attacks)
+    labels = compute_grounded(arguments, attacks)
     assert labels['in'] == {case2, new1, default}
     assert labels['out'] == {case3, case1}
     assert labels['undec'] == set()
@@ -153,7 +154,7 @@ class TestAacbr:
                (case2, case1),
                (new2, case2),
                (new2, case3)}
-    labels = Aacbr._compute_grounded(arguments, attacks)
+    labels = compute_grounded(arguments, attacks)
     assert labels['in'] == {case1, new2}
     assert labels['out'] == {default, case2, case3}
     assert labels['undec'] == set()
@@ -327,26 +328,6 @@ class TestAacbr:
     filtered_cb = {default, case1, case2}
     clf = Aacbr().fit(cb, remove_spikes=True)
     assert set(clf.casebase_active) == filtered_cb
-
-    
-@pytest.mark.skip(reason="Undefined tests")
-@pytest.mark.usefixtures("test_import")
-class TestCaacbr:
-  # TODO: perhaps delete this class, pass as parameter
-  def test_argumentation_framework_cautious():
-    pass
-  def test_predictions_cautious():
-    pass
-  def test_grounded_extension_cautious():
-    pass
-  def scikit_learning_like_api():
-    # import data...
-    train_data = None
-    test_data = None
-    expected_output = None
-    clf = Aacbr()
-    predicted_output = clf.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output
     
     
 #### json-defined tests
