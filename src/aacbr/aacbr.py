@@ -15,7 +15,7 @@ from collections import deque, defaultdict
 from warnings import warn
 
 from .argumentation import compute_grounded
-from .cases import Case, more_specific_weakly, different_outcomes
+from .cases import Case, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
 
@@ -50,7 +50,7 @@ class Aacbr:
   
   def fit(self, casebase=set(), outcomes=None, remove_spikes=False):
     if all((type(x)==Case for x in casebase)):
-      cb_input = casebase
+      cb_input = tuple(casebase)
     elif outcomes is not None:
       if len(outcomes) != len(casebase):
         raise(RuntimeError("Length of casebase argument is nto the same as outcomes!"))
@@ -64,7 +64,7 @@ class Aacbr:
     self.casebase_initial = cb_input
     self.infer_default(cb_input)
     if self.default_case not in cb_input:
-      cb_input += [self.default_case]
+      cb_input += (self.default_case,)
     # self.partial_order = partial_order
     if not self.cautious:
       if not remove_spikes:
@@ -142,9 +142,8 @@ class Aacbr:
 
   # unlabbled datapoint new_case
   @staticmethod
-  def new_case_attacks(new_case, targetcase):
-    # return sum(targetcase.weight) > sum(new_case.weight)
-    return not new_case.factors.issuperset(targetcase.factors)
+  def new_case_attacks(new_case, target_case):
+    return not target_case.factors <= new_case.factors
 
   # noisy points
   def inconsistent_attacks(self, A, B):
@@ -204,17 +203,6 @@ class Aacbr:
       #   sink = None
     else:
       raise(Exception("Unsupported nr_defaults: {nr_defaults}"))
-
-    # dialectical_box = None
-    # # graph drawing part
-    # if sink and cautious and outcome_map is False:
-    #   new_case_format = format_mapping[new_case]
-    #   graph_level_map, graph = self.give_graph(arguments, def_arg, attacks, grounded['in'], new_case_format, unattacked)
-    #   outcome_map.update({str(new_case.id): prediction})
-    #   excess_feature_map = self._compute_excess_features(new_case, graph, format_mapping)
-    #   dialectical_box = self._compute_dialectically_box(graph, graph_level_map, prediction, def_arg)
-    #   self.draw_graph(graph, new_case.id, outcome_map, graph_level_map, excess_feature_map, dialectical_box)
-
     return prediction
 
   
@@ -304,35 +292,9 @@ class Aacbr:
   
     return current_casebase
 
-  #comment out if the partial order is subset
-  # def give_cautious_subset_of_casebase(self, casebase):
-  #   current_casebase_set = [casebase[0]]
-  #   current_casebase = self.give_casebase(current_casebase_set)
-  #   unprocessed = casebase[1:]
-  #
-  #   while unprocessed:
-  #
-  #     min_len = len(unprocessed[0].factors)
-  #     stratum = list(filter(lambda case: len(case.factors) == min_len, unprocessed))
-  #     unprocessed = [item for item in unprocessed if item not in stratum]
-  #     new_cases = self.give_new_cases(current_casebase, stratum)
-  #
-  #     predicted_outcomes = self.give_predictions(current_casebase, new_cases, 1)
-  #     to_add = []
-  #
-  #     for index in range(len(stratum)):
-  #       if stratum[index].outcome != predicted_outcomes[index]['Prediction']:
-  #         self.attacked_by[stratum[index]] = []
-  #         self.attackers_of[stratum[index]] = []
-  #         to_add.append(stratum[index])
-  #
-  #     current_casebase_set.extend(to_add)
-  #     current_casebase = self.give_casebase(current_casebase_set)
-  #
-  #   return current_casebase
-
-  # calculate which cases are attacked by the new case
   def give_new_cases(self, casebase, new_cases):
+    """Calculates which cases are attacked by the new case.
+    """
     for new_case in new_cases:
       self.give_new_case(casebase, new_case)
     return new_cases
@@ -347,13 +309,14 @@ class Aacbr:
         # we do not do it since cleaning it afterwards would be harder
     return new_case
 
-  # give casebase-training dataset # (remove the duplicates) -- no!
-  # compute the attackees and attackers set
   def give_casebase(self, cases):
+    """Computes and stores the attack relation.
+    """
     self.reset_attack_relations(cases)
     casebase = []
     for candidate_case in cases:
       casebase.append(candidate_case)
+      # GPP: why check for duplicates? I removed this.
       # duplicate = False
       # for case in casebase:
       #   if candidate_case.id != case.id and candidate_case.factors == case.factors and candidate_case.outcome == case.outcome:
@@ -399,30 +362,11 @@ class Aacbr:
     clean_casebase = self.give_casebase(new_cases)
     return clean_casebase
 
-  # def topological_sort(self, casebase):
-  #   no_attackers = {}
-
-  #   for case in casebase:
-  #     no_attackers.update({case: len(case.attackers)})
-
-  #   unattacked = [case for case in casebase if no_attackers[case] == 0]
-  #   order_casebase = []
-  #   while unattacked:
-  #     first_case = unattacked.pop(0)
-  #     order_casebase.append(first_case)
-
-  #     for attackee in self.attacked_by[first_case]:
-  #       no_attackers[attackee] -= 1
-  #       if no_attackers[attackee] == 0:
-  #         unattacked.append(attackee)
-
-  #   return order_casebase
   def topological_sort(self, casebase):
-    # compare = lambda x,y: 1 if more_specific(x,y) else (0 if x.factors == y.factors else -1)
     order_dag = self.build_order_dag(casebase, lt)
     output = self.topological_sort_graph(*order_dag)
     return output
-    # return sorted(casebase, key=cmp_to_key(comparison_function))
+
   def build_order_dag(self, nodes, compare):
     """Returns a directed graph in which (a,b) is an edge iff
     compare(b,a), that is a is smaller than b in the partial
@@ -476,36 +420,6 @@ class Aacbr:
       raise Exception(f"This graph is not a dag!\nThe remaining nodes are {remaining_nodes}.\nThis contains a cycle: {explored}")
     return sorted_nodes
 
-  # partial order = subset; order the arguments with respect to partial order # gp18: wrong
-  # @staticmethod
-  # def min_ordering_casebase(casebase):
-  #   sorted_cards = sorted(casebase, key=lambda case: len(case.factors))
-  #   return sorted_cards
-
-  # read the cases from the JSON file
-  def load_cases(self, file, nr_defaults=1, lime=None, mapping_name=None):
-    cases = []
-    with open(file, encoding='utf-8') as json_file:
-      entries = json.load(json_file)
-      for entry in entries:
-        if entry['id'] == self.ID_DEFAULT:
-          default_case = Case(self.ID_DEFAULT, set(), self.outcome_def)
-          cases.insert(0, default_case)
-
-          if nr_defaults == 2:
-            non_default_case = Case(self.ID_NON_DEFAULT, set(), self.outcome_nondef, [], [], 0)
-            cases.insert(0, non_default_case)
-        else:
-          if lime:
-            factors = self.lime_preprocessing(entry['factors'], mapping_name)
-          else:
-            factors = entry['factors']
-          case = Case(entry['id'], set(factors), entry['outcome'])
-          cases.append(case)
-    json_file.close()
-
-    return cases
-
   def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
     sink = self.default_case
     arguments, attacks = self.give_argumentation_framework(new_case)
@@ -524,9 +438,10 @@ class Aacbr:
           inconsistent = True
       if not inconsistent:
         casebase.append(candidate_case)
-
+        
     return casebase
-
+  
+  ### Untested code below (legacy, kept "hidden" via underscore name)  
   def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):
     ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
     str = ""

@@ -306,16 +306,7 @@ class TestAacbr:
     
     predicted_output = clf.predict(test_X)
     assert expected_output == predicted_output
-   
-  def test_graph_drawing(self, tmp_path):
-    "Checks if a graph is created"
-    cb = self.example_cb2
-    clf = Aacbr().fit(cb)
-    clf.draw_graph(output_dir = tmp_path)
-    output_path = tmp_path / "graph.png"
-    assert output_path.exists()
-    assert output_path.is_file()
-
+    
   def test_remove_spikes(self):
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
@@ -329,6 +320,47 @@ class TestAacbr:
     clf = Aacbr().fit(cb, remove_spikes=True)
     assert set(clf.casebase_active) == filtered_cb
     
+  def test_alternative_partial_order(self):
+    class OrderedPair:
+      """Pair (a,b) where (a,b) are natural numbers.
+      Partial order is defined by (a,b) <= (c,d) iff a<=c and b<=d."""
+
+      def __init__(self, x, y):
+        self.x: int = x
+        self.y: int = y
+
+      def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+      def __le__(self, other):
+        return self.x <= other.x and self.y <= other.y
+      def __hash__(self):
+        return hash((self.x, self.y))
+      
+    default = Case('default', OrderedPair(0,0), outcome=0)
+    case1 = Case('1', OrderedPair(1,0), outcome=1)
+    case2 = Case('2', OrderedPair(0,1), outcome=0)
+    case3 = Case('3', OrderedPair(2,1), outcome=0)
+    cb = (case1, case2, case3)
+    clf = Aacbr(default_case=default)
+    clf.fit(cb)
+    assert set(clf.casebase_active) == set(cb + (default,))
+    test = [OrderedPair(2,0),
+            OrderedPair(0,2),
+            OrderedPair(20,20),
+            OrderedPair(1,1),
+            OrderedPair(0,0)]
+    expected_output = [1, 0, 0, 1, 0]
+    predictions = clf.predict(test)
+    assert expected_output == predictions
+    
+  def test_graph_drawing(self, tmp_path):
+    "Checks if a graph is created"
+    cb = self.example_cb2
+    clf = Aacbr().fit(cb)
+    clf.draw_graph(output_dir = tmp_path)
+    output_path = tmp_path / "graph.png"
+    assert output_path.exists()
+    assert output_path.is_file()    
     
 #### json-defined tests
 import json

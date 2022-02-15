@@ -143,6 +143,43 @@ A more "scikit-learn-style" interface is also available:
    assert expected_output == predicted_output
 ```
 
+### Partial orders
+Different partial orders may be used, but they are not implemented upfront. It is only required that case factors (characterisations) are defined by a class that supports [comparisons](https://docs.python.org/3/reference/datamodel.html#object.__lt__) and is [hashable](https://docs.python.org/3/glossary.html#term-hashable). Having only `__eq__` and `__le__` is sufficient for comparison, since, e.g. `__lt__` is ignored, but be careful for non-intuitive behaviour if this is not a partial order or comparisons are defined in superclasses.
+
+```python
+   class OrderedPair:
+     """Pair (a,b) where (a,b) are natural numbers.
+     Partial order is defined by (a,b) <= (c,d) iff a<=c and b<=d."""
+
+     def __init__(self, x, y):
+       self.x: int = x
+       self.y: int = y
+
+     def __eq__(self, other):
+       return self.x == other.x and self.y == other.y
+     def __le__(self, other):
+       return self.x <= other.x and self.y <= other.y
+     def __hash__(self):
+       return hash((self.x, self.y))
+     
+   default = Case('default', OrderedPair(0,0), outcome=0)
+   case1 = Case('1', OrderedPair(1,0), outcome=1)
+   case2 = Case('2', OrderedPair(0,1), outcome=0)
+   case3 = Case('3', OrderedPair(2,1), outcome=0)
+   cb = (case1, case2, case3)
+   clf = Aacbr(default_case=default)
+   clf.fit(cb)
+   assert set(clf.casebase_active) == set(cb + (default,))
+   test = [OrderedPair(2,0),
+           OrderedPair(0,2),
+           OrderedPair(20,20),
+           OrderedPair(1,1),
+           OrderedPair(0,0)]
+   expected_output = [1, 0, 0, 1, 0]
+   predictions = clf.predict(test)
+   assert expected_output == predictions
+```
+
 ### Basic CLI
 You may also define a `cb.json` file in [a casebase file format](./tests/data/cb_basic.json), as well as a `new.json` file in a [new cases file format](tests/data/new.json), and simply run:
 ```bash
