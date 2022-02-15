@@ -290,6 +290,20 @@ class TestAacbr:
     assert output_path.exists()
     assert output_path.is_file()
 
+  def test_remove_spikes(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'b'}, outcome=0)
+    case4 = Case('4', {'c'}, outcome=0)
+    case5 = Case('5', {'a','c'}, outcome=1)
+    case6 = Case('6', {'a','b','c'}, outcome=0)
+    cb = (default, case1, case2, case3, case4, case5, case6)
+    filtered_cb = {default, case1, case2}
+    clf = Aacbr().fit(cb, remove_spikes=True)
+    assert clf.casebase_active == filtered_cb
+
+    
 @pytest.mark.skip(reason="Undefined tests")
 @pytest.mark.usefixtures("test_import")
 class TestCaacbr:
