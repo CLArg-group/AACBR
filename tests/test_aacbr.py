@@ -128,11 +128,6 @@ class TestAacbr:
       {(self.case2, self.case1),
        (self.case1, self.default)}
     assert attacks == expected_attacks
-
-
-  @pytest.mark.skip(reason="Not implemented")
-  def test_removing_spikes(self):
-    pass
   
   def test_argumentation_grounded_extension(self):
     """For inner working of grounded extension
