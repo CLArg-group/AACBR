@@ -111,6 +111,38 @@ It is also possible to get AA-CBR without "spikes", that is, arguments from whic
    assert set(clf.casebase_active) == filtered_cb
 ```
 
+A more "scikit-learn-style" interface is also available:
+```python
+   train_X = [set(),
+              {'a'},
+              {'a','b'},
+              {'a','b','c'}]
+   train_Y = [0,
+              1,
+              0,
+              0]
+   test_X = [{'a'},
+             {'a', 'b'},
+             {'a', 'c'},
+             {'a', 'b', 'c', 'd'},
+             set()]
+   expected_output = [1, 0, 1, 0, 0]
+   clf = Aacbr()
+   clf.fit(train_X, train_Y)
+   
+   default = Case('default', set(), outcome=0)
+   case0 = Case("0", set(), outcome=0)
+   case1 = Case('1', {'a'}, outcome=1)
+   case2 = Case('2', {'a','b'}, outcome=0)
+   case3 = Case('3', {'a','b','c'}, outcome=0)
+   cb = [case0, case1, case2, case3]
+   
+   assert set(clf.casebase_active) == set(cb + [default])
+   
+   predicted_output = clf.predict(test_X)
+   assert expected_output == predicted_output
+```
+
 ### Basic CLI
 You may also define a `cb.json` file in [a casebase file format](./tests/data/cb_basic.json), as well as a `new.json` file in a [new cases file format](tests/data/new.json), and simply run:
 ```bash
@@ -126,8 +158,8 @@ You can run all tests by using `make test`.
 
 ## Roadmap (refactoring and debugging)
 This project is under heavy refactoring and expected to change. We expect the API in the previous section to be stable, but it is subject to change.
- - [ ] Adapt to a more sklearn API style
  - [ ] Support graphviz for drawing graphs
+ - [X] Adapt to a more sklearn API style
  - [X] Draw graphs
  - [X] (Re-)allow CLI usage via json files
  - [X] Allow cautious AA-CBR

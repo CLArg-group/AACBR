@@ -51,20 +51,31 @@ class Aacbr:
   # attacks(self, case1, case2)
   # is_attacked(self, case1, case2)
   
-  def fit(self, casebase=set(), remove_spikes=False):
+  def fit(self, casebase=set(), outcomes=None, remove_spikes=False):
+    if all((type(x)==Case for x in casebase)):
+      cb_input = casebase
+    elif outcomes is not None:
+      if len(outcomes) != len(casebase):
+        raise(RuntimeError("Length of casebase argument is nto the same as outcomes!"))
+      else:
+        cb_input = [Case(str(i), x, y)
+                    for (i,(x,y)) in enumerate(zip(casebase, outcomes))]
+    
     if not isinstance(self, Aacbr):
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
     
-    self.casebase_initial = casebase
-    self.infer_default(casebase)
+    self.casebase_initial = cb_input
+    self.infer_default(cb_input)
+    if self.default_case not in cb_input:
+      cb_input += [self.default_case]
     # self.partial_order = partial_order
     if not self.cautious:
       if not remove_spikes:
-        self.casebase_active = casebase
-        self.casebase_active = self.give_casebase(casebase) # adding attacks
+        self.casebase_active = cb_input
+        self.casebase_active = self.give_casebase(cb_input) # adding attacks
       else:
-        self.casebase_active = casebase
-        self.casebase_active = self.give_casebase_without_spikes(casebase)
+        self.casebase_active = cb_input
+        self.casebase_active = self.give_casebase_without_spikes(cb_input)
       
       # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
@@ -73,7 +84,7 @@ class Aacbr:
       if remove_spikes:
         warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
       self.casebase_active = []
-      self.casebase_active = self.give_cautious_subset_of_casebase(casebase)
+      self.casebase_active = self.give_cautious_subset_of_casebase(cb_input)
       self.give_casebase(self.casebase_active)
       # raise(Exception("Cautious case not implemented"))
     return self
@@ -82,12 +93,19 @@ class Aacbr:
     default_in_input = self.default_in_casebase(casebase)
     if default_in_input:
       self.default_case = default_in_input
+      
     elif type(self.default_case) == Case:
       if self.outcome_def != self.default_case.outcome:
         raise(RuntimeError(f"Default case outcome is not the same as as passed default outcome: {self.default_case.outcome} != {self.outcome_def}"))
       self.outcome_def = self.default_case.outcome
+      if self.casebase_active:
+        self.casebase_active += [self.default_case]
+      
     elif all([type(case.factors) == set for case in casebase]):
       self.default_case = Case("default", set(), outcome=self.outcome_def)
+      if self.casebase_active:
+        self.casebase_active += [self.default_case]
+      
     else:
       raise(RuntimeError("No default case to use!"))
 
@@ -136,6 +154,10 @@ class Aacbr:
     return different_outcomes(A, B) and B.factors == A.factors
 
   def predict(self, new_cases):
+    if all([type(nc) == Case for nc in new_cases]):
+      pass
+    else:
+      new_cases = [Case(f"new{i}", x) for i,x in enumerate(new_cases)]
     predictions = self.give_predictions(new_cases)
     # return [prediction_dict["Prediction"] for prediction_dict in predictions]
     return predictions

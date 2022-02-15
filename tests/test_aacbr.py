@@ -114,7 +114,6 @@ class TestAacbr:
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
       
-  # @pytest.mark.skip(reason="For visualising what is happening with AF, but not a proper test.") # this is because this AF implementation is to be changed
   def test_argumentation_framework(self):
     cb = self.example_cb
     # newcase = self.case3
@@ -160,8 +159,6 @@ class TestAacbr:
     assert labels['undec'] == set()
     pass
   
-  # @pytest.mark.skip(reason="Undefined tests -- see integration tests such as 'test_files_non_cautious'")
-  # @pytest.mark.xfail(reason="Refactoring prediction workings.")
   def test_grounded_extension(self):
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
@@ -260,9 +257,10 @@ class TestAacbr:
     assert expected_output == predicted_output
     assert set(clf.casebase_active) == set([default, case1, case4])
 
-  @pytest.mark.skip(reason="not implemented")
+  # @pytest.mark.xfail(reason="not implemented")
   def test_scikit_learning_like_api_with_characterisation_input(self):
-    train_data = self.example_cb2
+    case0 = Case("0", set(), outcome=0)
+    cb = [case0, self.case1, self.case2, self.case3]
     train_X = [c.factors for c in cb]
     train_Y = [c.outcome for c in cb]
     test_data = [Case('new1', {'a'}),
@@ -273,9 +271,41 @@ class TestAacbr:
     test_X = [c.factors for c in test_data]
     expected_output = [1, 0, 1, 0, 0]
     clf = Aacbr()
-    predicted_output = clf.fit(train_X, train_Y).predict(test_X)
+    clf.fit(train_X, train_Y)
+    assert set(clf.casebase_active) == set(cb + [self.default])
+    predicted_output = clf.predict(test_X)
     assert expected_output == predicted_output
 
+  def test_scikit_learning_like_api_with_characterisation_input2(self):
+    train_X = [set(),
+               {'a'},
+               {'a','b'},
+               {'a','b','c'}]
+    train_Y = [0,
+               1,
+               0,
+               0]
+    test_X = [{'a'},
+              {'a', 'b'},
+              {'a', 'c'},
+              {'a', 'b', 'c', 'd'},
+              set()]
+    expected_output = [1, 0, 1, 0, 0]
+    clf = Aacbr()
+    clf.fit(train_X, train_Y)
+    
+    default = Case('default', set(), outcome=0)
+    case0 = Case("0", set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'a','b','c'}, outcome=0)
+    cb = [case0, case1, case2, case3]
+    
+    assert set(clf.casebase_active) == set(cb + [default])
+    
+    predicted_output = clf.predict(test_X)
+    assert expected_output == predicted_output
+   
   def test_graph_drawing(self, tmp_path):
     "Checks if a graph is created"
     cb = self.example_cb2
