@@ -2,7 +2,7 @@
 
 This provides an implementation of the AA-CBR formalism [Abstract Argumentation for Case-Based Reasoning][1].
 
-This includes an implementation of cautiously monotonic AA-CBR (cAA-CBR), presented in [Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation][2], and supports general partial orders, as originally introduced in [Data-Empowered Argumentation for Dialectically Explainable Predictions][3].
+This includes an implementation of cautiously monotonic AA-CBR (cAA-CBR), presented in [Monotonicity and Noise-Tolerance in Case-Based Reasoning with Abstract Argumentation][2], and supports general partial orders, as originally introduced in [Data-Empowered Argumentation for Dialectically Explainable Predictions][3], but **not** arbitrary indifference relations (i.e. AA-CBR is assumed to be regular).
 
 ## Project structure
 
