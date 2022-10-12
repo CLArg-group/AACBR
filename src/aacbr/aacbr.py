@@ -162,7 +162,7 @@ class Aacbr:
   
   # predictions for multiple points
   def give_predictions(self, new_cases, nr_defaults=1):
-    casebase = self.casebase_active
+    # casebase = self.casebase_active
     # new_cases = self.give_new_cases(casebase, new_cases)
     predictions = []
     for new_case in new_cases:
