@@ -13,6 +13,7 @@ from functools import cmp_to_key
 from operator import lt
 from collections import deque, defaultdict
 from warnings import warn
+from logging import debug, info, warning, error
 
 from .argumentation import compute_grounded
 from .cases import Case, different_outcomes
@@ -53,7 +54,7 @@ class Aacbr:
       cb_input = tuple(casebase)
     elif outcomes is not None:
       if len(outcomes) != len(casebase):
-        raise(RuntimeError("Length of casebase argument is nto the same as outcomes!"))
+        raise(RuntimeError("Length of casebase argument is not the same as outcomes!"))
       else:
         cb_input = [Case(str(i), x, y)
                     for (i,(x,y)) in enumerate(zip(casebase, outcomes))]
@@ -86,7 +87,8 @@ class Aacbr:
       # raise(Exception("Cautious case not implemented"))
     return self
   
-  def infer_default(self, casebase):    
+  def infer_default(self, casebase):
+    info("Inferring default")
     default_in_input = self.default_in_casebase(casebase)
     if default_in_input:
       self.default_case = default_in_input
@@ -165,8 +167,7 @@ class Aacbr:
     predictions = []
     for new_case in new_cases:
       new_case_prediction = dict()
-      number = new_cases.index(new_case)
-      prediction = self.give_prediction(new_case, nr_defaults, number)
+      prediction = self.give_prediction(new_case, nr_defaults)
       predictions.append(prediction)
     formatted = self.format_predictions(new_cases, predictions)
     # return dialectical_box, predictions
@@ -181,7 +182,7 @@ class Aacbr:
                  in enumerate(zip(new_cases, predictions))]
   
   
-  def give_prediction(self, new_case, nr_defaults: int = 1, number: int = 0):
+  def give_prediction(self, new_case, nr_defaults: int = 1):
     '''Returns an AA-CBR prediction given a casebase and a new case'''
     grounded = self.grounded_extension(new_case, output_type="labelling")
     def_arg = self.default_case
@@ -312,6 +313,7 @@ class Aacbr:
   def give_casebase(self, cases):
     """Computes and stores the attack relation.
     """
+    info("Preparing attack relations in the casebase")
     self.reset_attack_relations(cases)
     casebase = []
     for candidate_case in cases:
@@ -335,6 +337,7 @@ class Aacbr:
   def give_casebase_without_spikes(self, cases):
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
+    info("Preparing attack relations in the casebase (without spikes)")
     casebase = self.give_casebase(cases)
     aaf = self.give_argumentation_framework()
     # print(set(cases).difference(set(mapping.keys())))
@@ -363,6 +366,7 @@ class Aacbr:
     return clean_casebase
 
   def topological_sort(self, casebase):
+    info("Topological sorting")
     order_dag = self.build_order_dag(casebase, lt)
     output = self.topological_sort_graph(*order_dag)
     return output
