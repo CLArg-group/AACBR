@@ -50,7 +50,7 @@ class Aacbr:
   #   return self._attacked[case]
   
   def fit(self, casebase=set(), outcomes=None, remove_spikes=False):
-    if all((type(x)==Case for x in casebase)):
+    if all((type(x) == Case for x in casebase)):
       cb_input = tuple(casebase)
     elif outcomes is not None:
       if len(outcomes) != len(casebase):
@@ -100,7 +100,7 @@ class Aacbr:
       if self.casebase_active:
         self.casebase_active += [self.default_case]
       
-    elif all([type(case.factors) == set for case in casebase]):
+    elif all([type(case.factors) == frozenset for case in casebase]):
       self.default_case = Case("default", set(), outcome=self.outcome_def)
       if self.casebase_active:
         self.casebase_active += [self.default_case]

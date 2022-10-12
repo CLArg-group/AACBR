@@ -14,7 +14,10 @@ class Case:
   
   def __init__(self, id, factors, outcome=None):
     self.id = id
-    self.factors = factors
+    if type(factors) == set:
+      self.factors = frozenset(factors)
+    else:
+      self.factors = factors
     self.outcome = outcome
   def __str__(self):
     return f'Case("id": {self.id}, "factors": {self.factors}, "outcome": {self.outcome})'
@@ -24,9 +27,12 @@ class Case:
   def __eq__(self, other):
     if not isinstance(other, Case):
       return NotImplemented
-    return all([self.id == other.id, self.factors == other.factors, self.outcome == other.outcome])
+    # raise(Exception(f"Trying equality for {self} and {other}.\nHash for self is: {hash(self)}.\nHash for other is: {hash(other)}"))
+    return all([self.id == other.id, self.factors == other.factors, self.outcome == other.outcome]) # slow
+    # return hash(self) == hash(other) 
   def __hash__(self):
-    if type(self.factors) == set:      
+    if type(self.factors) == set:
+      # now this test should be useless after changing init, keeping just in case
       return hash((self.id, frozenset(self.factors), self.outcome))
     else:
       return hash((self.id, self.factors, self.outcome))
