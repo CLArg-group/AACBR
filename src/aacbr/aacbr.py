@@ -135,8 +135,17 @@ class Aacbr:
 
   # attack relation defined
   def past_case_attacks(self, A, B):
-    if not all(x in self.casebase_active for x in (A,B)):
-      raise(Exception(f"Arguments {(A,B)} are not both in the active casebase."))
+    """Checks whether A should attack B by the past case rule.
+    It assumes A and B are in the active casebase."""
+    SAFETY_CHECK = False    
+    # for performance, set SAFETY_CHECK to False
+    # for safety, to True
+    # if True, checks whether both cases are actually in the
+    # casebase_active. Since this adds a big cost on performance, we
+    # deactivated this check by default.
+    if SAFETY_CHECK:
+      if not all(x in self.casebase_active for x in (A,B)):
+        raise(Exception(f"Arguments {(A,B)} are not both in the active casebase."))
     
     return (different_outcomes(A, B) and
             B <= A and
