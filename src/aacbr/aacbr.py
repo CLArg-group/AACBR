@@ -58,10 +58,11 @@ class Aacbr:
       else:
         cb_input = [Case(str(i), x, y)
                     for (i,(x,y)) in enumerate(zip(casebase, outcomes))]
-    
+
+    # unnecessary since it is now a method of the class
     if not isinstance(self, Aacbr):
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
-    
+
     self.casebase_initial = cb_input
     self.infer_default(cb_input)
     if self.default_case not in cb_input:
@@ -127,7 +128,7 @@ class Aacbr:
       self.attacked_by[case] = []
   
   # not something in the set of all possible cases in the middle
-  def most_concise(self, cases, A, B):
+  def minimal(self, A, B, cases):
     return not any((B < case and
                     case < A and
                     not (different_outcomes(A, case)))
@@ -149,7 +150,7 @@ class Aacbr:
     
     return (different_outcomes(A, B) and
             B <= A and
-            self.most_concise(self.casebase_active, A, B))
+            self.minimal(A, B, self.casebase_active))
 
   # unlabbled datapoint new_case
   @staticmethod
@@ -252,6 +253,7 @@ class Aacbr:
   def give_cautious_subset_of_casebase(self, casebase):
     self.reset_attack_relations(casebase) # gpp
     ordered_casebase = self.topological_sort(casebase)
+    info("Creating cautious casebase")
     # print(ordered_casebase)
     self.reset_attack_relations(ordered_casebase)
     
@@ -378,6 +380,7 @@ class Aacbr:
     info("Topological sorting")
     order_dag = self.build_order_dag(casebase, lt)
     output = self.topological_sort_graph(*order_dag)
+    info("Topological sorting: done.")
     return output
 
   def build_order_dag(self, nodes, compare):
@@ -434,12 +437,16 @@ class Aacbr:
     return sorted_nodes
 
   def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
-    sink = self.default_case
     arguments, attacks = self.give_argumentation_framework(new_case)
     graph = giveGraph(arguments, attacks)
-    path = getPath(graph, [sink])
-    directed_path = giveGraph(path)
-    drawGraph(directed_path, graph_name, output_dir)
+    # strange, with commented out code below this draws a path from an
+    # arbitrary leaf to the default
+    # unclear why this was the implementation
+    # sink = self.default_case
+    # path = getPath(graph, [sink])
+    # directed_path = giveGraph(path)
+    # drawGraph(directed_path, graph_name, output_dir)
+    drawGraph(graph, graph_name, output_dir)
     pass  
   
   def give_coherent_dataset(self, cases):

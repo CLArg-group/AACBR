@@ -1,6 +1,7 @@
 import json
 
 from .variables import *
+from functools import cache
 
 class Case:
   '''Defines a case to comprise id, factors, outcome, 
@@ -33,6 +34,7 @@ class Case:
     return self._hash == other._hash
   def __hash__(self):
     return self._hash
+  @cache
   def __le__(self, other):
     return self.factors <= other.factors
     # return self.factors < other.factors or self.factors == other.factors
