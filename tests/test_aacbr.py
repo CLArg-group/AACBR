@@ -31,7 +31,7 @@ class TestAacbr:
   @pytest.mark.parametrize("cb", example_cbs)
   def test_aacbr_methods(self, cb):
     clf = Aacbr().fit(cb)
-    assert clf.casebase_initial == cb
+    assert clf.casebase_initial_ == cb
     
   # def test_attack(self):
   #   default = Case('default', set(), outcome=0)
@@ -212,13 +212,18 @@ class TestAacbr:
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
-    assert set(clf.casebase_active) == set([default, case1, case2, case3, case4])
+    assert set(clf.casebase_active_) == set([default, case1, case2, case3, case4])
     #
     clf_noncautious = Aacbr(cautious=False)
     expected_output = [1, 0, 1, 1, 0, 1]
     predicted_output = clf_noncautious.fit(train_data).predict(test_data)
     assert expected_output == predicted_output, "Non-cautious is not giving expected result!"
 
+  @pytest.mark.xfail(reason="Currently incompatible.")
+  def test_scikit_learn_check_estimator(self):
+    from sklearn.utils.estimator_checks import check_estimator
+    assert check_estimator(Aacbr())    
+    
   def test_inconsistent_IO(self):
     default = Case('default', set(), outcome=0)
     case1 = Case('1', {'a'}, outcome=1)
@@ -256,10 +261,10 @@ class TestAacbr:
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
-    assert set(clf.casebase_active) == set([default, case1, case4])
+    assert set(clf.casebase_active_) == set([default, case1, case4])
 
   # @pytest.mark.xfail(reason="not implemented")
-  def test_scikit_learning_like_api_with_characterisation_input(self):
+  def test_scikit_learn_like_api_with_characterisation_input(self):
     case0 = Case("0", set(), outcome=0)
     cb = [case0, self.case1, self.case2, self.case3]
     train_X = [c.factors for c in cb]
@@ -273,11 +278,11 @@ class TestAacbr:
     expected_output = [1, 0, 1, 0, 0]
     clf = Aacbr()
     clf.fit(train_X, train_Y)
-    assert set(clf.casebase_active) == set(cb + [self.default])
+    assert set(clf.casebase_active_) == set(cb + [self.default])
     predicted_output = clf.predict(test_X)
     assert expected_output == predicted_output
 
-  def test_scikit_learning_like_api_with_characterisation_input2(self):
+  def test_scikit_learn_like_api_with_characterisation_input2(self):
     train_X = [set(),
                {'a'},
                {'a','b'},
@@ -302,7 +307,7 @@ class TestAacbr:
     case3 = Case('3', {'a','b','c'}, outcome=0)
     cb = [case0, case1, case2, case3]
     
-    assert set(clf.casebase_active) == set(cb + [default])
+    assert set(clf.casebase_active_) == set(cb + [default])
     
     predicted_output = clf.predict(test_X)
     assert expected_output == predicted_output
@@ -318,7 +323,7 @@ class TestAacbr:
     cb = (default, case1, case2, case3, case4, case5, case6)
     filtered_cb = {default, case1, case2}
     clf = Aacbr(remove_spikes=True).fit(cb)
-    assert set(clf.casebase_active) == filtered_cb
+    assert set(clf.casebase_active_) == filtered_cb
     
   def test_alternative_partial_order(self):
     class OrderedPair:
@@ -343,7 +348,7 @@ class TestAacbr:
     cb = (case1, case2, case3)
     clf = Aacbr(default_case=default)
     clf.fit(cb)
-    assert set(clf.casebase_active) == set(cb + (default,))
+    assert set(clf.casebase_active_) == set(cb + (default,))
     test = [OrderedPair(2,0),
             OrderedPair(0,2),
             OrderedPair(20,20),
@@ -408,7 +413,7 @@ def run_test_from_files(aacbr_type, test):
               outcome_unknown=test["outcomes"]["undecided"],
               cautious=cautious)
   clf.fit(casebase)
-  casebase_active_ids = set(map(lambda x: getattr(x, "id"), clf.casebase_active))
+  casebase_active_ids = set(map(lambda x: getattr(x, "id"), clf.casebase_active_))
   assert set(casebase_active_ids) == set(test["casebase_expected"][aacbr_type])
 
   for newcase_spec in test["newcases"]:

@@ -14,6 +14,8 @@ from operator import lt, add
 from collections import deque, defaultdict, Counter
 from warnings import warn
 from logging import debug, info, warning, error
+from numbers import Real
+from collections.abc import Sequence
 
 from .argumentation import compute_grounded
 from .cases import Case, different_outcomes
@@ -30,15 +32,10 @@ class Aacbr:
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
     self.default_case = default_case
-    self._nondefault_case = None # the default for opposite outcome
     self.cautious = cautious
     self.remove_spikes = remove_spikes
-    # self.partial_order = None
-    self.casebase_initial = None
-    self.casebase_active = None
-    self.attacked_by = defaultdict(list) # for storing inside an Aacbr instance the attacks, not in the cases # attacked_by[a] = {b such that a attacks b}
-    self.attackers_of = defaultdict(list)  # attackers_of[a] = {b such that b attacks a}
-
+    # See fit method for attributes set only during training
+    
   def get_params(self, deep=True):
     # for sklearn.utils.estimator_checks.check_estimator
     return {
@@ -56,6 +53,7 @@ class Aacbr:
       setattr(self, parameter, value)
     return self
   
+  
     
   # def attacked_by(self, case):
   #   """List of cases that `case' attacks.
@@ -71,7 +69,20 @@ class Aacbr:
   #     raise Exception(f"{case} not in active casebase of {self}")
   #   return self._attacked[case]
   
-  def fit(self, casebase=set(), outcomes=None):
+  def fit(self, X=None, y=None, casebase=None, outcomes=None):
+    """X and casebase are aliases, as are y and outcomes.
+    """
+    if X is not None:
+      if casebase is not None:
+        raise(Exception("Only one of 'casebase' and 'X' should be define, as they are aliases."))
+      else:
+        casebase = X
+    if y is not None:
+      if outcomes is not None:
+        raise(Exception("Only one of 'outcomes' and 'y' should be define, as they are aliases."))
+      else:
+        outcomes = y
+    
     if all((type(x) == Case for x in casebase)):
       cb_input = tuple(casebase)
     elif outcomes is not None:
@@ -85,18 +96,24 @@ class Aacbr:
     if not isinstance(self, Aacbr):
       raise(Exception(f"{self} is not an instance of {Aacbr}"))
 
-    self.casebase_initial = cb_input
+    self.casebase_initial_ = None
+    self.casebase_active_ = None
+    self.attacked_by_ = defaultdict(list) # for storing inside an Aacbr instance the attacks, not in the cases # attacked_by[a] = {b such that a attacks b}
+    self.attackers_of_ = defaultdict(list)  # attackers_of[a] = {b such that b attacks a}
+    self._nondefault_case_ = None # the default for opposite outcome
+
+    self.casebase_initial_ = cb_input
     self.infer_default(cb_input)
     if self.default_case not in cb_input:
       cb_input += (self.default_case,)
     # self.partial_order = partial_order
     if not self.cautious:
       if not self.remove_spikes:
-        self.casebase_active = cb_input
-        self.casebase_active = self.give_casebase(cb_input) # adding attacks
+        self.casebase_active_ = cb_input
+        self.casebase_active_ = self.give_casebase(cb_input) # adding attacks
       else:
-        self.casebase_active = cb_input
-        self.casebase_active = self.give_casebase_without_spikes(cb_input)
+        self.casebase_active_ = cb_input
+        self.casebase_active_ = self.give_casebase_without_spikes(cb_input)
       
       # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
@@ -104,9 +121,9 @@ class Aacbr:
     else:
       if self.remove_spikes:
         warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
-      self.casebase_active = []
-      self.casebase_active = self.give_cautious_subset_of_casebase(cb_input)
-      self.give_casebase(self.casebase_active)
+      self.casebase_active_ = []
+      self.casebase_active_ = self.give_cautious_subset_of_casebase(cb_input)
+      self.give_casebase(self.casebase_active_)
       # raise(Exception("Cautious case not implemented"))
     return self
   
@@ -120,13 +137,24 @@ class Aacbr:
       if self.outcome_def != self.default_case.outcome:
         raise(RuntimeError(f"Default case outcome is not the same as as passed default outcome: {self.default_case.outcome} != {self.outcome_def}"))
       self.outcome_def = self.default_case.outcome
-      if self.casebase_active:
-        self.casebase_active += [self.default_case]
+      if self.casebase_active_:
+        self.casebase_active_ += [self.default_case]
       
     elif all([type(case.factors) == frozenset for case in casebase]):
       self.default_case = Case("default", set(), outcome=self.outcome_def)
-      if self.casebase_active:
-        self.casebase_active += [self.default_case]
+      if self.casebase_active_:
+        self.casebase_active_ += [self.default_case]
+        
+    elif all([(isinstance(case.factors, Sequence)
+               and
+               all(isinstance(element, Real)
+                   for element in case.factors))
+              for case in casebase]):
+      # infers a sequence of same type all being negative infinity
+      default_factors = type(casebase[0].factors)([float('-inf') for x in casebase[0].factors])
+      self.default_case = Case("default", default_factors, outcome=self.outcome_def)
+      if self.casebase_active_:
+        self.casebase_active_ += [self.default_case]
       
     else:
       raise(RuntimeError("No default case to use!"))
@@ -146,13 +174,13 @@ class Aacbr:
     # self.attacked_by.clear()
     # TODO: does not work if I am removing just some cases from the AF, I should make a different interface for new cases, which I add and remove
     if completely:
-      self.attacked_by = defaultdict(list)
-      self.attackers_of = defaultdict(list)
+      self.attacked_by_ = defaultdict(list)
+      self.attackers_of_ = defaultdict(list)
       
     else:
       for case in casebase:
-        self.attackers_of[case] = []
-        self.attacked_by[case] = []
+        self.attackers_of_[case] = []
+        self.attacked_by_[case] = []
   
   # not something in the set of all possible cases in the middle
   def minimal(self, A, B, cases):
@@ -172,12 +200,12 @@ class Aacbr:
     # casebase_active. Since this adds a big cost on performance, we
     # deactivated this check by default.
     if SAFETY_CHECK:
-      if not all(x in self.casebase_active for x in (A,B)):
+      if not all(x in self.casebase_active_ for x in (A,B)):
         raise(Exception(f"Arguments {(A,B)} are not both in the active casebase."))
     
     return (different_outcomes(A, B) and
             B <= A and
-            self.minimal(A, B, self.casebase_active))
+            self.minimal(A, B, self.casebase_active_))
 
   # unlabbled datapoint new_case
   @staticmethod
@@ -223,7 +251,7 @@ class Aacbr:
     '''Returns an AA-CBR prediction given a casebase and a new case'''
     grounded = self.grounded_extension(new_case, output_type="labelling")
     def_arg = self.default_case
-    non_def_arg = self._nondefault_case
+    non_def_arg = self._nondefault_case_
     prediction = None
 
     if nr_defaults == 1:
@@ -249,7 +277,7 @@ class Aacbr:
       raise RuntimeError(f"output_type argument should be either 'subset' or 'labelling'")
     if not type(new_case) == Case:
       raise RuntimeError(f"new_case argument needs to be of type {Case}, but is {type(new_case)}")
-    casebase = self.casebase_active
+    casebase = self.casebase_active_
     new_case = self.give_new_case(casebase, new_case)
     arguments, attacks = self.give_argumentation_framework(new_case)
     grounded = compute_grounded(arguments, attacks)
@@ -262,16 +290,16 @@ class Aacbr:
     '''Returns an abstract argumentation framework (AAF) given a
     casebase and, optionally, a new case.
     The AAF is returned as a pair (arguments, attacks).'''
-    casebase = self.casebase_active
+    casebase = self.casebase_active_
     arguments = set()
     attacks = set()
     arguments = {case for case in casebase}
     for case in casebase:
-      for attacker in self.attackers_of[case]:
+      for attacker in self.attackers_of_[case]:
         attacks.add((attacker, case))
     if new_case != None:
       arguments.add(new_case)
-      for attacked in self.attacked_by[new_case]:
+      for attacked in self.attacked_by_[new_case]:
         attacks.add((new_case, attacked))
 
     return (arguments, attacks)
@@ -290,7 +318,7 @@ class Aacbr:
                      outcome_unknown=self.outcome_unknown,
                      default_case=self.default_case,
                      cautious=False)
-    current_casebase = base_clf.fit(current_casebase_set).casebase_active
+    current_casebase = base_clf.fit(current_casebase_set).casebase_active_
     unprocessed = ordered_casebase[1:]
     
     while unprocessed:
@@ -327,7 +355,7 @@ class Aacbr:
       # print("Adding the list of cases: {}".format(to_add))
       current_casebase_set.extend(to_add)
       # current_casebase = self.give_casebase(current_casebase_set)
-      current_casebase = base_clf.fit(current_casebase_set).casebase_active
+      current_casebase = base_clf.fit(current_casebase_set).casebase_active_
   
     return current_casebase
 
@@ -342,7 +370,7 @@ class Aacbr:
     self.reset_attack_relations([new_case])
     for case in casebase:
       if self.new_case_attacks(new_case, case):
-        self.attacked_by[new_case].append(case)
+        self.attacked_by_[new_case].append(case)
         # TODO?: we are not adding new_case to self.attackers_of[case], is
         # this an issue?
         # we do not do it since cleaning it afterwards would be harder
@@ -367,8 +395,8 @@ class Aacbr:
     for case in casebase:
       for othercase in casebase:
         if self.past_case_attacks(case, othercase):
-          self.attacked_by[case].append(othercase)
-          self.attackers_of[othercase].append(case)
+          self.attacked_by_[case].append(othercase)
+          self.attackers_of_[othercase].append(case)
 
     return casebase
 
@@ -493,9 +521,9 @@ class Aacbr:
 
   def statistics(self):
     results = {}
-    results["number of nodes"] = len(self.casebase_active)
-    results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by[x]), self.attacked_by))
-    results["distribution of attacks (out-going edges)"] = Counter([len(x) for x in self.attacked_by.values()])
+    results["number of nodes"] = len(self.casebase_active_)
+    results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by_[x]), self.attacked_by_))
+    results["distribution of attacks (out-going edges)"] = Counter([len(x) for x in self.attacked_by_.values()])
     # results["maximum depth"] = None
     return results
   

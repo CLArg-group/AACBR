@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## [0.3.0]
+  More compatible with the sklearn API, although still not passing sklearn automated testing.
+  * [CHANGED] `X` and `y` arguments can be used in `fit` instead of `casebase` and `outcomes`
+  * [CHANGED] Attributes only (properly) set after training are now defined in `fit`, not in initialisation.
+
 ## [0.2.0]
   * [CHANGED] When the argument `factors` of `Case` is a `set`, it is converted to `frozenset` instead. This is done in order to guarantee that cases are hashable. If modifying a case, create a new one with different values.
   * [CHANGED] Hashes for `Case` instances are now cached via an attribute.
