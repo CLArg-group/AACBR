@@ -317,7 +317,7 @@ class TestAacbr:
     case6 = Case('6', {'a','b','c'}, outcome=0)
     cb = (default, case1, case2, case3, case4, case5, case6)
     filtered_cb = {default, case1, case2}
-    clf = Aacbr().fit(cb, remove_spikes=True)
+    clf = Aacbr(remove_spikes=True).fit(cb)
     assert set(clf.casebase_active) == filtered_cb
     
   def test_alternative_partial_order(self):
@@ -335,7 +335,7 @@ class TestAacbr:
         return self.x <= other.x and self.y <= other.y
       def __hash__(self):
         return hash((self.x, self.y))
-      
+
     default = Case('default', OrderedPair(0,0), outcome=0)
     case1 = Case('1', OrderedPair(1,0), outcome=1)
     case2 = Case('2', OrderedPair(0,1), outcome=0)

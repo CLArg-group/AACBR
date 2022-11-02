@@ -2,6 +2,7 @@ import json
 
 from .variables import *
 from functools import cache
+from collections.abc import Hashable
 
 class Case:
   '''Defines a case to comprise id, factors, outcome, 
@@ -17,6 +18,8 @@ class Case:
     self.id = id
     if type(factors) == set:
       self.factors = frozenset(factors)
+    elif not isinstance(factors, Hashable):
+      self.factors = tuple(factors)
     else:
       self.factors = factors
     self.outcome = outcome

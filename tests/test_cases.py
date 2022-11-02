@@ -88,6 +88,8 @@ def test_alternative_partial_order():
     def __lt__(self, other):
       """Not necessary for Cases, but recommended."""
       return self <= other and self != other
+    def __hash__(self):
+      return hash((self.x, self.y))
 
   default = Case('default', OrderedPair(0,0), outcome=0)
   case1 = Case('1', OrderedPair(1,0), outcome=1)

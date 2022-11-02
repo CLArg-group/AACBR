@@ -9,9 +9,9 @@ import time
 import json
 import networkx as nx
 
-from functools import cmp_to_key
-from operator import lt
-from collections import deque, defaultdict
+from functools import cmp_to_key, reduce
+from operator import lt, add
+from collections import deque, defaultdict, Counter
 from warnings import warn
 from logging import debug, info, warning, error
 
@@ -22,19 +22,41 @@ from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID
 
 
 class Aacbr:
-  def __init__(self, outcome_def=OUTCOME_DEFAULT, outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN, default_case=None, cautious=False):
+  def __init__(self, outcome_def=OUTCOME_DEFAULT,
+               outcome_nondef=OUTCOME_NON_DEFAULT, outcome_unknown=OUTCOME_UNKNOWN,
+               default_case=None, cautious=False,
+               remove_spikes=False):
     self.outcome_def = outcome_def
     self.outcome_nondef = outcome_nondef
     self.outcome_unknown = outcome_unknown
     self.default_case = default_case
     self._nondefault_case = None # the default for opposite outcome
     self.cautious = cautious
+    self.remove_spikes = remove_spikes
     # self.partial_order = None
     self.casebase_initial = None
     self.casebase_active = None
     self.attacked_by = defaultdict(list) # for storing inside an Aacbr instance the attacks, not in the cases # attacked_by[a] = {b such that a attacks b}
     self.attackers_of = defaultdict(list)  # attackers_of[a] = {b such that b attacks a}
 
+  def get_params(self, deep=True):
+    # for sklearn.utils.estimator_checks.check_estimator
+    return {
+      "outcome_def": self.outcome_def,
+      "outcome_nondef": self.outcome_nondef,
+      "outcome_unknown": self.outcome_unknown,
+      "default_case": self.default_case,
+      "cautious": self.cautious,
+      "remove_spikes": self.remove_spikes
+    }
+  
+  def set_params(self, **kwargs):
+  # for sklearn.utils.estimator_checks.check_estimator
+    for parameter, value in parameters.items():
+      setattr(self, parameter, value)
+    return self
+  
+    
   # def attacked_by(self, case):
   #   """List of cases that `case' attacks.
   #   Gets in memory."""
@@ -49,7 +71,7 @@ class Aacbr:
   #     raise Exception(f"{case} not in active casebase of {self}")
   #   return self._attacked[case]
   
-  def fit(self, casebase=set(), outcomes=None, remove_spikes=False):
+  def fit(self, casebase=set(), outcomes=None):
     if all((type(x) == Case for x in casebase)):
       cb_input = tuple(casebase)
     elif outcomes is not None:
@@ -69,7 +91,7 @@ class Aacbr:
       cb_input += (self.default_case,)
     # self.partial_order = partial_order
     if not self.cautious:
-      if not remove_spikes:
+      if not self.remove_spikes:
         self.casebase_active = cb_input
         self.casebase_active = self.give_casebase(cb_input) # adding attacks
       else:
@@ -80,7 +102,7 @@ class Aacbr:
       # -- but this is no problem for typical aacbr, as long as we separate saving attack state from filtering
       # command 2: save attacks state
     else:
-      if remove_spikes:
+      if self.remove_spikes:
         warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
       self.casebase_active = []
       self.casebase_active = self.give_cautious_subset_of_casebase(cb_input)
@@ -119,13 +141,18 @@ class Aacbr:
     else:
       return False
 
-  def reset_attack_relations(self, casebase):
+  def reset_attack_relations(self, casebase, completely=False):
     # self.attackers_of.clear()
     # self.attacked_by.clear()
     # TODO: does not work if I am removing just some cases from the AF, I should make a different interface for new cases, which I add and remove
-    for case in casebase:
-      self.attackers_of[case] = []
-      self.attacked_by[case] = []
+    if completely:
+      self.attacked_by = defaultdict(list)
+      self.attackers_of = defaultdict(list)
+      
+    else:
+      for case in casebase:
+        self.attackers_of[case] = []
+        self.attacked_by[case] = []
   
   # not something in the set of all possible cases in the middle
   def minimal(self, A, B, cases):
@@ -325,7 +352,7 @@ class Aacbr:
     """Computes and stores the attack relation.
     """
     info("Preparing attack relations in the casebase")
-    self.reset_attack_relations(cases)
+    self.reset_attack_relations(cases, completely=True)
     casebase = []
     for candidate_case in cases:
       casebase.append(candidate_case)
@@ -450,6 +477,9 @@ class Aacbr:
     pass  
   
   def give_coherent_dataset(self, cases):
+    # Returns a coherent casebase, but no guarantees on how.
+    # Use cautious AA-CBR (cAACBR) for a coherent casebase for a
+    # principled treatment. 
     casebase = []
     for candidate_case in cases:
       inconsistent = False
@@ -460,6 +490,14 @@ class Aacbr:
         casebase.append(candidate_case)
         
     return casebase
+
+  def statistics(self):
+    results = {}
+    results["number of nodes"] = len(self.casebase_active)
+    results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by[x]), self.attacked_by))
+    results["distribution of attacks (out-going edges)"] = Counter([len(x) for x in self.attacked_by.values()])
+    # results["maximum depth"] = None
+    return results
   
   ### Untested code below (legacy, kept "hidden" via underscore name)  
   def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):
