@@ -89,6 +89,44 @@ class TestAacbr:
     clf = Aacbr().fit(cb)
     assert clf.default_case == Case("default", set(), clf.outcome_def)
 
+  def test_default_case_different_outcome(self):
+    default = Case('default', set(), outcome=1)
+    case1 = Case('1', {'a'}, outcome=0)
+    case2 = Case('2', {'a', 'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr()
+    assert clf.outcome_def == 0
+    assert clf.outcome_nondef == 1
+    clf.fit(cb)
+    assert clf.default_case == Case("default", set(), clf.outcome_def)
+    assert clf.outcome_def == 1
+    assert clf.outcome_nondef == 0
+    test_data = [Case('new', {'a', 'c'}),
+                Case('new2', {'a', 'b'})]
+    expected_output = [0, 0]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    
+  def test_default_case_different_outcome_cautious(self):
+    default = Case('default', set(), outcome=1)
+    case1 = Case('1', {'a'}, outcome=0)
+    case2 = Case('2', {'a', 'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr(cautious=True)
+    assert clf.outcome_def == 0
+    assert clf.outcome_nondef == 1
+    clf.fit(cb)
+    assert clf.default_case == Case("default", set(), clf.outcome_def)
+    assert clf.outcome_def == 1
+    assert clf.outcome_nondef == 0
+    test_data = [Case('new', {'a', 'c'}),
+                Case('new2', {'a', 'b'})]
+    expected_output = [0, 1]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    
   def test_cautious_basic_example(self):
     default = Case('default', {'a'}, outcome=0)
     case1 = Case('1', {'a','b'}, outcome=0)

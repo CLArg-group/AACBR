@@ -123,7 +123,7 @@ class Aacbr:
         warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
       self.casebase_active_ = []
       self.casebase_active_ = self.give_cautious_subset_of_casebase(cb_input)
-      self.give_casebase(self.casebase_active_)
+      # self.give_casebase(self.casebase_active_)
       # raise(Exception("Cautious case not implemented"))
     return self
   
@@ -132,6 +132,14 @@ class Aacbr:
     default_in_input = self.default_in_casebase(casebase)
     if default_in_input:
       self.default_case = default_in_input
+      if default_in_input.outcome is not None and \
+         self.outcome_def != default_in_input.outcome:
+        info(f"Overriding {self}.outcome_def of {self.outcome_def} with default_case outcome {default_in_input.outcome}")
+        aux = self.outcome_def
+        self.outcome_def = default_in_input.outcome
+        self.outcome_nondef = aux
+        assert self.outcome_unknown != self.outcome_def
+        assert self.outcome_unknown != self.outcome_nondef
       
     elif type(self.default_case) == Case:
       if self.outcome_def != self.default_case.outcome:
@@ -179,8 +187,12 @@ class Aacbr:
       
     else:
       for case in casebase:
-        self.attackers_of_.pop(case,None)
+        self.attackers_of_.pop(case, None)
         self.attacked_by_.pop(case, None)
+        # for othercase in self.attacked_by_.keys():
+        #   self.attacked_by_[othercase].remove(case)
+        # for othercase in self.attackers_of_.keys():
+        #   self.attackers_of_[othercase].remove(case)
         pass
   
   # not something in the set of all possible cases in the middle
@@ -490,8 +502,24 @@ class Aacbr:
 
     return casebase
 
-  
   def give_casebase_without_spikes(self, cases):
+    """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
+    This makes the comparison between cAACBR and AACBR much cleaner."""
+    info("Preparing attack relations in the casebase (without spikes)")
+    casebase = self.give_casebase(cases)
+    to_keep = set([self.default_case])
+    verified = set([self.default_case])
+    unchecked = self.attackers_of_[self.default_case]
+    while unchecked != []:
+      case = unchecked.pop()
+      to_keep.add(case)
+      verified.add(case)
+      unchecked += [x for x in self.attackers_of_[case] if x not in verified]
+        
+    clean_casebase = self.give_casebase(list(to_keep))
+    return clean_casebase
+  
+  def _old_give_casebase_without_spikes(self, cases):
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
     info("Preparing attack relations in the casebase (without spikes)")
@@ -613,7 +641,15 @@ class Aacbr:
   def statistics(self):
     results = {}
     results["number of nodes"] = len(self.casebase_active_)
-    results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by_[x]), self.attacked_by_))
+    results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by_[x]), self.casebase_active_), 0)
+    double_count = reduce(add, map(lambda x: len(self.attackers_of_[x]), self.casebase_active_), 0)
+    assert double_count == results["total number of attacks"]
+    assert set(self.attacked_by_.keys()) == set(self.casebase_active_)
+    assert set(self.attackers_of_.keys()) == set(self.casebase_active_)
+    non_attacking = [x for x in self.casebase_active_ if len(self.attacked_by_[x]) == 0][:10]
+    info(f"Some of the non-attacking are {non_attacking}")
+    unattacked = [x for x in self.casebase_active_ if len(self.attackers_of_[x]) == 0][:10]
+    info(f"Some of the unattacked are {unattacked}")
     results["distribution of attacks (out-going edges)"] = Counter([len(x) for x in self.attacked_by_.values()])
     # results["maximum depth"] = None
     return results
