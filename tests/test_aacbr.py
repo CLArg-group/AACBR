@@ -3,7 +3,7 @@ import pytest
 from pathlib import Path
 from itertools import product
 from collections.abc import Sequence
-from random import random, randint
+from random import random, randint, shuffle
 
 @pytest.fixture(autouse=True)
 def test_import():
@@ -374,6 +374,62 @@ class TestAacbr:
     clf = Aacbr(remove_spikes=True).fit(cb)
     assert set(clf.casebase_active_) == filtered_cb
     
+  @pytest.mark.parametrize("remove_spikes", (False, True))
+  @pytest.mark.parametrize("cautious", (False, True))
+  def test_sort(self, remove_spikes, cautious):
+    if cautious and remove_spikes:
+      pytest.skip()
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'b'}, outcome=0)
+    case4 = Case('4', {'c'}, outcome=0)
+    case5 = Case('5', {'a','c'}, outcome=1)
+    case6 = Case('6', {'a','b','c'}, outcome=0)
+    cb = [default, case1, case2, case3, case4, case5, case6]
+    shuffle(cb)
+    clf = Aacbr(remove_spikes=remove_spikes, cautious=cautious).fit(cb)
+    for idx,case in enumerate(clf.casebase_active_):
+      for idx2,othercase in enumerate(clf.casebase_active_[idx:]):
+        assert not case > othercase, (idx, idx2)
+
+  @pytest.mark.parametrize("remove_spikes", (False, True))
+  @pytest.mark.parametrize("cautious", (False, True))
+  def test_sort_larger_cb(self, remove_spikes, cautious):
+    if cautious and remove_spikes:
+      pytest.skip()
+    cb = generate_orderedsequence_casebase(n=100, dim=3)
+    shuffle(cb)
+    clf = Aacbr(remove_spikes=remove_spikes, cautious=cautious).fit(cb)
+    for idx,case in enumerate(clf.casebase_active_):
+      for idx2,othercase in enumerate(clf.casebase_active_[idx:]):
+        assert not case > othercase, (idx, idx2)
+
+  def test_remove_spikes_larger_cb(self):
+    cb = generate_orderedsequence_casebase(n=100, dim=5)
+    clf = Aacbr(remove_spikes=True, cautious=False).fit(cb)
+    non_attacking_cases = [case for case in clf.casebase_active_
+                           if clf.attacked_by_[case] == []]
+    assert clf.outcome_def == clf.default_case.outcome
+    assert non_attacking_cases == [clf.default_case]
+    
+  @pytest.mark.parametrize("remove_spikes", (False, True))
+  @pytest.mark.parametrize("cautious", (False, True))
+  def test_attacked_by_attackers_of_consistency(self, remove_spikes, cautious):
+    if cautious and remove_spikes:
+      pytest.skip()
+    cb = generate_orderedsequence_casebase(n=50, dim=3)
+    clf = Aacbr(remove_spikes=remove_spikes, cautious=cautious).fit(cb)
+    assert set(clf.attacked_by_.keys()).issubset(set(clf.casebase_active_))
+    assert set(clf.attackers_of_.keys()).issubset(set(clf.casebase_active_))
+    # assert set(clf.attacked_by_.keys()) == set(clf.attackers_of_.keys()) # not necessarily true, since it is a defaultdict
+    for case in clf.attacked_by_.keys():
+      for othercase in clf.attacked_by_[case]:
+        assert case in clf.attackers_of_[othercase]
+    for case in clf.attackers_of_.keys():
+      for othercase in clf.attackers_of_[case]:
+        assert case in clf.attacked_by_[othercase]
+    
   def test_alternative_partial_order(self):
     class OrderedPair:
       """Pair (a,b) where (a,b) are natural numbers.
@@ -430,22 +486,25 @@ class OrderedSequence(tuple):
     return all([self[i]<=other[i] for i in range(len(self))])
   def __lt__(self, other):
     return self.__le__(other) and not self.__eq__(other)
+  def __hash__(self):
+    return tuple.__hash__(self)
   
   # def __lt__(self, other):
   #   return self <= other and self != other
   # def __hash__(self):
   #   return hash((self.x, self.y))
+def generate_orderedsequence_casebase(n=100, dim=5):
+  cb = [Case(i, OrderedSequence([random() for _ in range(dim)]),
+             outcome=randint(0,1)) for i in range(n)]
+  default_case = Case("default", OrderedSequence([0 for _ in range(dim)]),
+                      outcome=0)
+  cb = [default_case] + cb
+  return cb
 
+  
 @pytest.mark.speed
 class TestCautiousAacbrEfficiency:
-  def casebase(self, n=100, dim=5):
-    cb = [Case(i, OrderedSequence([random() for _ in range(dim)]),
-               outcome=randint(0,1)) for i in range(n)]
-    default_case = Case("default", OrderedSequence([0 for _ in range(dim)]),
-                        outcome=0)
-    cb = [default_case] + cb
-    return cb
-  
+  casebase = staticmethod(generate_orderedsequence_casebase)
   # @pytest.mark.parametrize("n",(10, 100, 200))
   # @pytest.mark.parametrize("d",(2, 5, 10))
   @pytest.mark.parametrize("n",(100,200))

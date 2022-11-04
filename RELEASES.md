@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## [0.4.2]
+  * [FIXED] Bugs with sorting fixed, solving issues with remove_spikes not working properly, among others.
+
 ## [0.4.1]
   * [FIXED] When the default case is passed as argument and has a different outcome than originally set in the Aacbr instance as default outcome, now this is taken intou account, respecting the explicitly sent default case.
 

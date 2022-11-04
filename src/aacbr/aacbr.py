@@ -16,11 +16,17 @@ from warnings import warn
 from logging import debug, info, warning, error
 from numbers import Real
 from collections.abc import Sequence
+from graphlib import TopologicalSorter
 
 from .argumentation import compute_grounded
 from .cases import Case, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
+
+def tsorted(case_list):
+  ts = TopologicalSorter({i:[j for j in case_list if i>j]
+                          for i in case_list})
+  return tuple(ts.static_order())
 
 
 class Aacbr:
@@ -109,10 +115,10 @@ class Aacbr:
     # self.partial_order = partial_order
     if not self.cautious:
       if not self.remove_spikes:
-        self.casebase_active_ = cb_input
+        # self.casebase_active_ = cb_input
         self.casebase_active_ = self.give_casebase(cb_input) # adding attacks
       else:
-        self.casebase_active_ = cb_input
+        # self.casebase_active_ = cb_input
         self.casebase_active_ = self.give_casebase_without_spikes(cb_input)
       
       # command 1: filter which cases to use -- but if this depends on attack, do I have to fit in order to define attack? this is strange
@@ -345,7 +351,7 @@ class Aacbr:
     info("Preparing attack relations in the casebase")
     self.reset_attack_relations(casebase, completely=True)
     debug("Sorting casebase")
-    cases = sorted(casebase)
+    cases = tsorted(casebase)
     debug("Sorted")
     
     assert cases[0] == self.default_case
@@ -378,7 +384,7 @@ class Aacbr:
                          for attacker_of_case in self.attackers_of_[case]))  # defended
                  and different_outcomes(case, newcase)]
     self.casebase_active_.append(newcase)
-    self.attacked_by_[newcase] = sorted(to_attack)  # sorted might be unnecessary
+    self.attacked_by_[newcase] = tsorted(to_attack)  # sorted might be unnecessary
     for case in to_attack:
       self.attackers_of_[case].append(newcase)
     pass
@@ -485,8 +491,9 @@ class Aacbr:
     info("Preparing attack relations in the casebase")
     self.reset_attack_relations(cases, completely=True)
     debug("Sorting casebase")
-    casebase = sorted(cases)
+    casebase = tsorted(cases)
     debug("Sorted")
+    self.casebase_active_ = casebase
     # Since cases are sorted, no case that comes before than attack
     # one that comes later.
     for idx,case in enumerate(casebase):
@@ -517,9 +524,13 @@ class Aacbr:
       unchecked += [x for x in self.attackers_of_[case] if x not in verified]
         
     clean_casebase = self.give_casebase(list(to_keep))
+    assert to_keep == set(self.casebase_active_)
+    non_attacking_cases = [case for case in self.casebase_active_
+                           if self.attacked_by_[case] == []]
+    assert non_attacking_cases == [self.default_case]
     return clean_casebase
   
-  def _old_give_casebase_without_spikes(self, cases):
+  def _give_casebase_without_spikes(self, cases):
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
     info("Preparing attack relations in the casebase (without spikes)")
@@ -644,17 +655,16 @@ class Aacbr:
     results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by_[x]), self.casebase_active_), 0)
     double_count = reduce(add, map(lambda x: len(self.attackers_of_[x]), self.casebase_active_), 0)
     assert double_count == results["total number of attacks"]
-    assert set(self.attacked_by_.keys()) == set(self.casebase_active_)
-    assert set(self.attackers_of_.keys()) == set(self.casebase_active_)
     non_attacking = [x for x in self.casebase_active_ if len(self.attacked_by_[x]) == 0][:10]
     info(f"Some of the non-attacking are {non_attacking}")
     unattacked = [x for x in self.casebase_active_ if len(self.attackers_of_[x]) == 0][:10]
     info(f"Some of the unattacked are {unattacked}")
-    results["distribution of attacks (out-going edges)"] = Counter([len(x) for x in self.attacked_by_.values()])
+    results["distribution of attacks (out-going edges)"] = Counter((len(self.attacked_by_[case]) for case in self.casebase_active_))
     # results["maximum depth"] = None
     return results
+
   
-  ### Untested code below (legacy, kept "hidden" via underscore name)  
+### Untested code below (legacy, kept "hidden" via underscore name)  
   def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):
     ordered_graph_level_map = sorted(graph_level_map.items(), key=lambda node_level: node_level[1])
     str = ""
