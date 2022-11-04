@@ -2,6 +2,8 @@
 import pytest
 from pathlib import Path
 from itertools import product
+from collections.abc import Sequence
+from random import random, randint
 
 @pytest.fixture(autouse=True)
 def test_import():
@@ -87,6 +89,14 @@ class TestAacbr:
     clf = Aacbr().fit(cb)
     assert clf.default_case == Case("default", set(), clf.outcome_def)
 
+  def test_cautious_basic_example(self):
+    default = Case('default', {'a'}, outcome=0)
+    case1 = Case('1', {'a','b'}, outcome=0)
+    case2 = Case('2', {'a','b'}, outcome=1)
+    cb = [default, case1, case2]
+    clf = Aacbr(cautious=True).fit(cb)
+    assert clf.casebase_active_ == [default, case2]
+    
   def test_default_case_in_casebase(self):
     default = Case('default', {'a'}, outcome=0)
     case1 = Case('1', {'a','b'}, outcome=0)
@@ -114,7 +124,7 @@ class TestAacbr:
     assert clf.past_case_attacks(case2, case1)
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
-      
+          
   def test_argumentation_framework(self):
     cb = self.example_cb
     # newcase = self.case3
@@ -193,32 +203,6 @@ class TestAacbr:
     predicted_output = clf.fit(train_data).predict(test_data)
     assert expected_output == predicted_output
 
-  def test_scikit_learning_like_api_with_case_input_cautious(self):
-    default = Case('default', set(), outcome=0)
-    case1 = Case('1', {'a'}, outcome=1)
-    case2 = Case('2', {'a','b'}, outcome=0)
-    case3 = Case('3', {'c'}, outcome=1)
-    case4 = Case('4', {'c','d'}, outcome=0)
-    case5 = Case('5', {'a','b','c'}, outcome=1)
-    cb = [default, case1, case2, case3, case4, case5]
-    train_data = cb
-    test_data = [Case('new1', {'a'}),
-                 Case('new2', {'a', 'b'}),
-                 Case('new3', {'a', 'c'}),
-                 Case('new4', {'a', 'b', 'c', 'd'}),
-                 Case('new5', set()),
-                 Case('new6', {'a','c','d'})]
-    expected_output = [1, 0, 1, 0, 0, 1]
-    clf = Aacbr(cautious=True)
-    predicted_output = clf.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output
-    assert set(clf.casebase_active_) == set([default, case1, case2, case3, case4])
-    #
-    clf_noncautious = Aacbr(cautious=False)
-    expected_output = [1, 0, 1, 1, 0, 1]
-    predicted_output = clf_noncautious.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output, "Non-cautious is not giving expected result!"
-
   @pytest.mark.xfail(reason="Currently incompatible.")
   def test_scikit_learn_check_estimator(self):
     from sklearn.utils.estimator_checks import check_estimator
@@ -260,9 +244,36 @@ class TestAacbr:
     expected_output = [1, 0, 1, 0, 0, 1]
     clf = Aacbr(cautious=True)
     predicted_output = clf.fit(train_data).predict(test_data)
-    assert expected_output == predicted_output
     assert set(clf.casebase_active_) == set([default, case1, case4])
+    assert expected_output == predicted_output
 
+  def test_scikit_learning_like_api_with_case_input_cautious(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('3', {'c'}, outcome=1)
+    case4 = Case('4', {'c','d'}, outcome=0)
+    case5 = Case('5', {'a','b','c'}, outcome=1)
+    cb = [default, case1, case2, case3, case4, case5]
+    train_data = cb
+    test_data = [Case('new1', {'a'}),
+                 Case('new2', {'a', 'b'}),
+                 Case('new3', {'a', 'c'}),
+                 Case('new4', {'a', 'b', 'c', 'd'}),
+                 Case('new5', set()),
+                 Case('new6', {'a','c','d'})]
+    expected_output = [1, 0, 1, 0, 0, 1]
+    clf = Aacbr(cautious=True)
+    predicted_output = clf.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output
+    assert set(clf.casebase_active_) == set([default, case1, case2, case3, case4])
+    #
+    clf_noncautious = Aacbr(cautious=False)
+    expected_output = [1, 0, 1, 1, 0, 1]
+    predicted_output = clf_noncautious.fit(train_data).predict(test_data)
+    assert expected_output == predicted_output, "Non-cautious is not giving expected result!"
+
+    
   # @pytest.mark.xfail(reason="not implemented")
   def test_scikit_learn_like_api_with_characterisation_input(self):
     case0 = Case("0", set(), outcome=0)
@@ -366,6 +377,47 @@ class TestAacbr:
     output_path = tmp_path / "graph.png"
     assert output_path.exists()
     assert output_path.is_file()    
+
+class OrderedSequence(tuple):    
+  def __sub__(self, other):
+    if len(self) != len(other):
+      raise(Exception("Arguments have different lengths!"))
+    return OrderedSequence([self[i]-other[i] for i in range(len(self))])
+  def __eq__(self, other):
+    return isinstance(other, OrderedSequence) and \
+      all([self[i]==other[i] for i in range(len(self))])
+  def __le__(self, other):
+    if len(self) != len(other):
+      raise(Exception("Arguments have different lengths!"))
+    return all([self[i]<=other[i] for i in range(len(self))])
+  def __lt__(self, other):
+    return self.__le__(other) and not self.__eq__(other)
+  
+  # def __lt__(self, other):
+  #   return self <= other and self != other
+  # def __hash__(self):
+  #   return hash((self.x, self.y))
+
+@pytest.mark.speed
+class TestCautiousAacbrEfficiency:
+  def casebase(self, n=100, dim=5):
+    cb = [Case(i, OrderedSequence([random() for _ in range(dim)]),
+               outcome=randint(0,1)) for i in range(n)]
+    default_case = Case("default", OrderedSequence([0 for _ in range(dim)]),
+                        outcome=0)
+    cb = [default_case] + cb
+    return cb
+  
+  # @pytest.mark.parametrize("n",(10, 100, 200))
+  # @pytest.mark.parametrize("d",(2, 5, 10))
+  @pytest.mark.parametrize("n",(100,200))
+  @pytest.mark.parametrize("d",(5,10))
+  @pytest.mark.parametrize("cautious",(False,True))
+  def test_speed(self, benchmark, cautious, n, d):
+    cb = self.casebase(n, d)
+    clf = Aacbr(cautious=cautious)
+    benchmark(clf.fit, cb)
+    pass
     
 #### json-defined tests
 import json
@@ -412,6 +464,11 @@ def run_test_from_files(aacbr_type, test):
               outcome_nondef=test["outcomes"]["nondefault"],
               outcome_unknown=test["outcomes"]["undecided"],
               cautious=cautious)
+  # casebase2 = casebase[:-1]
+  # clf.fit(casebase2)
+  # print(casebase[-1], clf.predict([casebase[-1]]))
+  # print(cautious)
+  # print(sorted(casebase))
   clf.fit(casebase)
   casebase_active_ids = set(map(lambda x: getattr(x, "id"), clf.casebase_active_))
   assert set(casebase_active_ids) == set(test["casebase_expected"][aacbr_type])

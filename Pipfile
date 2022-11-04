@@ -8,6 +8,7 @@ pytest = "*"
 ipython = "*"
 aacbr = {editable = true, path = "."}
 sklearn = "*"
+pytest-benchmark = "*"
 
 [packages]
 networkx = "*"

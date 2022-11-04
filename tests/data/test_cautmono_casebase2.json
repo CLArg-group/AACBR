@@ -12,7 +12,7 @@
     {"id": "cd",
      "factors": ["c", "d"],
      "outcome": 0},
-    {"id": "abc",
+    {"id": "acd",
      "factors": ["a","c", "d"],
      "outcome": 1}
 ]

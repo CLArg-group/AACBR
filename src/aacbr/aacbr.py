@@ -179,15 +179,35 @@ class Aacbr:
       
     else:
       for case in casebase:
-        self.attackers_of_[case] = []
-        self.attacked_by_[case] = []
+        self.attackers_of_.pop(case,None)
+        self.attacked_by_.pop(case, None)
+        pass
   
   # not something in the set of all possible cases in the middle
-  def minimal(self, A, B, cases):
+  def _old_minimal(self, A, B, cases):
     return not any((B < case and
                     case < A and
                     not (different_outcomes(A, case)))
                    for case in cases)
+  
+  def minimal(self, A, B, cases):
+    """Checks whether there is a case larger than A that attacks B.
+    Assumes that A and B are in the casebase and their attackers are
+    defined or being defined.
+    """
+    SAFETY_CHECK = False
+    if SAFETY_CHECK:
+      assert A in self.casebase_active_
+      assert B in self.casebase_active_
+    try:
+      attackers = self.attackers_of_[B]
+    except KeyError:
+      raise(Exception(f"{B} is not in the casebase!"))
+    except NameError as E:
+      raise(E)
+    # Should we fall back to the usual minimal test? Currently we do not.
+    return not any(((case < A) for case in attackers))
+
 
   # attack relation defined
   def past_case_attacks(self, A, B):
@@ -216,17 +236,19 @@ class Aacbr:
   def inconsistent_attacks(self, A, B):
     return different_outcomes(A, B) and B.factors == A.factors
 
-  def predict(self, new_cases):
+  def predict(self, new_cases, _keep_newcase_attacks=False):
     if all([type(nc) == Case for nc in new_cases]):
-      pass
+      new_cases = [Case(f"new{nc.id}", nc.factors, outcome=None) for nc in new_cases]
     else:
       new_cases = [Case(f"new{i}", x) for i,x in enumerate(new_cases)]
-    predictions = self.give_predictions(new_cases)
+    predictions = self.give_predictions(new_cases,
+                                        _keep_newcase_attacks=_keep_newcase_attacks)
     # return [prediction_dict["Prediction"] for prediction_dict in predictions]
     return predictions
   
   # predictions for multiple points
-  def give_predictions(self, new_cases, nr_defaults=1):
+  def give_predictions(self, new_cases, nr_defaults=1,
+                       _keep_newcase_attacks=False):
     # casebase = self.casebase_active
     # new_cases = self.give_new_cases(casebase, new_cases)
     predictions = []
@@ -235,7 +257,9 @@ class Aacbr:
       prediction = self.give_prediction(new_case, nr_defaults)
       predictions.append(prediction)
     formatted = self.format_predictions(new_cases, predictions)
-    # return dialectical_box, predictions
+    if not _keep_newcase_attacks:
+      self.reset_attack_relations(new_cases)  # clean new cases
+    # unnecessary, since only self.attacked_by_ is updated by the new_cases
     return predictions
 
   @staticmethod
@@ -303,9 +327,52 @@ class Aacbr:
         attacks.add((new_case, attacked))
 
     return (arguments, attacks)
-  
-  # cautious casebase computed + resetting the attack relations
+
+
   def give_cautious_subset_of_casebase(self, casebase):
+    info("Preparing attack relations in the casebase")
+    self.reset_attack_relations(casebase, completely=True)
+    debug("Sorting casebase")
+    cases = sorted(casebase)
+    debug("Sorted")
+    
+    assert cases[0] == self.default_case
+    self.casebase_active_ = [cases[0]]
+    # non-parallel implementation, one by one
+    for case in cases[1:]:
+      predicted_outcome = self.predict([case])[0]
+      if case.outcome != predicted_outcome:
+        if not self.incoherent_case_in_casebase(case):
+          # breakpoint()
+          self._simple_add(case)
+        # check incoherence
+        # if not, simple add
+    return self.casebase_active_
+      
+  def incoherent_case_in_casebase(self, case):
+    return any(self.inconsistent_attacks(case, anothercase)
+               for anothercase in self.casebase_active_)
+  
+  def _simple_add(self, newcase):
+    # info(f"Adding {newcase}")
+    # try:
+    attacked = set(case for case in self.casebase_active_
+                   if self.new_case_attacks(newcase, case))
+    # except KeyError:
+    #   raise(Exception(f"_simple_add failed since newcase {newcase} is not a key in attacked_by_."))
+    to_attack = [case for case in self.casebase_active_
+                 if case not in attacked # since those are not excluded below
+                 and all((attacker_of_case in attacked
+                         for attacker_of_case in self.attackers_of_[case]))  # defended
+                 and different_outcomes(case, newcase)]
+    self.casebase_active_.append(newcase)
+    self.attacked_by_[newcase] = sorted(to_attack)  # sorted might be unnecessary
+    for case in to_attack:
+      self.attackers_of_[case].append(newcase)
+    pass
+    
+  # cautious casebase computed + resetting the attack relations
+  def _give_cautious_subset_of_casebase(self, casebase):
     self.reset_attack_relations(casebase) # gpp
     ordered_casebase = self.topological_sort(casebase)
     info("Creating cautious casebase")
@@ -375,8 +442,8 @@ class Aacbr:
         # this an issue?
         # we do not do it since cleaning it afterwards would be harder
     return new_case
-
-  def give_casebase(self, cases):
+    
+  def _old_give_casebase(self, cases):
     """Computes and stores the attack relation.
     """
     info("Preparing attack relations in the casebase")
@@ -400,6 +467,30 @@ class Aacbr:
 
     return casebase
 
+  def give_casebase(self, cases):
+    """Computes and stores the attack relation.
+    """
+    info("Preparing attack relations in the casebase")
+    self.reset_attack_relations(cases, completely=True)
+    debug("Sorting casebase")
+    casebase = sorted(cases)
+    debug("Sorted")
+    # Since cases are sorted, no case that comes before than attack
+    # one that comes later.
+    for idx,case in enumerate(casebase):
+      for othercase in casebase[idx:]:
+        if self.past_case_attacks(othercase, case):
+          self.attacked_by_[othercase].append(case)
+          self.attackers_of_[case].append(othercase)
+          if case.factors == othercase.factors:
+            # then they are the an incoherent pair, so we add directly
+            # the attacks
+            self.attacked_by_[case].append(othercase)
+            self.attackers_of_[othercase].append(case)
+
+    return casebase
+
+  
   def give_casebase_without_spikes(self, cases):
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""

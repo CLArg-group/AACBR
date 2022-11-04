@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## [0.4.0]
+  API is kept, but massive speed-ups.
+  * [CHANGED] Fitting, for both cautious and non-cautious, is now much faster.
+    In the slowest scenarios in benchmarking contained in `tests/`, 85% speed-up in non-cautious, and 99.89% speed-up in cautious.
+
 ## [0.3.0]
   More compatible with the sklearn API, although still not passing sklearn automated testing.
   * [CHANGED] `X` and `y` arguments can be used in `fit` instead of `casebase` and `outcomes`

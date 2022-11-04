@@ -32,7 +32,7 @@
         },
         "casebase": "test_cautmono_casebase2.json",
         "casebase_expected": {
-            "non_cautious": [ "default", "a", "c", "ab", "cd", "abc"],
+            "non_cautious": [ "default", "a", "c", "ab", "cd", "acd"],
             "cautious": [ "default", "a", "c", "ab", "cd" ]
         },
         "newcases":
