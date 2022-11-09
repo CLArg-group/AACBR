@@ -11,6 +11,7 @@ def test_import():
   pass
 
 from aacbr import Aacbr, Case
+from aacbr.aacbr import tsorted
 from aacbr.cases import load_cases
 from aacbr.argumentation import compute_grounded
 
@@ -388,9 +389,28 @@ class TestAacbr:
     case6 = Case('6', {'a','b','c'}, outcome=0)
     cb = [default, case1, case2, case3, case4, case5, case6]
     shuffle(cb)
-    clf = Aacbr(remove_spikes=remove_spikes, cautious=cautious).fit(cb)
-    for idx,case in enumerate(clf.casebase_active_):
-      for idx2,othercase in enumerate(clf.casebase_active_[idx:]):
+    sorted_cb = tsorted(cb)
+    for idx,case in enumerate(sorted_cb):
+      for idx2,othercase in enumerate(sorted_cb[idx:]):
+        assert not case > othercase, (idx, idx2)
+
+  @pytest.mark.parametrize("remove_spikes", (False, True))
+  @pytest.mark.parametrize("cautious", (False, True))
+  def test_sort_with_cycles(self, remove_spikes, cautious):
+    if cautious and remove_spikes:
+      pytest.skip()
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a','b'}, outcome=0)
+    case3 = Case('2', {'a','b'}, outcome=0)
+    case4 = Case('4', {'c'}, outcome=0)
+    case5 = Case('5', {'a','c'}, outcome=1)
+    case6 = Case('6', {'a','b','c'}, outcome=0)
+    cb = [default, case1, case2, case3, case4, case5, case6]
+    shuffle(cb)
+    sorted_cb = tsorted(cb)
+    for idx,case in enumerate(sorted_cb):
+      for idx2,othercase in enumerate(sorted_cb[idx:]):
         assert not case > othercase, (idx, idx2)
 
   @pytest.mark.parametrize("remove_spikes", (False, True))
@@ -400,9 +420,9 @@ class TestAacbr:
       pytest.skip()
     cb = generate_orderedsequence_casebase(n=100, dim=3)
     shuffle(cb)
-    clf = Aacbr(remove_spikes=remove_spikes, cautious=cautious).fit(cb)
-    for idx,case in enumerate(clf.casebase_active_):
-      for idx2,othercase in enumerate(clf.casebase_active_[idx:]):
+    sorted_cb = tsorted(cb)
+    for idx,case in enumerate(sorted_cb):
+      for idx2,othercase in enumerate(sorted_cb[idx:]):
         assert not case > othercase, (idx, idx2)
 
   def test_remove_spikes_larger_cb(self):
