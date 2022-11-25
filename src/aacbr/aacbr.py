@@ -208,8 +208,9 @@ class Aacbr:
                     not (different_outcomes(A, case)))
                    for case in cases)
   
-  def minimal(self, A, B, cases):
-    """Checks whether there is a case larger than A that attacks B.
+  def minimal(self, A, B):
+    """Checks whether there is a case larger than A that attacks B,
+    AND is strictly greater in the partial order.
     Assumes that A and B are in the casebase and their attackers are
     defined or being defined.
     """
@@ -218,13 +219,13 @@ class Aacbr:
       assert A in self.casebase_active_
       assert B in self.casebase_active_
     try:
-      attackers = self.attackers_of_[B]
+      greater_attackers = [case for case in self.attackers_of_[B] if B < case]
     except KeyError:
       raise(Exception(f"{B} is not in the casebase!"))
     except NameError as E:
       raise(E)
     # Should we fall back to the usual minimal test? Currently we do not.
-    return not any(((case < A) for case in attackers))
+    return not any(((case < A) for case in greater_attackers))
 
 
   # attack relation defined
@@ -243,7 +244,7 @@ class Aacbr:
     
     return (different_outcomes(A, B) and
             B <= A and
-            self.minimal(A, B, self.casebase_active_))
+            self.minimal(A, B))
 
   # unlabbled datapoint new_case
   @staticmethod
@@ -527,10 +528,14 @@ class Aacbr:
     assert to_keep == set(self.casebase_active_)
     non_attacking_cases = [case for case in self.casebase_active_
                            if self.attacked_by_[case] == []]
-    assert non_attacking_cases == [self.default_case]
+    # It is ok if the default attacks someone, it means there is an
+    # inconsistency at the minimal characterisation.
+    # The check here is whether there is no other attack, since that would be a spike.
+    assert set(non_attacking_cases).issubset([self.default_case]), \
+      f"Some in non_attacking_cases: {non_attacking_cases[:10]}"
     return clean_casebase
   
-  def _give_casebase_without_spikes(self, cases):
+  def _old_give_casebase_without_spikes(self, cases):
     """Gives casebase without "spikes", that is, without nodes that do not reach the default argument.
     This makes the comparison between cAACBR and AACBR much cleaner."""
     info("Preparing attack relations in the casebase (without spikes)")

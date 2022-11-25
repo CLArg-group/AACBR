@@ -157,12 +157,30 @@ class TestAacbr:
     # own interface to it.
     case1 = Case('1', {'a','b'}, outcome=0)
     case2 = Case('2', {'a','b'}, outcome=1)
-    cb = [case1, case2]
+    case3 = Case('3', {'a','b'}, outcome=0)
+    cb = [case1, case2, case3]
     clf = Aacbr().fit(cb)
     assert clf.past_case_attacks(case1, case2)
     assert clf.past_case_attacks(case2, case1)
     assert clf.inconsistent_attacks(case1, case2)
     assert clf.inconsistent_attacks(case2, case1)
+    assert set([case2]) == set(clf.attacked_by_[case1])
+    assert set([case2]) == set(clf.attacked_by_[case3])
+    assert set([case1,case3,clf.default_case]) == set(clf.attacked_by_[case2])
+
+  @pytest.mark.parametrize("remove_spikes", (False, True))
+  def test_inconsistent_with_default(self, remove_spikes):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', set(), outcome=1)
+    case2 = Case('2', {'a'}, outcome=1)
+    case3 = Case('3', {'a','b'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr(remove_spikes=remove_spikes).fit(cb)
+    assert clf.default_case == default
+    assert set(clf.attacked_by_[default]) == set([case1])
+    assert set(clf.attacked_by_[case1]) == set([default])
+    assert set(clf.attacked_by_[case2]) == set([default])
+    assert set(clf.attacked_by_[case3]) == set([case1,case2])
           
   def test_argumentation_framework(self):
     cb = self.example_cb
