@@ -219,7 +219,8 @@ class Aacbr:
       assert A in self.casebase_active_
       assert B in self.casebase_active_
     try:
-      greater_attackers = [case for case in self.attackers_of_[B] if B < case]
+      greater_attackers = [case for case in self.attackers_of_[B]
+                           if not B.factors == case.factors]
     except KeyError:
       raise(Exception(f"{B} is not in the casebase!"))
     except NameError as E:
@@ -525,14 +526,17 @@ class Aacbr:
       unchecked += [x for x in self.attackers_of_[case] if x not in verified]
         
     clean_casebase = self.give_casebase(list(to_keep))
-    assert to_keep == set(self.casebase_active_)
-    non_attacking_cases = [case for case in self.casebase_active_
-                           if self.attacked_by_[case] == []]
-    # It is ok if the default attacks someone, it means there is an
-    # inconsistency at the minimal characterisation.
-    # The check here is whether there is no other attack, since that would be a spike.
-    assert set(non_attacking_cases).issubset([self.default_case]), \
-      f"Some in non_attacking_cases: {non_attacking_cases[:10]}"
+    
+    SAFETY_CHECK=False
+    if SAFETY_CHECK:
+      assert to_keep == set(self.casebase_active_)
+      non_attacking_cases = [case for case in self.casebase_active_
+                             if self.attacked_by_[case] == []]
+      # It is ok if the default attacks someone, it means there is an
+      # inconsistency at the minimal characterisation.
+      # The check here is whether there is no other attack, since that would be a spike.
+      assert set(non_attacking_cases).issubset([self.default_case]), \
+        f"Some in non_attacking_cases: {non_attacking_cases[:10]}"
     return clean_casebase
   
   def _old_give_casebase_without_spikes(self, cases):
