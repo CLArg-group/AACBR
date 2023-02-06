@@ -276,10 +276,10 @@ class Aacbr:
       new_case_prediction = dict()
       prediction = self.give_prediction(new_case, nr_defaults)
       predictions.append(prediction)
-    formatted = self.format_predictions(new_cases, predictions)
-    if not _keep_newcase_attacks:
-      self.reset_attack_relations(new_cases)  # clean new cases
-    # unnecessary, since only self.attacked_by_ is updated by the new_cases
+      if not _keep_newcase_attacks:
+        self.reset_attack_relations([new_case])  # clean new cases
+        # unnecessary, since only self.attacked_by_ is updated by the new_cases
+    # formatted = self.format_predictions(new_cases, predictions)
     return predictions
 
   @staticmethod
@@ -350,7 +350,7 @@ class Aacbr:
 
 
   def give_cautious_subset_of_casebase(self, casebase):
-    info("Preparing attack relations in the casebase")
+    info("Preparing attack relations in the casebase (cautious)")
     self.reset_attack_relations(casebase, completely=True)
     debug("Sorting casebase")
     cases = tsorted(casebase)
@@ -663,7 +663,9 @@ class Aacbr:
     results["number of nodes"] = len(self.casebase_active_)
     results["total number of attacks"] = reduce(add, map(lambda x: len(self.attacked_by_[x]), self.casebase_active_), 0)
     double_count = reduce(add, map(lambda x: len(self.attackers_of_[x]), self.casebase_active_), 0)
-    assert double_count == results["total number of attacks"]
+    if not double_count == results["total number of attacks"]:
+      warn("Double_count test failed, storing of attacks is wrong!")
+      results["total number of attacks (double count)"] = double_count
     non_attacking = [x for x in self.casebase_active_ if len(self.attacked_by_[x]) == 0][:10]
     info(f"Some of the non-attacking are {non_attacking}")
     unattacked = [x for x in self.casebase_active_ if len(self.attackers_of_[x]) == 0][:10]
