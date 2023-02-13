@@ -181,7 +181,22 @@ class TestAacbr:
     assert set(clf.attacked_by_[case1]) == set([default])
     assert set(clf.attacked_by_[case2]) == set([default])
     assert set(clf.attacked_by_[case3]) == set([case1,case2])
-          
+    
+  # TODO: make default not attack anyone. For now, intended behaviour.
+  @pytest.mark.xfail(reason="Current bug: inconsistent with default not added.")
+  def test_inconsistent_with_default_cautious(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', set(), outcome=1)
+    case2 = Case('2', {'a'}, outcome=1)
+    case3 = Case('3', {'a','b'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr(cautious=True).fit(cb)
+    assert clf.default_case == default
+    assert set(clf.attacked_by_[default]) == set([case1])
+    assert set(clf.attacked_by_[case1]) == set([default])
+    assert set(clf.attacked_by_[case2]) == set([default])
+    assert set(clf.attacked_by_[case3]) == set([case1,case2])
+    
   def test_argumentation_framework(self):
     cb = self.example_cb
     # newcase = self.case3
