@@ -666,9 +666,9 @@ class Aacbr:
     if not double_count == results["total number of attacks"]:
       warn("Double_count test failed, storing of attacks is wrong!")
       results["total number of attacks (double count)"] = double_count
-    non_attacking = [x for x in self.casebase_active_ if len(self.attacked_by_[x]) == 0][:10]
+    non_attacking = [str(x) for x in self.casebase_active_ if len(self.attacked_by_[x]) == 0][:10]
     info(f"Some of the non-attacking are {non_attacking}")
-    unattacked = [x for x in self.casebase_active_ if len(self.attackers_of_[x]) == 0][:10]
+    unattacked = [str(x) for x in self.casebase_active_ if len(self.attackers_of_[x]) == 0][:10]
     info(f"Some of the unattacked are {unattacked}")
     results["distribution of attacks (out-going edges)"] = Counter((len(self.attacked_by_[case]) for case in self.casebase_active_))
     results["number of inconsistent cases"] = [self.incoherent_case_in_casebase(case) for case in self.casebase_active_].count(True)
