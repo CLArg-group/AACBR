@@ -126,7 +126,7 @@ class Aacbr:
       # command 2: save attacks state
     else:
       if self.remove_spikes:
-        warn("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
+        warning("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
       self.casebase_active_ = []
       self.casebase_active_ = self.give_cautious_subset_of_casebase(cb_input)
       # self.give_casebase(self.casebase_active_)
@@ -140,7 +140,7 @@ class Aacbr:
       self.default_case = default_in_input
       if default_in_input.outcome is not None and \
          self.outcome_def != default_in_input.outcome:
-        info(f"Overriding {self}.outcome_def of {self.outcome_def} with default_case outcome {default_in_input.outcome}")
+        warn(f"Overriding {self}.outcome_def of {self.outcome_def} with default_case outcome {default_in_input.outcome}")
         aux = self.outcome_def
         self.outcome_def = default_in_input.outcome
         self.outcome_nondef = aux
@@ -242,10 +242,12 @@ class Aacbr:
     if SAFETY_CHECK:
       if not all(x in self.casebase_active_ for x in (A,B)):
         raise(Exception(f"Arguments {(A,B)} are not both in the active casebase."))
-    
-    return (different_outcomes(A, B) and
-            B <= A and
-            self.minimal(A, B))
+    if A == self.default_case:
+      return False
+    else:
+      return (different_outcomes(A, B) and
+              B <= A and
+              self.minimal(A, B))
 
   # unlabbled datapoint new_case
   @staticmethod
@@ -253,7 +255,7 @@ class Aacbr:
     return not target_case.factors <= new_case.factors
 
   # noisy points
-  def inconsistent_attacks(self, A, B):
+  def inconsistent_pair(self, A, B):
     return different_outcomes(A, B) and B.factors == A.factors
 
   def predict(self, new_cases, _keep_newcase_attacks=False):
@@ -353,24 +355,48 @@ class Aacbr:
     info("Preparing attack relations in the casebase (cautious)")
     self.reset_attack_relations(casebase, completely=True)
     debug("Sorting casebase")
-    cases = tsorted(casebase)
+    default = self.default_case
+    casebase_without_default = [case for case in casebase if not case == default]
+    cases_without_default = tsorted(casebase_without_default)
+    ## guaranteeing default in the beginning,
+    ## in case there is a case with minimal factorset
     debug("Sorted")
     
-    assert cases[0] == self.default_case
-    self.casebase_active_ = [cases[0]]
+    self.casebase_active_ = [default]
     # non-parallel implementation, one by one
-    for case in cases[1:]:
+    stratum = []
+    for next_case in cases_without_default:
+      debug(f"Next case is {next_case}. Stratum is {stratum}")
+      if any(case < next_case for case in stratum):        
+        ### idea: if there is a smaller scase, then case is not minimal
+        ### so it should be part of another stratum
+        # debug("stratum closed, processing it")
+        self._process_stratum(stratum)
+        stratum = [] # new stratum
+        debug("beginning new stratum")
+      stratum = stratum + [next_case]
+    else:
+      debug(f"Processing last stratum: {stratum}")
+      self._process_stratum(stratum)
+    return self.casebase_active_
+  
+  def _select_from_stratum(self, stratum):
+    to_add = []
+    for case in stratum:
       predicted_outcome = self.predict([case])[0]
       if case.outcome != predicted_outcome:
-        if not self.incoherent_case_in_casebase(case):
-          # breakpoint()
-          self._simple_add(case)
-        # check incoherence
-        # if not, simple add
-    return self.casebase_active_
-      
+        to_add = to_add + [case]
+    return to_add
+
+  def _process_stratum(self, stratum):
+    to_add = self._select_from_stratum(stratum)
+    for case in to_add:
+      debug(f"simple_add case: {case.id}")
+      self._simple_add(case)
+    pass
+    
   def incoherent_case_in_casebase(self, case):
-    return any(self.inconsistent_attacks(case, anothercase)
+    return any(self.inconsistent_pair(case, anothercase)
                for anothercase in self.casebase_active_)
   
   def _simple_add(self, newcase):
@@ -392,7 +418,7 @@ class Aacbr:
     pass
     
   # cautious casebase computed + resetting the attack relations
-  def _give_cautious_subset_of_casebase(self, casebase):
+  def _old_give_cautious_subset_of_casebase(self, casebase):
     self.reset_attack_relations(casebase) # gpp
     ordered_casebase = self.topological_sort(casebase)
     info("Creating cautious casebase")
@@ -425,7 +451,7 @@ class Aacbr:
         if stratum[index].outcome != predicted_outcomes[index]:
           inconsistent = False
           for case in current_casebase:
-            if base_clf.inconsistent_attacks(stratum[index], case):
+            if base_clf.inconsistent_pair(stratum[index], case):
               print(f"Incoherence found between:\n{stratum[index]} and {case}")
               inconsistent = True
               pass
@@ -493,19 +519,26 @@ class Aacbr:
     info("Preparing attack relations in the casebase")
     self.reset_attack_relations(cases, completely=True)
     debug("Sorting casebase")
-    casebase = tsorted(cases)
+    default = self.default_case
+    cases_without_default = tsorted([case for case in cases if not case == default])
+    casebase = [default] + list(cases_without_default)
+    ## guaranteeing default in the beginning,
+    ## in case there is a case with minimal factorset
     debug("Sorted")
     self.casebase_active_ = casebase
     # Since cases are sorted, no case that comes before than attack
     # one that comes later.
     for idx,case in enumerate(casebase):
       for othercase in casebase[idx:]:
+        debug(f"Considering pair:\n\t - case {case}\n\t - othercase {othercase}")
         if self.past_case_attacks(othercase, case):
+          debug(f"othercase attacks case")
           self.attacked_by_[othercase].append(case)
           self.attackers_of_[case].append(othercase)
-          if case.factors == othercase.factors:
+          if case.factors == othercase.factors and case != self.default_case:            
             # then they are the an incoherent pair, so we add directly
-            # the attacks
+            # the attacks. default case does not attack.
+            debug("case attacks othercase")
             self.attacked_by_[case].append(othercase)
             self.attackers_of_[othercase].append(case)
 
@@ -651,7 +684,7 @@ class Aacbr:
     for candidate_case in cases:
       inconsistent = False
       for case in casebase:
-        if self.inconsistent_attacks(candidate_case, case):
+        if self.inconsistent_pair(candidate_case, case):
           inconsistent = True
       if not inconsistent:
         casebase.append(candidate_case)
