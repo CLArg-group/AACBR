@@ -8,12 +8,13 @@ test_speed:
 
 test_development:
 	cd src ; pipenv run pytest \
-	--log-cli-level DEBUG \
+	--log-cli-level INFO \
 	-x \
 	-rXxs \
 	-m "not speed" ../tests/
 
 # --log-cli-level INFO \
+# --log-cli-level DEBUG \
 # -k "test_inconsistent_with_default"
 # -rxXs -m "not speed" ../tests/
 

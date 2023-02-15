@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.5.0]
+  Breaking changes.
+  * [CHANGED] Default case now does NOT attack cases with same characterisation but different outcome.
+  * [FIXED] Cases incoherent with default cases were not being added in cautious aacbr.
+  * [FIXED] Issues with cases with same characterisation as default.
+
 ## [0.4.2]
   * [FIXED] Bugs with sorting fixed, solving issues with remove_spikes not working properly, among others.
 
