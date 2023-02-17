@@ -197,6 +197,36 @@ class TestAacbr:
     assert set(clf.attacked_by_[case2]) == set([])
     assert set(clf.attacked_by_[case3]) == set([case1])
     assert set(clf.casebase_active_) == set([default, case1,case3])
+
+  def test_depth_calculation(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a','a2'}, outcome=0)
+    case4 = Case('4', {'a','a2','a3'}, outcome=1)
+    case5 = Case('5', {'a','a2','a3','b'}, outcome=0)
+    case6 = Case('6', {'d'}, outcome=0)
+    cb = [default, case1, case2, case3, case4, case5, case6]
+    clf = Aacbr(cautious=False, remove_spikes=True).fit(cb)
+    assert clf.default_case == default
+    expected_depths = {
+      default: 0,
+      case1: 1,
+      case2: 1,
+      case3: 2,
+      case4: 3,
+      case5: 2,
+      # case6: None
+      }
+    expected_stats = {"maximum": 3,
+                      "average": round(1.5, ndigits=4),
+                      "stdev (population)": round(0.95742, ndigits=4)}
+    calculated = clf._framework_depth_statistics()
+    stats = ["maximum", "average", "stdev (population)"]
+    assert clf.get_casebase_depths() == expected_depths
+    for stat in stats:
+      assert pytest.approx(calculated[stat], 0.001) == expected_stats[stat]
+    
     
   def test_argumentation_framework(self):
     cb = self.example_cb

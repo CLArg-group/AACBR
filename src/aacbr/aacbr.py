@@ -706,15 +706,17 @@ class Aacbr:
     info(f"Some of the unattacked are {unattacked}")
     results["distribution of attacks (out-going edges)"] = Counter((len(self.attacked_by_[case]) for case in self.casebase_active_))
     results["number of inconsistent cases"] = [self.incoherent_case_in_casebase(case) for case in self.casebase_active_].count(True)
-    # results["maximum depth"] = None
+    results["depth"] = self._framework_depth_statistics()
     return results
 
   def _framework_depth_statistics(self):
     """Filters "None" results."""
     depths = self.get_casebase_depths()
-    results = {"maximum": None,
-               "average": None,
-               "stdev (population)": None}
+    depths = [d for d in depths.values() if d is not None]
+    results = {"maximum": max(depths),
+               "average": mean(depths),
+               "stdev (population)": pstdev(depths)}
+    return results
     
 
   def get_casebase_depths(self):
