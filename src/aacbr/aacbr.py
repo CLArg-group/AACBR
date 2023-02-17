@@ -17,6 +17,7 @@ from logging import debug, info, warning, error
 from numbers import Real
 from collections.abc import Sequence
 from graphlib import TopologicalSorter
+from statistics import mean, pstdev
 
 from .argumentation import compute_grounded
 from .cases import Case, different_outcomes
@@ -708,6 +709,26 @@ class Aacbr:
     # results["maximum depth"] = None
     return results
 
+  def _framework_depth_statistics(self):
+    """Filters "None" results."""
+    depths = self.get_casebase_depths()
+    results = {"maximum": None,
+               "average": None,
+               "stdev (population)": None}
+    
+
+  def get_casebase_depths(self):
+    """Distance to default. If no path from default to it, None."""
+    depth = {c:None for c in self.casebase_active_}
+    to_explore = deque([(self.default_case,-1)])
+    while len(to_explore) != 0:
+      current, previous_depth = to_explore.pop()
+      current_depth = previous_depth + 1
+      depth[current] = current_depth
+      for next_case in self.attackers_of_[current]:
+        if depth[next_case] is None:
+          to_explore.appendleft((next_case, current_depth))
+    return depth
   
 ### Untested code below (legacy, kept "hidden" via underscore name)  
   def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):
