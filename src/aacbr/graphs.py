@@ -18,6 +18,7 @@ def drawGraph(graph, gname: str, output_dir = None, engine = "networkx",
    if not os.path.isdir(graph_dir):
       os.makedirs(graph_dir)
    graph_name = os.path.join(graph_dir, '{}.png'.format(gname))
+   
    match node_formatter:
       case function if callable(function):
          format_node = function
@@ -31,6 +32,7 @@ def drawGraph(graph, gname: str, output_dir = None, engine = "networkx",
          format_node = str
       case _:
          raise(RuntimeError(f"Unsupported {node_formatter=}"))
+      
    match engine:
       case "networkx":
          if node_formatter is not None:
