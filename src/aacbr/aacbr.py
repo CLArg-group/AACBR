@@ -337,6 +337,8 @@ class Aacbr:
     '''Returns an abstract argumentation framework (AAF) given a
     casebase and, optionally, a new case.
     The AAF is returned as a pair (arguments, attacks).'''
+    if new_case is not None and type(new_case) is not Case:
+      raise(TypeError(f"{new_case=} is not of type {Case}"))
     casebase = self.casebase_active_
     arguments = set()
     attacks = set()
@@ -664,7 +666,7 @@ class Aacbr:
       raise Exception(f"This graph is not a dag!\nThe remaining nodes are {remaining_nodes}.\nThis contains a cycle: {explored}")
     return sorted_nodes
 
-  def draw_graph(self, new_case=None, graph_name="graph", output_dir=None):
+  def draw_graph(self, output_dir=None, new_case=None, graph_name="graph"):
     arguments, attacks = self.give_argumentation_framework(new_case)
     graph = giveGraph(arguments, attacks)
     # strange, with commented out code below this draws a path from an
@@ -718,7 +720,6 @@ class Aacbr:
                "stdev (population)": pstdev(depths)}
     return results
     
-
   def get_casebase_depths(self):
     """Distance to default. If no path from default to it, None."""
     depth = {c:None for c in self.casebase_active_}

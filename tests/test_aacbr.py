@@ -1,9 +1,12 @@
 ### Tests the model/classifier itself, predictions, argumentation framework, etc
 import pytest
+import pickle
 from pathlib import Path
 from itertools import product
 from collections.abc import Sequence
 from random import random, randint, shuffle
+
+from logging import debug, info, warning, error
 
 @pytest.fixture(autouse=True)
 def test_import():
@@ -553,8 +556,37 @@ class TestAacbr:
     clf = Aacbr().fit(cb)
     clf.draw_graph(output_dir = tmp_path)
     output_path = tmp_path / "graph.png"
+    info(f"Graph in {output_path=}")
     assert output_path.exists()
-    assert output_path.is_file()    
+    assert output_path.is_file()
+    
+  def test_graph_drawing_invalid_input(self, tmp_path):
+    "Tests wrong arguments for graph drawing"
+    cb = self.example_cb2
+    clf = Aacbr().fit(cb)
+    with pytest.raises(Exception) as exc_info:
+      clf.draw_graph(new_case=tmp_path)
+      # info(f"Graph in {output_path=}")
+      # assert output_path.exists()
+      # assert output_path.is_file()
+    info(f"Successfully raised exception: {exc_info.value}")
+    clf.draw_graph(tmp_path)
+    output_path = tmp_path / "graph.png"
+    assert output_path.exists()
+    assert output_path.is_file()
+    
+  def test_if_pickable(self, tmp_path):
+    "Checks if aacbr is pickable."
+    cb = self.example_cb2
+    clf = Aacbr().fit(cb)
+    output_path = tmp_path / "aacbr_object"
+    output_path.write_bytes(pickle.dumps(clf))
+    info(f"Pickle in {output_path=}")
+    assert output_path.exists()
+    assert output_path.is_file()
+    loaded = pickle.loads(output_path.read_bytes())
+    assert set(clf.casebase_active_) == set(loaded.casebase_active_)
+    
 
 class OrderedSequence(tuple):    
   def __sub__(self, other):
