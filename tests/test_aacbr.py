@@ -589,6 +589,25 @@ class TestAacbr:
    assert output_path.exists()
    assert output_path.is_file()
    
+  @pytest.mark.parametrize("node_formatter",
+                           [None, "full",
+                            "id", "factors",
+                            lambda x: str(x),
+                            lambda x: str(x.outcome),
+                            lambda x: str(x.id),
+                            lambda x: str(x.factors),
+                            lambda x: str(x).upper()])
+  def test_graph_drawing_node_formatters(self, tmp_path, node_formatter):
+   """Checks if a graph is created using different node_formatters.
+   """
+   cb = self.example_cb2
+   clf = Aacbr().fit(cb)
+   clf.draw_graph(output_dir=tmp_path, engine="graphviz",
+                  node_formatter=node_formatter)
+   output_path = tmp_path / "graph.png"
+   info(f"Graph in {output_path=}")
+   assert output_path.exists()
+   assert output_path.is_file()
     
   def test_if_pickable(self, tmp_path):
     "Checks if aacbr is pickable."

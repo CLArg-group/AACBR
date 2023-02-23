@@ -667,7 +667,7 @@ class Aacbr:
     return sorted_nodes
 
   def draw_graph(self, output_dir=None, new_case=None, graph_name="graph",
-                 engine="networkx"):
+                 engine="networkx", node_formatter=None):
     arguments, attacks = self.give_argumentation_framework(new_case)
     match engine:
       case "networkx":
@@ -683,7 +683,8 @@ class Aacbr:
     # path = getPath(graph, [sink])
     # directed_path = giveGraph(path)
     # drawGraph(directed_path, graph_name, output_dir)
-    drawGraph(graph, graph_name, output_dir, engine=engine)
+    drawGraph(graph, graph_name, output_dir, engine=engine,
+              node_formatter=node_formatter)
     pass  
   
   def give_coherent_dataset(self, cases):
