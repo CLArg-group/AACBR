@@ -6,12 +6,20 @@ test_speed:
 	--benchmark-compare=slowrun \
 	../tests/
 
+# test_development:
+# 	cd src ; pipenv run pytest \
+# 	--log-cli-level INFO \
+# 	-x \
+# 	-rXxs \
+# 	-m "not speed" ../tests/
+
 test_development:
 	cd src ; pipenv run pytest \
 	--log-cli-level INFO \
 	-x \
 	-rXxs \
-	-m "not speed" ../tests/
+	-k draw ../tests/
+
 
 # --log-cli-level INFO \
 # --log-cli-level DEBUG \

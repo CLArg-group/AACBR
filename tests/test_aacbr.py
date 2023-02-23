@@ -575,6 +575,21 @@ class TestAacbr:
     assert output_path.exists()
     assert output_path.is_file()
     
+  
+  @pytest.mark.parametrize("engine", ["networkx", "graphviz"])
+  def test_graph_drawing_engines(self, tmp_path, engine):
+   """Checks if a graph is created using two different engines:
+    networkx and graphviz.
+   """
+   cb = self.example_cb2
+   clf = Aacbr().fit(cb)
+   clf.draw_graph(output_dir = tmp_path, engine=engine)
+   output_path = tmp_path / "graph.png"
+   info(f"Graph in {output_path=}")
+   assert output_path.exists()
+   assert output_path.is_file()
+   
+    
   def test_if_pickable(self, tmp_path):
     "Checks if aacbr is pickable."
     cb = self.example_cb2

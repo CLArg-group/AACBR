@@ -666,9 +666,16 @@ class Aacbr:
       raise Exception(f"This graph is not a dag!\nThe remaining nodes are {remaining_nodes}.\nThis contains a cycle: {explored}")
     return sorted_nodes
 
-  def draw_graph(self, output_dir=None, new_case=None, graph_name="graph"):
+  def draw_graph(self, output_dir=None, new_case=None, graph_name="graph",
+                 engine="networkx"):
     arguments, attacks = self.give_argumentation_framework(new_case)
-    graph = giveGraph(arguments, attacks)
+    match engine:
+      case "networkx":
+        graph = giveGraph(arguments, attacks)
+      case "graphviz":
+        graph = arguments, attacks
+      case _:
+        raise(Exception(f"Unsupported {engine=}"))
     # strange, with commented out code below this draws a path from an
     # arbitrary leaf to the default
     # unclear why this was the implementation
@@ -676,7 +683,7 @@ class Aacbr:
     # path = getPath(graph, [sink])
     # directed_path = giveGraph(path)
     # drawGraph(directed_path, graph_name, output_dir)
-    drawGraph(graph, graph_name, output_dir)
+    drawGraph(graph, graph_name, output_dir, engine=engine)
     pass  
   
   def give_coherent_dataset(self, cases):
