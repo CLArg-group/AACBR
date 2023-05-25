@@ -7,7 +7,7 @@ verify_ssl = true
 pytest = "*"
 ipython = "*"
 aacbr = {editable = true, path = "."}
-sklearn = "*"
+scikit-learn = "*"
 pytest-benchmark = "*"
 
 [packages]

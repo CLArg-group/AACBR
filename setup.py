@@ -4,8 +4,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 requires = [
-    "matplotlib==3.5.1",
-    "networkx==2.6.3"
+    "matplotlib>=3.5.1",
+    "networkx>=2.6.3",
+    "graphviz>=0.20.1"
     ]
     
 setuptools.setup(
@@ -27,6 +28,6 @@ setuptools.setup(
     ],    
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
-    python_requires=">=3.9",
+    python_requires=">=3.10",
     install_requires=requires
 )
