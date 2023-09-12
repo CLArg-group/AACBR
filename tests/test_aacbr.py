@@ -811,8 +811,56 @@ class TestDisputeTrees:
     pass
   
   # @pytest.mark.xfail(reason="Currently not implemented.")
-  # def test_minimality(self):
-  #   pass
+  def test_minimality(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'b', 'd'}, outcome=0)
+    case5 = Case('5', {'b', 'd', 'e'}, outcome=1)
+    case6 = Case('6', {'b', 'd', 'e', 'f'}, outcome=0)
+    case7 = Case('7', {'b', 'd', 'e', 'f', 'g'}, outcome=1)
+    case8 = Case('8', {'b', 'd', 'e', 'f', 'g', 'h'}, outcome=0)
+    cb = [default, case1, case2, case4, case5, case6, case7, case8, case3]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'a', 'b', 'c', 'd'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+    
+    adt = clf.adt_explain(test_case, mode="minimal")
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    assert case4 not in adt.get_cases()
+    expected_cases = set([default, test_case, case1, case2, case3])
+    assert expected_cases == set(adt.get_cases())
+                                   
+  def test_minimality2(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'b', 'd'}, outcome=0)
+    case5 = Case('5', {'b', 'd', 'e'}, outcome=1)
+    case6 = Case('6', {'b', 'd', 'e', 'f'}, outcome=0)
+    case7 = Case('7', {'b', 'd', 'e', 'f', 'g'}, outcome=1)
+    case8 = Case('8', {'b', 'd', 'e', 'f', 'g', 'h'}, outcome=0)
+    cb = [default, case1, case2, case4, case5, case6, case7, case8, case3]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'a', 'b', 'c', 'd', 'e', 'f'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+
+    adt = clf.adt_explain(test_case, mode="minimal")
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    assert case4 not in adt.get_cases()
+    expected_cases = set([default, test_case, case1, case2, case3])
+    assert expected_cases == set(adt.get_cases())
+    pass
     
 class OrderedSequence(tuple):    
   def __sub__(self, other):
