@@ -636,6 +636,7 @@ class TestDisputeTrees:
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
     assert type(adt) is ArbitratedDisputeTree
+    info(f"{adt.nodes=}\n{adt.edges=}")
     pass
   
   def test_incoherent_af_dispute_tree(self):
@@ -645,6 +646,7 @@ class TestDisputeTrees:
     case3 = Case('3', {'a', 'b'}, outcome=1)
     cb = [default, case1, case2, case3]
     clf = Aacbr()
+    clf.fit(cb)
     test_data = [Case('new', {'a', 'b', 'c'})]
     expected_output = [1]
     predicted_output = clf.predict(test_data)
@@ -660,11 +662,13 @@ class TestDisputeTrees:
     case4 = Case('4', {'a', 'b', 'c'}, outcome=0)
     cb = [default, case1, case2, case3, case4]
     clf = Aacbr()
+    clf.fit(cb)
     test_data = [Case('new', {'a', 'b', 'c'})]
     expected_output = [0]
     predicted_output = clf.predict(test_data)
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
+    info(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
 
   def test_acceptable_incoherent_af2(self):
@@ -674,11 +678,13 @@ class TestDisputeTrees:
     case3 = Case('3', {'a', 'b'}, outcome=0)
     cb = [default, case1, case2, case3]
     clf = Aacbr()
+    clf.fit(cb)
     test_data = [Case('new', {'a', 'b', 'c'})]
     expected_output = [0]
     predicted_output = clf.predict(test_data)
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
+    info(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
 
     
