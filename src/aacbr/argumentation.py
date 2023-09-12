@@ -91,18 +91,23 @@ def _compute_adt(clf, new_case, grounded, mode="arbitrary"):
 def _cycle_check(explored, to_explore, adt):
   for node in to_explore:
     if node in explored:
-      return Exception(f"Unexpected error: cycle longer than 2 nodes found.\n{node=} was added, but it was already explored.")
+      return Exception(f"""Unexpected error: cycle longer than 2 nodes
+      found.\n{node=} was added, but it was already explored.""")
 
 def _create_root_node(adt, clf, grounded):
   if clf.default_case in grounded['undec']:
-    warn(f"ArbitratedDisputeTree for {clf} was requested, but this is impossible, since the grounded labelling for the default case {clf.default_case} is UNDEC (undecided). This implies there is a cycle in {clf}.")
+    warn(f"""ArbitratedDisputeTree for {clf} was requested, but this is
+    impossible, since the grounded labelling for the default case
+    {clf.default_case} is UNDEC (undecided). This implies there is a
+    cycle in {clf}.""")
     return None
   elif clf.default_case in grounded['in']:
     root_node = (adt.win_label, clf.default_case)
   elif clf.default_case in grounded['out']:
     root_node = (adt.lose_label, clf.default_case)
   else:
-    raise Exception(f"Unexpected error: {clf.default_case=} is not labelled by the grounded labelling.")
+    raise Exception(f"""Unexpected error: {clf.default_case=} is not
+    labelled by the grounded labelling.""")
   return root_node
 
 def _explore_node(node, adt, clf, new_case, grounded_label_of):
@@ -119,7 +124,7 @@ def _explore_node(node, adt, clf, new_case, grounded_label_of):
       ### this is also not a problem elsewhere since no case attacks the newcase.
       attacker = new_case
     elif len(clf.attackers_of_[node_case]) == 0:
-      raise(Exception(f"Unexpected error: {node=} has no attackers in {clf}, but it is labelled as losing. Make sure {clf} was correctly generated."))
+      raise(Exception(f"""Unexpected error: {node=} has no attackers in {clf}, but it is labelled as losing. Make sure {clf} was correctly generated."""))
     else:
       # an arbitrary attacker
       # the restriction is that it cannot be an incoherent attacker, otherwise it would create a loop
