@@ -1,4 +1,5 @@
 import copy
+import operator
 from warnings import warn
 
 def compute_grounded(args: set, att: set):
@@ -44,7 +45,7 @@ class ArbitratedDisputeTree:
   """
   - mode=arbitrary: returns an arbitrated dispute tree, with no
     guarantees except that it is one.
-  - mode=minimal: only returns a minimal arbitrated dispute tree, in
+  - mode=minimal: returns a minimal arbitrated dispute tree, in
     number of nodes.
   - mode=all: returns all possible arbitrated dispute trees.
   
@@ -101,6 +102,8 @@ class ArbitratedDisputeTree:
     return tuple(node[1] for node in self.nodes)
   
   def _compute_adt(self, grounded, root_node, mode="arbitrary"):
+    if mode == "minimal":
+      self._calculate_ranks()
     self.nodes.append(root_node)
     grounded_label_of = _get_node_labelling_dict(grounded)
     stack = [root_node]
@@ -161,6 +164,46 @@ class ArbitratedDisputeTree:
     self.nodes.extend(children)
     self.edges.extend((child, node) for child in children)
     return children
+  
+  def _calculate_ranks(self):
+    """Returns a dict containing the rank of each node.
+
+    This is used for building a minimal ADT.
+    
+    The rank is calculated as follows:
+    If a node is a leaf (unattacked), the rank is 0.
+    Else, if a node is 
+    """
+    # Not hard to implement changing criterion to depth or width.
+    # Here implemented as number of nodes in subtree.
+    # Essentially a form of max-min (for depth)
+    # or of min-sum (tropical geometry) (for number of nodes).
+    # This is basically based on semirings. :)
+    criterion = "number_of_nodes"
+    if criterion == "number_of_nodes":
+      add = min
+      prod = operator.add
+      initial_value = 1
+    clf = self.clf
+    cb = clf.casebase_active_
+    new_case = clf.new_case
+    unattacked = tuple(c for c in cb if
+                       c not in clf.attacked_by_[new_case] and
+                       len(clf.attackers_of_[c]) == 0)
+    ranks = {c:initial_value for c in unattacked}
+    stack = list(unattacked)
+    while stack != []:
+      current = stack.pop()
+      to_add = self._get_rank_of_attacked_by(current, ranks, add, prod)
+      stack.extend(to_add)
+    return ranks
+
+  def _get_rank_of_attacked_by(self, current, ranks, add, prod):
+    attacked = self.clf.attacked_by_[current]
+    rank = ranks[current]+1
+    rank = ...
+    raise(Exception("Not yet implemented"))
+    
 
 def _get_node_labelling_dict(labels):
   """Receives a dict of the form
