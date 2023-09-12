@@ -123,7 +123,8 @@ def _explore_node(node, adt, clf, new_case, grounded):
       # an arbitrary attacker
       # the restriction is that it cannot be an incoherent attacker, otherwise it would create a loop
       for attacker in clf.attackers_of_[node_case]:
-        if not clf.inconsistent_pair(node_case, attacker):
+        if not clf.inconsistent_pair(node_case, attacker) \
+           and (attacker in grounded['in']):
           # acceptable attacker found
           break
         else:

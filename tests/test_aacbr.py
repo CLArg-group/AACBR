@@ -636,7 +636,7 @@ class TestDisputeTrees:
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
     assert type(adt) is ArbitratedDisputeTree
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     pass
   
   def test_incoherent_af_dispute_tree(self):
@@ -668,7 +668,7 @@ class TestDisputeTrees:
     predicted_output = clf.predict(test_data)
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
 
   def test_acceptable_incoherent_af2(self):
@@ -684,7 +684,7 @@ class TestDisputeTrees:
     predicted_output = clf.predict(test_data)
     assert expected_output == predicted_output
     adt = clf.adt_explain(test_data[0])
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
 
   def test_branch_selection(self):
@@ -706,7 +706,7 @@ class TestDisputeTrees:
     assert expected_output == predicted_output
     
     adt = clf.adt_explain(test_case)
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
     assert case4 not in adt.get_winning_cases()
     assert case4 not in adt.get_losing_cases()
@@ -775,7 +775,7 @@ class TestDisputeTrees:
     assert expected_output == predicted_output
     
     adt = clf.adt_explain(test_case)
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
     expected_winning = set([default, caseb3,
                             caseb313extra, test_case])
@@ -803,16 +803,16 @@ class TestDisputeTrees:
     assert expected_output == predicted_output
     
     adt = clf.adt_explain(test_case)
-    info(f"{adt.nodes=}\n{adt.edges=}")
+    debug(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
     lower_priority = [case6, case7, case8]    
     for case in lower_priority:
       assert len(adt.get_nodes_labelled_by(case)) == 0
     pass
   
-  @pytest.mark.xfail(reason="Currently not implemented.")
-  def test_minimality(self):
-    pass
+  # @pytest.mark.xfail(reason="Currently not implemented.")
+  # def test_minimality(self):
+  #   pass
     
 class OrderedSequence(tuple):    
   def __sub__(self, other):
