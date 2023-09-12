@@ -757,7 +757,8 @@ class Aacbr:
       raise(Exception(f"{mode=} not implemented! Use one of {accepted_modes=}"))
     
     if type(new_case) == Case:
-      new_case = Case(f"new{new_case.id}", new_case.factors, outcome=None)
+      # new_case = Case(f"new{new_case.id}", new_case.factors, outcome=None)
+      new_case = new_case
     else:
       new_case = Case(f"new_case", new_case)
 

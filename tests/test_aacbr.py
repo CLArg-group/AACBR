@@ -687,6 +687,132 @@ class TestDisputeTrees:
     info(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
 
+  def test_branch_selection(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'b', 'd'}, outcome=0)
+    case5 = Case('5', {'b', 'd', 'e'}, outcome=1)
+    case6 = Case('6', {'b', 'd', 'e', 'f'}, outcome=0)
+    case7 = Case('7', {'b', 'd', 'e', 'f', 'g'}, outcome=1)
+    case8 = Case('8', {'b', 'd', 'e', 'f', 'g', 'h'}, outcome=0)
+    cb = [default, case1, case2, case4, case5, case6, case7, case8, case3]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'a', 'b', 'c'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+    
+    adt = clf.adt_explain(test_case)
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    assert case4 not in adt.get_winning_cases()
+    assert case4 not in adt.get_losing_cases()
+    pass
+
+  def test_branch_selection2(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'c'}, outcome=1)
+    othercases1 = ([
+      Case('a1', {'a', 'a1'}, outcome=0),
+      Case('a2', {'a', 'a2'}, outcome=0),
+      Case('a3', {'a', 'a3'}, outcome=0),
+      Case('b1', {'b', 'b1'}, outcome=0),
+      Case('b2', {'b', 'b2'}, outcome=0),
+      ])
+    caseb3 = Case('b3', {'b', 'b3'}, outcome=0)
+    othercases2 = ([
+      Case('c1', {'c', 'c1'}, outcome=0),
+      Case('c2', {'c', 'c2'}, outcome=0),
+      Case('c3', {'c', 'c3'}, outcome=0),
+      Case('a11', {'a', 'a1', 'a11'}, outcome=1),
+      Case('a11', {'a', 'a1', 'a12'}, outcome=1),
+      Case('a11', {'a', 'a1', 'a13'}, outcome=1),
+      Case('a224', {'a', 'a2', 'a24'}, outcome=1),
+      Case('a225', {'a', 'a2', 'a25'}, outcome=1),
+      Case('a226', {'a', 'a2', 'a26'}, outcome=1),
+      Case('a37', {'a', 'a3', 'a37'}, outcome=1),
+      Case('a38', {'a', 'a3', 'a38'}, outcome=1),
+      Case('a39', {'a', 'a3', 'a39'}, outcome=1),
+      Case('b110', {'b', 'b1', 'b110'}, outcome=1),
+      Case('b111', {'b', 'b1', 'b111'}, outcome=1),
+      Case('b112', {'b', 'b1', 'b112'}, outcome=1),
+      Case('b213', {'b', 'b2', 'b213'}, outcome=1),
+      Case('b214', {'b', 'b2', 'b214'}, outcome=1),
+      Case('b215', {'b', 'b2', 'b215'}, outcome=1),
+    ])
+    caseb313 = Case('b313', {'b', 'b3', 'b313'}, outcome=1)
+    othercases3 = ([
+      Case('b314', {'b', 'b3', 'b314'}, outcome=1),
+      Case('b315', {'b', 'b3', 'b315'}, outcome=1),
+      ])
+    caseb313extra = Case('b313extra', {'b', 'b3', 'b313', 'extra'}, outcome=0)
+    othercases4 = ([
+      Case('c110', {'c', 'c1', 'c110'}, outcome=1),
+      Case('c111', {'c', 'c1', 'c111'}, outcome=1),
+      Case('c112', {'c', 'c1', 'c112'}, outcome=1),
+      Case('c213', {'c', 'c2', 'c213'}, outcome=1),
+      Case('c214', {'c', 'c2', 'c214'}, outcome=1),
+      Case('c215', {'c', 'c2', 'c215'}, outcome=1),
+      Case('c31', {'c', 'c3', 'c313'}, outcome=1),
+      Case('c314', {'c', 'c3', 'c314'}, outcome=1),
+      Case('c315', {'c', 'c3', 'c315'}, outcome=1),
+      ])
+    othercases = []
+    for l in ([othercases1, [caseb3], othercases2, [caseb313],
+               othercases3, [caseb313extra], othercases4]):
+      othercases.extend(l)
+    cb = [default, case1, case2, case3] + othercases
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'b', 'b3', 'b313', 'extra', 'extra2'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+    
+    adt = clf.adt_explain(test_case)
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    expected_winning = set([default, caseb3,
+                            caseb313extra, test_case])
+    assert expected_winning == set(adt.get_winning_cases())
+
+  
+  def test_newcase_priority(self):
+    """lower_priority case cannot be in ADT since test_case should occur instead.
+    """
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'b', 'd'}, outcome=0)
+    case5 = Case('5', {'b', 'd', 'e'}, outcome=1)
+    case6 = Case('6', {'b', 'd', 'e', 'f'}, outcome=0)
+    case7 = Case('7', {'b', 'd', 'e', 'f', 'g'}, outcome=1)
+    case8 = Case('8', {'b', 'd', 'e', 'f', 'g', 'h'}, outcome=0)
+    cb = [default, case1, case2, case3, case4, case5, case6, case7, case8]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'a', 'b', 'c', 'd'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+    
+    adt = clf.adt_explain(test_case)
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    lower_priority = [case6, case7, case8]    
+    for case in lower_priority:
+      assert len(adt.get_nodes_labelled_by(case)) == 0
+    pass
+  
+  @pytest.mark.xfail(reason="Currently not implemented.")
+  def test_minimality(self):
+    pass
     
 class OrderedSequence(tuple):    
   def __sub__(self, other):

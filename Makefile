@@ -16,9 +16,9 @@ test_speed:
 test_development:
 	cd src ; pipenv run pytest \
 	--log-cli-level INFO \
-	-x \
 	-rXxs \
 	-k TestDisputeTrees ../tests/
+	# -x \ # add to stop in the first failure
 
 
 # --log-cli-level INFO \

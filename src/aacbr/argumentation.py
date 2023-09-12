@@ -46,6 +46,18 @@ class ArbitratedDisputeTree:
   def __init__(self, nodes, edges):
     self.nodes = nodes
     self.edges = edges
+  def get_nodes_labelled_by(self, case):
+    return tuple(node for node in self.nodes if node[1] == case)
+  def get_winning_nodes(self):
+    return tuple(node for node in self.nodes if node[0] == self.win_label)
+  def get_losing_nodes(self):
+    return tuple(node for node in self.nodes if node[0] == self.lose_label)
+  def get_winning_cases(self):
+    return tuple(node[1] for node in self.get_winning_nodes())
+  def get_losing_cases(self):
+    return tuple(node[1] for node in self.get_losing_nodes())
+  def get_cases(self):
+    return tuple(node[1] for node in self.nodes)
       
 def _compute_adt(clf, new_case, grounded, mode="arbitrary"):
   """
@@ -117,7 +129,10 @@ def _explore_node(node, adt, clf, new_case, grounded):
         else:
           continue
       else:
-        raise(Exception(f"Unexpected error: {node=} has as its only attacker its incoherent pair {attacker}."))
+        if clf.inconsistent_pair(node_case, attacker):
+          raise(Exception(f"Unexpected error: {node=} has as its only valid attacker its incoherent pair {attacker}. Absurd."))
+        else:
+          raise(Exception(f"Unexpected error: {node=} no attackers labelled IN. Some of its attackers are: {clf.attackers_of_[node_case][:5]}"))
     child = (adt.win_label, attacker)
     children = [child]
   adt.nodes.extend(children)
