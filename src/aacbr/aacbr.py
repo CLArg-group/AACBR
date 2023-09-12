@@ -19,7 +19,7 @@ from collections.abc import Sequence
 from graphlib import TopologicalSorter
 from statistics import mean, pstdev
 
-from .argumentation import compute_grounded
+from .argumentation import compute_grounded, _compute_adt
 from .cases import Case, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
@@ -740,6 +740,31 @@ class Aacbr:
         if depth[next_case] is None:
           to_explore.appendleft((next_case, current_depth))
     return depth
+
+  def adt_explain(self, new_case, mode="arbitrary"):
+    """Returns explanation based on ArbitratedDisputeTree (ADT). Depends on mode:
+    - mode=arbitrary: returns an arbitrated dispute tree, with no guarantees except that it is one.
+    - mode=all: returns all possible arbitrated dispute trees.
+    - mode=minimal: only returns a minimal arbitrated dispute tree, in number of nodes.
+
+    Even in mode=all, not _every_ ADT is generated. We do not consider
+    ADTs in which an irrelevant case attacks another (since those are
+    unnecessarily longer).
+    """
+    # OK to implement in the feature _really every_ ADT, but irrelevant right now.
+    accepted_modes = ["arbitrary"]
+    if mode not in accepted_modes:
+      raise(Exception(f"{mode=} not implemented! Use one of {accepted_modes=}"))
+    
+    if type(new_case) == Case:
+      new_case = Case(f"new{new_case.id}", new_case.factors, outcome=None)
+    else:
+      new_case = Case(f"new_case", new_case)
+
+    grounded = self.grounded_extension(new_case, output_type="labelling")
+    result = _compute_adt(self, new_case, grounded, mode=mode)
+    self.reset_attack_relations([new_case])
+    return result
   
 ### Untested code below (legacy, kept "hidden" via underscore name)  
   def _compute_dialectically_box(self, graph, graph_level_map, prediction, root):

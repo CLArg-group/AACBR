@@ -13,7 +13,7 @@ def test_import():
   from aacbr import Aacbr, Case
   pass
 
-from aacbr import Aacbr, Case
+from aacbr import Aacbr, ArbitratedDisputeTree, Case
 from aacbr.aacbr import tsorted
 from aacbr.cases import load_cases
 from aacbr.argumentation import compute_grounded
@@ -620,8 +620,68 @@ class TestAacbr:
     assert output_path.is_file()
     loaded = pickle.loads(output_path.read_bytes())
     assert set(clf.casebase_active_) == set(loaded.casebase_active_)
-    
 
+class TestDisputeTrees:
+  def test_basic_dispute_tree(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b','c'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_data = [Case('new', {'a', 'c'})]
+    expected_output = [1]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0])
+    assert type(adt) is ArbitratedDisputeTree
+    pass
+  
+  def test_incoherent_af_dispute_tree(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a', 'b'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=1)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr()
+    test_data = [Case('new', {'a', 'b', 'c'})]
+    expected_output = [1]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0])
+    assert adt is None
+
+  def test_acceptable_incoherent_af1(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a', 'b'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=1)
+    case4 = Case('4', {'a', 'b', 'c'}, outcome=0)
+    cb = [default, case1, case2, case3, case4]
+    clf = Aacbr()
+    test_data = [Case('new', {'a', 'b', 'c'})]
+    expected_output = [0]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0])
+    assert type(adt) is ArbitratedDisputeTree
+
+  def test_acceptable_incoherent_af2(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    cb = [default, case1, case2, case3]
+    clf = Aacbr()
+    test_data = [Case('new', {'a', 'b', 'c'})]
+    expected_output = [0]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0])
+    assert type(adt) is ArbitratedDisputeTree
+
+    
 class OrderedSequence(tuple):    
   def __sub__(self, other):
     if len(self) != len(other):

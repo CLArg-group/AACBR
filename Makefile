@@ -18,7 +18,7 @@ test_development:
 	--log-cli-level INFO \
 	-x \
 	-rXxs \
-	-k draw ../tests/
+	-k TestDisputeTrees ../tests/
 
 
 # --log-cli-level INFO \

@@ -1,4 +1,5 @@
 import copy
+from warnings import warn
 
 def compute_grounded(args: set, att: set):
   '''
@@ -38,3 +39,87 @@ def compute_grounded(args: set, att: set):
   # afterwards it removes them from the remaing ones and continues.
   # raise(Exception(f"{args}\n{att}\n{ {'in': IN, 'out': OUT, 'undec': UNDEC}}"))
   return {'in': IN, 'out': OUT, 'undec': UNDEC}
+
+class ArbitratedDisputeTree:
+  win_label = "W"
+  lose_label = "L"
+  def __init__(self, nodes, edges):
+    self.nodes = nodes
+    self.edges = edges
+      
+def _compute_adt(clf, new_case, grounded, mode="arbitrary"):
+  """
+    - mode=arbitrary: returns an arbitrated dispute tree, with no guarantees except that it is one.
+    - mode=all: returns all possible arbitrated dispute trees.
+    - mode=minimal: only returns a minimal arbitrated dispute tree, in number of nodes.
+
+    Even in mode=all, not _every_ ADT is generated. We do not consider
+    ADTs in which an irrelevant case attacks another (since those are
+    unnecessarily longer).
+  """
+  nodes = []
+  edges = []
+  current_adt = ArbitratedDisputeTree(nodes, edges)
+  root_node = _create_root_node(current_adt, clf, grounded)
+  if root_node is None:
+    return None
+  current_adt.nodes.append(root_node)
+  stack = [root_node]
+  explored = set()
+  while stack != []:
+    current_node = stack.pop()
+    current_adt, to_explore = _explore_node(current_node, current_adt,
+                                            clf, new_case, grounded)
+    explored.add(current_node)
+    _cycle_check(explored, to_explore, current_adt)
+    stack.extend(to_explore)
+  return current_adt
+
+def _cycle_check(explored, to_explore, adt):
+  for node in to_explore:
+    if node in explored:
+      return Exception(f"Unexpected error: cycle longer than 2 nodes found.\n{node=} was added, but it was already explored.")
+
+def _create_root_node(adt, clf, grounded):
+  if clf.default_case in grounded['undec']:
+    warn(f"ArbitratedDisputeTree for {clf} was requested, but this is impossible, since the grounded labelling for the default case {clf.default_case} is UNDEC (undecided). This implies there is a cycle in {clf}.")
+    return None
+  elif clf.default_case in grounded['in']:
+    root_node = (adt.win_label, clf.default_case)
+  elif clf.default_case in grounded['out']:
+    root_node = (adt.lose_label, clf.default_case)
+  else:
+    raise Exception(f"Unexpected error: {clf.default_case=} is not labelled by the grounded labelling.")
+  return root_node
+
+def _explore_node(node, adt, clf, new_case, grounded):
+  node_case = node[1]
+  if node[0] == adt.win_label:
+    # all attackers included as lose nodes
+    attackers = clf.attackers_of_[node_case]
+    children = [(adt.lose_label, attacker) for attacker in attackers]
+  else: # node[0] == adt.lose_label
+    # exactly one of the attackers included as win node
+    if node_case in clf.attacked_by_[new_case]:
+      # we prioritise the new_case as attacker
+      # new_case does not get into clf.attackers_of_, only clf.attacked_by_
+      ### this is also not a problem elsewhere since no case attacks the newcase.
+      attacker = new_case
+    elif len(clf.attackers_of_[node_case]) == 0:
+      raise(Exception(f"Unexpected error: {node=} has no attackers in {clf}, but it is labelled as losing. Make sure {clf} was correctly generated."))
+    else:
+      # an arbitrary attacker
+      # the restriction is that it cannot be an incoherent attacker, otherwise it would create a loop
+      for attacker in clf.attackers_of_[node_case]:
+        if not clf.inconsistent_pair(node_case, attacker):
+          # acceptable attacker found
+          break
+        else:
+          continue
+      else:
+        raise(Exception(f"Unexpected error: {node=} has as its only attacker its incoherent pair {attacker}."))
+    child = (adt.win_label, attacker)
+    children = [child]
+  adt.nodes.extend(children)
+  adt.edges.extend((child, node) for child in children)
+  return adt, children
