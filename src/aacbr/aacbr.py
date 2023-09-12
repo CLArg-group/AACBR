@@ -752,7 +752,7 @@ class Aacbr:
     unnecessarily longer).
     """
     # OK to implement in the feature _really every_ ADT, but irrelevant right now.
-    accepted_modes = ["arbitrary"]
+    accepted_modes = ["arbitrary", "minimal"]
     if mode not in accepted_modes:
       raise(Exception(f"{mode=} not implemented! Use one of {accepted_modes=}"))
     

@@ -76,12 +76,13 @@ def _compute_adt(clf, new_case, grounded, mode="arbitrary"):
   if root_node is None:
     return None
   current_adt.nodes.append(root_node)
+  grounded_label_of = _get_node_labelling_dict(grounded)
   stack = [root_node]
   explored = set()
   while stack != []:
     current_node = stack.pop()
     current_adt, to_explore = _explore_node(current_node, current_adt,
-                                            clf, new_case, grounded)
+                                            clf, new_case, grounded_label_of)
     explored.add(current_node)
     _cycle_check(explored, to_explore, current_adt)
     stack.extend(to_explore)
@@ -104,7 +105,7 @@ def _create_root_node(adt, clf, grounded):
     raise Exception(f"Unexpected error: {clf.default_case=} is not labelled by the grounded labelling.")
   return root_node
 
-def _explore_node(node, adt, clf, new_case, grounded):
+def _explore_node(node, adt, clf, new_case, grounded_label_of):
   node_case = node[1]
   if node[0] == adt.win_label:
     # all attackers included as lose nodes
@@ -124,7 +125,7 @@ def _explore_node(node, adt, clf, new_case, grounded):
       # the restriction is that it cannot be an incoherent attacker, otherwise it would create a loop
       for attacker in clf.attackers_of_[node_case]:
         if not clf.inconsistent_pair(node_case, attacker) \
-           and (attacker in grounded['in']):
+           and (grounded_label_of[attacker] == 'in'):
           # acceptable attacker found
           break
         else:
@@ -139,3 +140,15 @@ def _explore_node(node, adt, clf, new_case, grounded):
   adt.nodes.extend(children)
   adt.edges.extend((child, node) for child in children)
   return adt, children
+
+def _get_node_labelling_dict(labels):
+  """Receives a dict of the form
+    labels = {'in': NODES_IN, 'out': NODES_OUT, 'undec': NODES_UNDEC}
+  and returns a dict of the form
+    {node:label[node]}
+  """
+  result = {}
+  for key in labels.keys():
+    for node in labels[key]:
+      result[node] = key
+  return result
