@@ -19,7 +19,7 @@ from collections.abc import Sequence
 from graphlib import TopologicalSorter
 from statistics import mean, pstdev
 
-from .argumentation import compute_grounded, _compute_adt
+from .argumentation import ArbitratedDisputeTree, compute_grounded
 from .cases import Case, different_outcomes
 from .graphs import giveGraph, getPath, drawGraph
 from .variables import OUTCOME_DEFAULT, OUTCOME_NON_DEFAULT, OUTCOME_UNKNOWN, ID_DEFAULT, ID_NON_DEFAULT
@@ -763,7 +763,7 @@ class Aacbr:
       new_case = Case(f"new_case", new_case)
 
     grounded = self.grounded_extension(new_case, output_type="labelling")
-    result = _compute_adt(self, new_case, grounded, mode=mode)
+    result = ArbitratedDisputeTree.create_adt(self, new_case, grounded, mode=mode)
     self.reset_attack_relations([new_case])
     return result
   
