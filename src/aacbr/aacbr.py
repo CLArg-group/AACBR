@@ -742,16 +742,22 @@ class Aacbr:
     return depth
 
   def adt_explain(self, new_case, mode="arbitrary"):
-    """Returns explanation based on ArbitratedDisputeTree (ADT). Depends on mode:
-    - mode=arbitrary: returns an arbitrated dispute tree, with no guarantees except that it is one.
-    - mode=all: returns all possible arbitrated dispute trees.
-    - mode=minimal: only returns a minimal arbitrated dispute tree, in number of nodes.
+    """Returns explanation based on ArbitratedDisputeTree (ADT).
 
-    Even in mode=all, not _every_ ADT is generated. We do not consider
-    ADTs in which an irrelevant case attacks another (since those are
-    unnecessarily longer).
-    """
-    # OK to implement in the feature _really every_ ADT, but irrelevant right now.
+    Depends on mode:
+    - mode=arbitrary: returns an arbitrated dispute tree, with no
+      guarantees except that it is one.
+    - mode=minimal: returns a minimal arbitrated dispute tree, in
+      number of nodes.
+    We do not consider ADTs in which an irrelevant case attacks another
+    (since those are unnecessarily longer).
+
+    TODO:
+    - mode=all (TODO): returns all possible arbitrated dispute trees.
+    Even in mode=all, not _every_ ADT would be generated (since those
+    could be arbitrarily long with a 2-cycle, and due to the bias for
+    the irrelevant case attack.
+    """    # OK to implement in the feature _really every_ ADT, but irrelevant right now.
     accepted_modes = ["arbitrary", "minimal"]
     if mode not in accepted_modes:
       raise(Exception(f"{mode=} not implemented! Use one of {accepted_modes=}"))

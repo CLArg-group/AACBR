@@ -833,7 +833,7 @@ class TestDisputeTrees:
     info(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
     assert case4 not in adt.get_cases()
-    expected_cases = set([default, test_case, case1, case2, case3])
+    expected_cases = set([default, case1, case2, case3])
     assert expected_cases == set(adt.get_cases())
                                    
   def test_minimality2(self):
@@ -858,10 +858,10 @@ class TestDisputeTrees:
     info(f"{adt.nodes=}\n{adt.edges=}")
     assert type(adt) is ArbitratedDisputeTree
     assert case4 not in adt.get_cases()
-    expected_cases = set([default, test_case, case1, case2, case3])
+    expected_cases = set([default, case1, case2, case3])
     assert expected_cases == set(adt.get_cases())
     pass
-    
+
 class OrderedSequence(tuple):    
   def __sub__(self, other):
     if len(self) != len(other):
