@@ -51,6 +51,8 @@ class ArbitratedDisputeTree:
   We do not consider ADTs in which an irrelevant case attacks another
   (since those are unnecessarily longer).
 
+  To create an instance, use ArbitratedDisputeTree.create_adt
+
   TODO:
   - mode=all (TODO): returns all possible arbitrated dispute trees.
     Even in mode=all, not _every_ ADT would be generated (since those

@@ -741,7 +741,7 @@ class Aacbr:
           to_explore.appendleft((next_case, current_depth))
     return depth
 
-  def adt_explain(self, new_case, mode="arbitrary"):
+  def adt_explain(self, new_case, mode="minimal"):
     """Returns explanation based on ArbitratedDisputeTree (ADT).
 
     Depends on mode:
