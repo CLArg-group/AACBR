@@ -159,8 +159,9 @@ class ArbitratedDisputeTree:
           # the restriction is that it cannot be an incoherent attacker,
           # otherwise it would create a loop
           for attacker in clf.attackers_of_[node_case]:
-            if not clf.inconsistent_pair(node_case, attacker) \
-               and (grounded_label_of[attacker] == 'in'):
+            if (grounded_label_of[attacker] == 'in') \
+               and (not clf.inconsistent_pair(node_case, attacker) \
+                    or clf.has_default_characterisation(attacker))
               # acceptable attacker found
               break
             else:
@@ -172,14 +173,18 @@ class ArbitratedDisputeTree:
               raise(Exception(f"Unexpected error: {node=} no attackers labelled IN. Some of its attackers are: {clf.attackers_of_[node_case][:5]}"))
         elif mode == "minimal":
           candidates = [candidate for candidate in clf.attackers_of_[node_case] if \
-                        not clf.inconsistent_pair(node_case, candidate) \
-                        and (grounded_label_of[candidate] == 'in')]
+                        (grounded_label_of[candidate] == 'in') \
+                        and \
+                        (not clf.inconsistent_pair(node_case, candidate) \
+                        or clf.has_default_characterisation(attacker))]
           try:
             attacker = min(candidates, key=ranks.get)
           except:
-            breakpoint()
+            exception_string = f"{node=} which is a losing node could not find minimal attacker.\nSome {candidates[:10]=}\nranks: {[ranks.get(c,None) for c in candidates[:10]]}\n"
+            exception_string += f"{clf.attackers_of_[node_case]=}"
+            raise(Exception(exception_string))
         else:
-          raise(Exception())
+          raise(Exception(f"Unknown {mode=}"))
       child = (self.win_label, attacker)
       children = [child]
     self.nodes.extend(children)

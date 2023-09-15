@@ -259,6 +259,9 @@ class Aacbr:
   def inconsistent_pair(self, A, B):
     return different_outcomes(A, B) and B.factors == A.factors
 
+  def has_default_characterisation(self, case):
+    return case.factors == self.default_case.factors
+
   def predict(self, new_cases, _keep_newcase_attacks=False):
     if all([type(nc) == Case for nc in new_cases]):
       new_cases = [Case(f"new{nc.id}", nc.factors, outcome=None) for nc in new_cases]
