@@ -161,7 +161,7 @@ class ArbitratedDisputeTree:
           for attacker in clf.attackers_of_[node_case]:
             if (grounded_label_of[attacker] == 'in') \
                and (not clf.inconsistent_pair(node_case, attacker) \
-                    or clf.has_default_characterisation(attacker))
+                    or clf.has_default_characterisation(attacker)):
               # acceptable attacker found
               break
             else:
@@ -176,7 +176,7 @@ class ArbitratedDisputeTree:
                         (grounded_label_of[candidate] == 'in') \
                         and \
                         (not clf.inconsistent_pair(node_case, candidate) \
-                        or clf.has_default_characterisation(attacker))]
+                        or clf.has_default_characterisation(candidate))]
           try:
             attacker = min(candidates, key=ranks.get)
           except:
