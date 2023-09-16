@@ -2,6 +2,7 @@ import copy
 import operator
 from collections import deque
 from warnings import warn
+from logging import debug, info, warning, error
 
 def compute_grounded(args: set, att: set):
   '''
@@ -101,11 +102,13 @@ class ArbitratedDisputeTree:
   def get_losing_nodes(self):
     return tuple(node for node in self.nodes if node[0] == self.lose_label)
   def get_winning_cases(self):
-    return tuple(node[1] for node in self.get_winning_nodes())
+    return tuple(set(node[1] for node in self.get_winning_nodes()))
   def get_losing_cases(self):
-    return tuple(node[1] for node in self.get_losing_nodes())
+    return tuple(set(node[1] for node in self.get_losing_nodes()))
   def get_cases(self):
-    return tuple(node[1] for node in self.nodes)
+    return tuple(set(node[1] for node in self.nodes))
+  def get_depth(self):
+    return self.depth
   
   def _compute_adt(self, grounded, root_node, mode="arbitrary"):
     grounded_label_of = _get_node_labelling_dict(grounded)
@@ -113,24 +116,23 @@ class ArbitratedDisputeTree:
       ranks = self._calculate_ranks(grounded_label_of)
     else:
       ranks = None
-    self.nodes.append(root_node)    
+    self.nodes.append(root_node)
+    node_depths, max_depth = {root_node: 1}, 1
     stack = [root_node]
-    explored = set()
     while stack != []:
       current_node = stack.pop()
       to_explore = self._explore_node(current_node,
                                       grounded_label_of,
                                       mode=mode, ranks=ranks)
-      explored.add(current_node)
-      self._cycle_check(explored, to_explore)
       stack.extend(to_explore)
+      current_depth = node_depths[current_node]
+      for node in to_explore:
+        node_depth = current_depth + 1
+        node_depths[node] = node_depth
+        if node_depth > max_depth:
+          max_depth = node_depth
+    self.depth = max_depth
     return self
-
-  def _cycle_check(self, explored, to_explore):
-    for node in to_explore:
-      if node in explored:
-        return Exception(f"""Unexpected error: cycle longer than 2 nodes
-        found.\n{node=} was added, but it was already explored.""")
 
   def _explore_node(self, node, grounded_label_of,
                     mode="arbitrary", ranks=None):
@@ -222,11 +224,14 @@ class ArbitratedDisputeTree:
     unattacked = unattacked_cb + (new_case,)
     ranks = {c:initial_value for c in unattacked}
     queue = deque(unattacked)
+    explored = set()
     while queue != deque():
       current = queue.popleft()
       to_add = self._get_rank_of_attacked_by(current, ranks,
                                              grounded_label_of,
                                              add, prod)
+      explored.add(current)
+      to_add = tuple(x for x in to_add if x not in explored)
       queue.extend(to_add)
     return ranks
 

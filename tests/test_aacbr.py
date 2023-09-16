@@ -862,6 +862,72 @@ class TestDisputeTrees:
     assert expected_cases == set(adt.get_cases())
     pass
 
+  def test_adt_depth(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'b'}, outcome=1)
+    case3 = Case('3', {'a', 'b'}, outcome=0)
+    case4 = Case('4', {'b', 'd'}, outcome=0)
+    case5 = Case('5', {'b', 'd', 'e'}, outcome=1)
+    case6 = Case('6', {'b', 'd', 'e', 'f'}, outcome=0)
+    case7 = Case('7', {'b', 'd', 'e', 'f', 'g'}, outcome=1)
+    case8 = Case('8', {'b', 'd', 'e', 'f', 'g', 'h'}, outcome=0)
+    cb = [default, case1, case2, case4, case5, case6, case7, case8, case3]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_case = Case('new', {'a', 'b', 'c', 'd', 'e', 'f'})
+    expected_output = [0]
+    predicted_output = clf.predict([test_case])
+    assert expected_output == predicted_output
+
+    adt = clf.adt_explain(test_case, mode="minimal")
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+    assert case4 not in adt.get_cases()
+    expected_cases = set([default, case1, case2, case3])
+    assert expected_cases == set(adt.get_cases())
+    assert adt.get_depth() == adt.depth
+    assert adt.get_depth() == 3
+
+  @pytest.mark.skip
+  def test_minimality3(self):
+    import time
+    t = time.time()
+    n = 3 # can try time with big numbers here
+    default = Case('default', set(), outcome=0)
+    multiplecases = [Case(f'1-{i}', {'a{i}'}, outcome=0) for i in range(n)]
+    a_factors = set(["a"+str(i) for i in range(n)])
+    case4 = Case('4', a_factors.union({'b', 'c'}), outcome=0)
+    case5 = Case('5', a_factors.union({'b', 'c','d'}), outcome=1)
+    cb = [default] + multiplecases + [case4, case5]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_data = [Case('new', a_factors.union({'b', 'c', 'f'}))]
+    expected_output = [0]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0], mode='minimal')
+    assert type(adt) is ArbitratedDisputeTree
+    info(f'Took {time.time()-t} seconds')
+
+  def test_acceptable_incoherent_af1_minimal(self):
+    default = Case('default', set(), outcome=0)
+    case1 = Case('1', {'a'}, outcome=1)
+    case2 = Case('2', {'a', 'b'}, outcome=0)
+    case3 = Case('3', {'a', 'b'}, outcome=1)
+    case4 = Case('4', {'a', 'b', 'c'}, outcome=0)
+    cb = [default, case1, case2, case3, case4]
+    clf = Aacbr()
+    clf.fit(cb)
+    test_data = [Case('new', {'a', 'b', 'c'})]
+    expected_output = [0]
+    predicted_output = clf.predict(test_data)
+    assert expected_output == predicted_output
+    adt = clf.adt_explain(test_data[0])
+    info(f"{adt.nodes=}\n{adt.edges=}")
+    assert type(adt) is ArbitratedDisputeTree
+
+  
 class OrderedSequence(tuple):    
   def __sub__(self, other):
     if len(self) != len(other):
