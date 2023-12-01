@@ -127,7 +127,7 @@ class Aacbr:
       # command 2: save attacks state
     else:
       if self.remove_spikes:
-        warning("remove_spikes argument is ignored for cautious AA-CBR, since there wil be no spikes by construction.")
+        warning("remove_spikes argument is ignored for cautious AA-CBR, since there will be no spikes by construction.")
       self.casebase_active_ = []
       self.casebase_active_ = self.give_cautious_subset_of_casebase(cb_input)
       # self.give_casebase(self.casebase_active_)
